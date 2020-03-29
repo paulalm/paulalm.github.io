@@ -17,8 +17,8 @@ Aarhus University, Denmark
 
 ## List of participating scientists
 
-| ### Name 	| ### Institution	|
-|-----------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| *Name* 	| *Institution*	|
+|:-----------------------------	|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
 | Andreas Lieberoth 	| Aarhus University. Department of Culture and Society 	|
 | Dmitrii Dubrov 	| National Research University Higher School of Economics 	|
 | Thao Tran 	| Colorado State University 	|
