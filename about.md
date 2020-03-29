@@ -9,9 +9,7 @@ We want to map out all the factors, that might affects people's psychological we
 
 
 ## Principal Investigator and contact email
-Andreas Lieberoth 
-
-andreas at edu dot au dot dk
+Andreas Lieberoth (andreas at edu dot au dot dk)
 
 Aarhus University, Denmark
 
