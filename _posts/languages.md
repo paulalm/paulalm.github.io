@@ -1,6 +1,7 @@
 ---
-layout: post
+layout: page
 title: Languages
+permalink: /languages/
 ---
 
 ### Find your language below, of click here to go to the survey now (link to follow)
