@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Psychological stressors and behavioural implications of COVID-19 Research
+title: Contributors
 permalink: /about/
 ---
 
