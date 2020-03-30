@@ -6,36 +6,36 @@ permalink: /languages/
 
 ### Find your language below, of click here to go to the survey now (link to follow)
 
-A [Albanian](https://coronalifesurvey.github.io/)
+A [Albanian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-B [Bangla](https://coronalifesurvey.github.io/),  [Brazilian Portugese](https://coronalifesurvey.github.io/)
+B [Bangla](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Brazilian Portugese](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-C [Chinese_simplified](https://coronalifesurvey.github.io/),  [Chinese_traditional](https://coronalifesurvey.github.io/),  [Croatian](https://coronalifesurvey.github.io/),  [Czech](https://coronalifesurvey.github.io/)
+C [Chinese_simplified](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES), [Chinese_traditional](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Croatian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Czech](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-D [Danish](https://coronalifesurvey.github.io/),  [Dutch](https://coronalifesurvey.github.io/),  [Dutch Belgian](https://coronalifesurvey.github.io/)
+D [Danish](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Dutch](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Dutch Belgian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-E [English](https://coronalifesurvey.github.io/)
+E [English](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=EN)
 
-F [Filipino](https://coronalifesurvey.github.io/), [French](https://coronalifesurvey.github.io/)
+F [Filipino](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES), [French](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=FR)
 
-G [German](https://coronalifesurvey.github.io/)
+G [German](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-H [Hindi](https://coronalifesurvey.github.io/)
+H [Hindi](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-I [Indonesian](https://coronalifesurvey.github.io/), [Italian](https://coronalifesurvey.github.io/)
+I [Indonesian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES), [Italian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-J [Japanese](https://coronalifesurvey.github.io/)
+J [Japanese](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=JP)
 
-K [Korean](https://coronalifesurvey.github.io/)
+K [Korean](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-L [Lithuanian](https://coronalifesurvey.github.io/)
+L [Lithuanian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-P [Polish](https://coronalifesurvey.github.io/),  [Portugese](https://coronalifesurvey.github.io/)
+P [Polish](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Portugese](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-R [Russian](https://coronalifesurvey.github.io/)
+R [Russian](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-S [Spanish-mexico](https://coronalifesurvey.github.io/),  [Spanish-Argentina](https://coronalifesurvey.github.io/), [Spanish-Cuba](https://coronalifesurvey.github.io/),  [Spanish-Spain](https://coronalifesurvey.github.io/)
+S [Spanish-mexico](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=S-MX),  [Spanish-Argentina](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=S-AR), [Spanish-Cuba](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES),  [Spanish-Spain](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES) [Spanish-Colombia](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=S-CO)
 
-U [Urdu](https://coronalifesurvey.github.io/)
+U [Urdu](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
 
-V [Vietnamese](https://coronalifesurvey.github.io/)
+V [Vietnamese](https://aarhus.eu.qualtrics.com/jfe/form/SV_6X6017nwDwNEv7D?Q_Language=ES)
