@@ -1,4 +1,2 @@
-aarhus:
-    url: aarhus.jpg
-health:
-    url: Makgatho_Health_Sciences_University_Logo_2018.svg
+- url: aarhus.jpg
+- url: Makgatho_Health_Sciences_University_Logo_2018.svg
