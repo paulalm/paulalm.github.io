@@ -1,4 +1,5 @@
-  {% for img in site.data.logos %}
-	<img src=/images/logos/{{ img.url }} />
+  {% for logo in site.data.logos %}
+  <div>
+	<img src=/images/logos/{{ logo.file }} /></div>
   {% endfor %}
 
