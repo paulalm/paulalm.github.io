@@ -287,9 +287,10 @@ table {
   width: 100%;
 }
 
-td {
-  height: 50px;
+td, th {
   vertical-align: center;
+  padding: 15px;
+  text-align: left;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
