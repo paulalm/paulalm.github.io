@@ -1,0 +1,25 @@
+<ul>
+    <li><a href="{{ "/" | relative_url}}">Course information</a></li>
+    <li class="nothing">---</li>
+    <li class="nothing">Assignments &amp; Practicing</li>
+    <li class="nothing">---</li>
+    {% assign sorted_practicals = site.practicals | sort:"ordering" %}
+    {% for practical in sorted_practicals %}
+    <li>
+      <a href="{{ practical.url | relative_url}}">
+        {{ practical.linkname }}
+      </a>
+    </li>
+    {% endfor %}
+    <li class="nothing">---</li>
+    <li class="nothing">Lectures</li>
+    <li class="nothing">---</li>
+    {% assign sorted_lectures = site.lectures | sort:"ordering" %}
+    {% for lecture in sorted_lectures %}
+    <li>
+      <a href="{{ lecture.url | relative_url}}">
+        {{ lecture.linkname }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>

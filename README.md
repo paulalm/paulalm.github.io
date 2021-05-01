@@ -1,120 +1,312 @@
-> March, 2016: If you're on an old version of Jekyll Now and run into a) build warnings or b) syntax highlighting issues caused by [Jekyll 3 and GitHub Pages updates](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0), just :sparkles:[update your _config.yml](https://github.com/barryclark/jekyll-now/pull/445/files):sparkles: and you'll be set!
+![cse-theme preview](/img/banner.png)
 
-# Jekyll Now
+# Jekyll theme for lecture notes <!-- omit in toc -->
 
-**Jekyll** is a static site generator that's perfect for GitHub hosted blogs ([Jekyll Repository](https://github.com/jekyll/jekyll))
+This Jekyll theme was devloped for one of my courses (web technology), you can view the course (and thus this theme) [here](https://chauff.github.io/Web-Teaching/). Jekyll is a static site generator that can be used to customize ones' GitHub Pages. The themes is set up with code-heavy teaching materials in mind.
 
-**Jekyll Now** makes it easier to create your Jekyll blog, by eliminating a lot of the up front setup.
+This Jekyll theme is built on top of [Minima](https://github.com/jekyll/minima), Jekyll's default theme. Only the necessary files were kept, the rest was stripped from the repo.
 
-- You don't need to touch the command line
-- You don't need to install/configure ruby, rvm/rbenv, ruby gems :relaxed:
-- You don't need to install runtime dependencies like markdown processors, Pygments, etc
-- If you're on Windows, this will make setting up Jekyll a lot easier
-- It's easy to try out, you can just delete your forked repository if you don't like it
+It should be possible to develop the lecture materials entirely in markdown, without regard for the `cse-theme`.
 
-In a few minutes you'll be set up with a minimal, responsive blog like the one below giving you more time to spend on writing epic blog posts!
+**Spoilers**, **highlighting**, **note-taking** and **timing of active reading** are built into the theme. All information is stored in the browser's localStorage.
 
-![Jekyll Now Theme Screenshot](/images/jekyll-now-theme-screenshot.jpg "Jekyll Now Theme Screenshot")
+Your repo should have the following files and folders in the root folder:
+- folders: `_lectures`, `_practicals`, `_extras`
+- files: `index.md`, `404.html`, `_config.yml`
 
-## Quick Start
+**Important: when you make changes to the configuration file (e.g. trying out a new header image) it may look like these changes are not reflected on your site, even a few minutes after updating the configurations on GitHub. If you experience this, try to open the site in a private browser window! Depending on the browser, agressive caching may be employed and although the css/image/js files have changed on the server, the browser simply looks up cached versions of these files.**
 
-### Step 1) Fork Jekyll Now to your User Repository
+## Table of Contents <!-- omit in toc -->
 
-Fork this repo, then rename the repository to yourgithubusername.github.io.
+- [Installation](#installation)
+- [Customization happens via settings in `_config.yml`](#customization-happens-via-settings-in-_configyml)
+  - [Course title and tagline](#course-title-and-tagline)
+  - [Color themes](#color-themes)
+  - [Code color theme](#code-color-theme)
+  - [Header image](#header-image)
+  - [Footer image](#footer-image)
+  - [Warning](#warning)
+  - [Exam](#exam)
+  - [Small navigation bar](#small-navigation-bar)
+  - [Time spent (or: active reading)](#time-spent-or-active-reading)
+- [Responsiveness](#responsiveness)
+- [Course content](#course-content)
+  - [Course information](#course-information)
+  - [Adding a lecture](#adding-a-lecture)
+  - [Adding practicals](#adding-practicals)
+  - [Figure captions, spoilers and questions](#figure-captions-spoilers-and-questions)
+- [Other information](#other-information)
+  - [Adding additional (analytics) scripts/content](#adding-additional-analytics-scriptscontent)
+  - [CSS split](#css-split)
+  - [How to develop the theme further](#how-to-develop-the-theme-further)
+  - [Misc](#misc)
 
-Your Jekyll blog will often be viewable immediately at <https://yourgithubusername.github.io> (if it's not, you can often force it to build by completing step 2)
+## Installation
 
-![Step 1](/images/step1.gif "Step 1")
+This repository does not have to be forked or cloned. It can be used as [remote theme](https://github.blog/2017-11-29-use-any-theme-with-github-pages/). All that is needed in the repository to apply the theme to is to copy [_config.yml](_config.yml) and [404.html](404.html) to your repository's root directory and add the following two lines to `_config.yml`:
 
-### Step 2) Customize and view your site
+```
+baseurl: "/your-repository-name/"
+remote_theme: chauff/cse-theme
+```
 
-Enter your site name, description, avatar and many other options by editing the _config.yml file. You can easily turn on Google Analytics tracking, Disqus commenting and social icons here too.
+The `baseurl` is used to set the root of the website (minus the hostname). The `remote_theme` has the format `GITHUBUSERNAME/REPO` and should be left as-is, unless the `cse-theme` repo was forked. That's it. Once the `_config.yml` file is added to the repository of choice this Jekyll theme will apply to it. 
 
-Making a change to _config.yml (or any file in your repository) will force GitHub Pages to rebuild your site with jekyll. Your rebuilt site will be viewable a few seconds later at <https://yourgithubusername.github.io> - if not, give it ten minutes as GitHub suggests and it'll appear soon
+## Customization happens via settings in `_config.yml`
 
-> There are 3 different ways that you can make changes to your blog's files:
+This section walks through the site-wide options that can be set in the `_config.yml` file.
 
-> 1. Edit files within your new username.github.io repository in the browser at GitHub.com (shown below).
-> 2. Use a third party GitHub content editor, like [Prose by Development Seed](http://prose.io). It's optimized for use with Jekyll making markdown editing, writing drafts, and uploading images really easy.
-> 3. Clone down your repository and make updates locally, then push them to your GitHub repository.
+### Course title and tagline
 
-![_config.yml](/images/config.png "_config.yml")
+The browser (tab) title is set via `tabTitle`.
 
-### Step 3) Publish your first blog post
+Three taglines can be set, which differ in size/coloring and whether they are animated. 
+- `line1Title`: e.g. the course code (not animated)
+- `line2Title`: e.g. what this course is about in 1-2 terms (not animated; first letter of each term is given a different highlight)
+- `line3Title`: e.g. what this course is about in more detail (this line is animated and appears being *typed out* one letter at a time - unless you view the transcript in Safari which doesn't implement this particular CSS feature)
 
-Edit `/_posts/2014-3-3-Hello-World.md` to publish your first blog post. This [Markdown Cheatsheet](http://www.jekyllnow.com/Markdown-Style-Guide/) might come in handy.
+You can also opt to not set one or more of the titles, in this case remove the variable from `_config.yml`.
 
-![First Post](/images/first-post.png "First Post")
+![cse-theme preview](/img/screenshot-title.png)
 
-> You can add additional posts in the browser on GitHub.com too! Just hit the + icon in `/_posts/` to create new content. Just make sure to include the [front-matter](http://jekyllrb.com/docs/frontmatter/) block at the top of each new blog post and make sure the post's filename is in this format: year-month-day-title.md
 
-## Local Development
+### Color themes
 
-1. Install Jekyll and plug-ins in one fell swoop. `gem install github-pages` This mirrors the plug-ins used by GitHub Pages on your local machine including Jekyll, Sass, etc.
-2. Clone down your fork `git clone https://github.com/yourusername/yourusername.github.io.git`
-3. Serve the site and watch for markup/sass changes `jekyll serve`
-4. View your website at http://127.0.0.1:4000/
-5. Commit any changes and push everything to the master branch of your GitHub user repository. GitHub Pages will then rebuild and serve your website.
+Set the color theme (`cssTheme`), either `light-blue`, `light-green`, `light-grey`, `light-pink`, `light-red`, `dark-pink`, `dark-red` or `dark-blue`.
 
-## Moar!
+![cse-theme preview](/img/screenshot-light-red.png)
 
-I've created a more detailed walkthrough, [**Build A Blog With Jekyll And GitHub Pages**](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/) over at the Smashing Magazine website. Check it out if you'd like a more detailed walkthrough and some background on Jekyll. :metal:
+![cse-theme preview](/img/screenshot-light-blue.png)
 
-It covers:
+![cse-theme preview](/img/screenshot-light-pink.png)
 
-- A more detailed walkthrough of setting up your Jekyll blog
-- Common issues that you might encounter while using Jekyll
-- Importing from Wordpress, using your own domain name, and blogging in your favorite editor
-- Theming in Jekyll, with Liquid templating examples
-- A quick look at Jekyll 2.0’s new features, including Sass/Coffeescript support and Collections
+![cse-theme preview](/img/screenshot-light-green.png)
 
-## Jekyll Now Features
+![cse-theme preview](/img/screenshot-light-grey.png)
 
-✓ Command-line free _fork-first workflow_, using GitHub.com to create, customize and post to your blog  
-✓ Fully responsive and mobile optimized base theme (**[Theme Demo](http://jekyllnow.com)**)  
-✓ Sass/Coffeescript support using Jekyll 2.0  
-✓ Free hosting on your GitHub Pages user site  
-✓ Markdown blogging  
-✓ Syntax highlighting  
-✓ Disqus commenting  
-✓ Google Analytics integration  
-✓ SVG social icons for your footer  
-✓ 3 http requests, including your avatar  
+![cse-theme preview](/img/screenshot-dark-pink.png)
 
-✘ No installing dependencies
-✘ No need to set up local development  
-✘ No configuring plugins  
-✘ No need to spend time on theming  
-✘ More time to code other things ... wait ✓!  
+![cse-theme preview](/img/screenshot-dark-blue.png)
 
-## Questions?
+![cse-theme preview](/img/screenshot-dark-red.png)
 
-[Open an Issue](https://github.com/barryclark/jekyll-now/issues/new) and let's chat!
+### Code color theme
 
-## Other forkable themes
+Set the code color theme (`cssCodeTheme`), prepackaged are `monokai`, `dracula` (both have a dark background color) and `perldoc` (light background color).
 
-You can use the [Quick Start](https://github.com/barryclark/jekyll-now#quick-start) workflow with other themes that are set up to be forked too! Here are some of my favorites:
+![cse-theme preview](/img/screenshot-code-monokai.png)
 
-- [Hyde](https://github.com/poole/hyde) by MDO
-- [Lanyon](https://github.com/poole/lanyon) by MDO
-- [mojombo.github.io](https://github.com/mojombo/mojombo.github.io) by Tom Preston-Werner
-- [Left](https://github.com/holman/left) by Zach Holman
-- [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) by Michael Rose
-- [Skinny Bones](https://github.com/mmistakes/skinny-bones-jekyll) by Michael Rose
+![cse-theme preview](/img/screenshot-code-dracula.png)
 
-## Credits
+![cse-theme preview](/img/screenshot-code-perldoc.png)
 
-- [Jekyll](https://github.com/jekyll/jekyll) - Thanks to its creators, contributors and maintainers.
-- [SVG icons](https://github.com/neilorangepeel/Free-Social-Icons) - Thanks, Neil Orange Peel. They're beautiful.
-- [Solarized Light Pygments](https://gist.github.com/edwardhotchkiss/2005058) - Thanks, Edward.
-- [Joel Glovier](http://joelglovier.com/writing/) - Great Jekyll articles. I used Joel's feed.xml in this repository.
-- [David Furnes](https://github.com/dfurnes), [Jon Uy](https://github.com/jonuy), [Luke Patton](https://github.com/lkpttn) - Thanks for the design/code reviews.
-- [Bart Kiers](https://github.com/bkiers), [Florian Simon](https://github.com/vermluh), [Henry Stanley](https://github.com/henryaj), [Hun Jae Lee](https://github.com/hunjaelee), [Javier Cejudo](https://github.com/javiercejudo), [Peter Etelej](https://github.com/etelej), [Ben Abbott](https://github.com/jaminscript), [Ray Nicholus](https://github.com/rnicholus), [Erin Grand](https://github.com/eringrand), [Léo Colombaro](https://github.com/LeoColomb), [Dean Attali](https://github.com/daattali), [Clayton Errington](https://github.com/cjerrington), [Colton Fitzgerald](https://github.com/coltonfitzgerald), [Trace Mayer](https://github.com/sunnankar) - Thanks for your [fantastic contributions](https://github.com/barryclark/jekyll-now/commits/master) to the project!
+### Header image
 
-## Contributing
+Set the header image (`headerImage`). Included already are two variants,  `../images/tudelft_ewi.jpg` shows TU Delft's iconic EWI building and `../images/tudelft_ewi_bw.jpg` is its grayscale variant.
 
-Issues and Pull Requests are greatly appreciated. If you've never contributed to an open source project before I'm more than happy to walk you through how to create a pull request.
+**Important**: if you are using your own header image, the easiest option is to use an absolute URL (starting with `http://` or `https://`). If you are using a relative URL, you need to keep track of the folder structure: for instance, you may want to create a folder `images` in your repository and add your header/footer images there. Then, `headerImage` should be set to `../../images/your-image.png` as per the theme, the CSS file that contains the rule to load the header image is in `assets/css/skin.css`. Thus, two directories have to be traversed to reach a directory that is in your repository's root folder.
 
-You can start by [opening an issue](https://github.com/barryclark/jekyll-now/issues/new) describing the problem that you're looking to resolve and we'll go from there.
+The best way to figure out what went wrong with your relative URL setting is to use your browser's *Inspect element* option to determine the absolute path that was derived from your relative URL. Below is a screenshot of what to look out for (using Firefox) when inspecting the `<header>` holding the background image:
 
-I want to keep Jekyll Now as minimal as possible. Every line of code should be one that's useful to 90% of the people using it. Please bear that in mind when submitting feature requests. If it's not something that most people will use, it probably won't get merged. :guardsman:
+![cse-theme preview](/img/screenshot-inspector.png)
+
+
+### Footer image
+
+Set the footer image (`footerImage`). Included already is a typical Dutch scene ([by day](assets/images/tudelft-ewi-light-footer.svg) and [by night](assets/images/tudelft-ewi-dark-footer.svg)). The imagery has been created by [David Maxwell](https://www.dmax.org.uk/)!
+
+The daytime image goes well with a light theme:
+
+![cse-theme preview](/img/screenshot-light-footer.png)
+
+The night-time image goes well with a dark theme:
+
+![cse-theme preview](/img/screenshot-dark-footer.png)
+
+**Important: the note above about absolute vs. relative URLs holds here as well.**
+
+### Warning
+
+Decide whether to show a warning of some type. If yes, set the `warning` string. This is one *global* warning string for the site. Whether or not a particular page shows the warning is determined by setting `warning: true` in each individual page's front matter (explained below in more detail). My standard use case is the updating of lecture materials throughout the year. Each page that has not been updated yet for the new year contains the warning. The warning appears just above the start of the page's content:
+
+![cse-theme preview](/img/screenshot-warning.png)
+
+### Exam
+
+During the exam, you may want to remove access to the lecture materials without setting the GitHub repo to private. If the setting `exam: false` is changed to `exam: true`, a JavaScript snippet is triggered which places an opaque `<div>` across the entire viewport with the text *Exam time*. Note though that this can easily be circumvented by disabling JavaScript ... it is not more than a reminder that the lecture materials should not be accessed. It typically takes 2-3 minutes for this change in the configuration file to take effect when reloading the page (as on GitHub's end the page is rebuilt).
+
+![cse-theme preview](/img/screenshot-exam.png)
+
+### Small navigation bar
+
+If a transcript is very long, switching to the next transcript can require a lot of scrolling (to scroll up and view the navigation bar again). For this reason the setting `smallNavbar: true` adds a small icon at the bottom left of the screen that pops up a small semi-transparent navigation pane when hovering over the icon with the mouse. It has the same structure/content as the original navigation bar. 
+
+The screenshots above were all made with the setting `smallNavbar: false`. 
+
+Here is how the icon looks like when the mouse does not hover over it:
+
+![cse-theme small navigation bar](/img/screenshot-smallnav1.png)
+
+And here is the mouse hovering over the icon:
+
+![cse-theme small navigation bar](/img/screenshot-smallnav2.png)
+
+### Time spent (or: active reading)
+
+In order to provide some feedback on the amount of time spent on each transcript, the following setting is available:
+
+```
+timeSpent: true
+idleTimeout: 60
+```
+
+If `timeSpent: true` is set, a second icon appears next to the small navigation icon with a clock (as seen in the two screenshots above). Hovering over it reveals the amount of time spent on the particular page:
+
+![cse-theme small time spent](/img/screenshot-timespent.png)
+
+The `idleTimeout` setting is the number of seconds of idling that is required for the timer to stop. By default, this is 60 seconds. Idling occurs when (1) the page is not in focus or (2) the page is in focus but no mouse/keyboard/scroll activity is detected. 
+
+*This is only a crude approximation of time spent on each transcript of course. It provides nothing more than an indication.*
+
+The timer information is stored in the browser's localStorage.
+
+## Responsiveness
+
+The design has basic responsiveness, it looks decent across large screens, tablets and phones.
+
+![cse-theme preview](/img/screenshot-mobile.png)
+
+
+## Course content
+
+This section describes how to set up the course content for this specific theme. Instead of starting from scratch, you can copy the respective files and folders from here: they have been included to make development of the theme easier.
+
+### Course information
+
+The course information (overview, instructors, grading, etc.) should all be contained in `index.md`.
+
+### Adding a lecture
+
+Place the lectures (each one in a separate markdown file) in the `_lectures` folder and add the [YAML front matter](https://jekyllrb.com/docs/front-matter/) at the top of each file, separated by tripple dashes:
+
+```yaml
+---
+layout: default
+permalink: /http/
+linkname: HTTP
+ordering: 4
+warning: true
+---
+
+OTHER CONTENT
+```
+
+The `layout` variable is always `default` in our case (other Jekyll themes may have different types of pages depending on the content type). 
+
+The `permalink` variable beautifies the URL (instead of just going with the filename, which may be rather ugly) and the `linkname` variable determines how the link appears in the navigation bar of the site. 
+
+As lectures are typically in a specific order, the `ordering` variable (just use integers, ascending order) determines the order of the lectures. Without this explicit ordering, the links would show up in alphabetic order. 
+
+Lastly, setting the `warning` variable to `true` ensures that there will be a warning box shown at the top of the page (removing the variable or another setting yields no warning box). The warning string itself should be set in `_config.yml`. Note that the `div` sizing and resizing based on the viewport size was **hardcoded** based on my typical update warning string -- significantly longer/shorter update strings may look odd or even overflow the `div`. 
+
+Note: all content appearing after the front matter is pushed into the `content` attribute, accessed as `{{content}}` in `default.html`.
+
+### Adding practicals
+
+Practicals (assignments, exercises, old exams, etc.) are added to the `_practicals` folder. The front matter is the same as for the lectures.
+
+### Figure captions, spoilers and questions
+
+There is no special tag for **figure captions** in Markdown. The current regime is to use `<sup>My caption.</sup>` (note the extra empty line) :point_down::
+
+```markdown
+![caniuse indexedb](/img/caniuse-indexedb.png)
+
+<sup>Screenshot taken on September 3, 2020.</sup>
+```
+
+The result looks like this:
+
+![screenshot caption](/img/screenshot-caption.png)
+
+**Spoilers** (text that should onl be visible once the mouse hovers over it) can be added with a bit of HTML :point_down::
+
+```html
+<span class="spoiler">Besides a little broken image icon not much is happening.</span>
+```
+
+The result looks like this:
+
+![screenshot caption](/img/screenshot-spoiler.png)
+
+To add a set of **questions/answers** (e.g. at the end of a transcript as self-check questions), the `<details>`/`<summary>` tag combination works well :point_down::
+
+```html
+<details> 
+  <summary>What does JavaScript's hoisting principle refer to?</summary>
+  Declarations are processed before any code is executed.
+</details>
+```
+![screenshot summary](/img/screenshot-summary.png)
+
+*Note that the `<details>` tag does clash at the moment with how markdown handles code snippets. Ccode snippets are marked by backticks and rendered in a specific way; inside the `<details>` tag though this does not happen, the text is treated as normal text. A workaround is to place the code snippet to ask questions about right before the `<details>` tag.*
+
+## Other information
+
+The following sections are not necessary to know, but they may be useful if you want to develop the theme further or do a bit more than just adding transcripts.
+
+### Adding additional (analytics) scripts/content
+
+To track for instance site visits, add a folder `_extras`: any file in this folder will be included right before the `</body>` tag in the default layout page. For the file content to be included, the file needs to start with an empty frontmatter. As an example, the [statcounter](https://statcounter.com/) snippet (which allows you to track site visits once you set up your own account) looks as follows:
+
+```yaml
+---
+---
+<!-- Default Statcounter code  -->
+  <script type="text/javascript">
+    var sc_project = xxx;
+    var sc_invisible = 1;
+    var sc_security = "xxx"; 
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <!-- End of Statcounter Code -->
+```
+
+### CSS split
+
+The CSS is split across a number of files:
+
+- `/assets/css/skin.css` contains the CSS for the layout of the entire page (CSS grid) and the header, navbar and footer.
+- `/assets/css/github-markdown.css` contains the CSS for the layout of the lectures/exercises, etc. The CSS comes from [sindresorhus](https://github.com/sindresorhus/github-markdown-css) (with slight adaptations).
+- `/assets/css/text-highlighting.css` contains the CSS for the highlighting and note-taking features.
+
+The color themes reside in `/assets/css/themes/`. To change the theme, go to `_config.yml` and change the `cssTheme` variable. The color theme of the page is separate from the color theme of the code snippets: these themes reside in `/assets/css/themes/code`. Change `cssCodeTheme` in `_config.yml` if you want to switch to another code highlighter. Code highlighter CSS files have to be compatible with [pygments](https://github.com/pygments/pygments).
+
+### How to develop the theme further
+
+Clone this repository and in the root folder run `bundle exec jekyll serve --watch`. The `watch` flag ensures that the Jekyll site is rebuilt when a file changes. The console output should look something like this:
+
+```
+Configuration file: /Users/claudia/GitHub/cse-theme/_config.yml
+            Source: /Users/claudia/GitHub/cse-theme
+       Destination: /Users/claudia/GitHub/cse-theme/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+                    done in 1.001 seconds.
+ Auto-regeneration: enabled for '/Users/claudia/GitHub/cse-theme'
+    Server address: http://127.0.0.1:4000
+  Server running... press ctrl-c to stop.
+```
+
+The **server address** tells you which URL to open to view the theme in action.
+
+*Note, that changing the `_config.yml` file (e.g. to switch to a different css theme) requires a restart of the server.*
+
+### Misc
+
+GitHub Pages does not run the latest Jekyll version, make sure to check the right Jekyll version when looking at the documentation. GitHub's Jekyll version can be found [here](https://pages.github.com/versions/). For example, the very useful `sort_by` is a Jekyll 4 feature.
+
+If you made changes to the configuration but don't see them reflected on the served pages, clear the browser's cache or try the private mode (Firefox likes caching a lot ...).
+
+The table of contents for each transcript can be easily generated with VS Code's [Markdown all in one](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) extension. In general, writing your Markdown in VSC is a nice way of doing things!
+

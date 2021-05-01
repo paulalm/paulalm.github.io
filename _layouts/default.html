@@ -1,52 +1,89 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-    {% include meta.html %}
+{%- include head.html -%}
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<body>
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+  {%- include header.html -%}
 
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-  </head>
+  <main>
+    <nav class="skin">
+      {%- include nav.html -%}
 
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+      <ul class="text-highlighted-info">
+        <li><small>The course notes can be <span class="text-highlighted-highlight">✎ highlighted</span> by holding <kbd>h</kbd> and selecting
+            text. <span class="text-highlighted-highlight">Hovering</span> over a highlight opens a notepad.
+            A <span class="text-highlighted-highlight">double-click</span> on a highlight removes it. 
+            <br />
+            <button id="deleteHighlights">Delete all highlights on this page.</button>
+          </small>
+        </li>
+      </ul>
+    </nav>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
+    <!-- fixes an issue in Safari iOS: 
+        https://stackoverflow.com/questions/29315889/ios-safari-100-width-fixed-position-header-wider-than-viewport 
+    -->
+    <div class="iosfix"> 
+    <section class="markdown-body">
 
-          <nav style="text-align: center">
-			<a href="{{ site.baseurl }}/research">Research Questions</a>
-			<a href="{{ site.baseurl }}/data">Data & Registration</a>
-            <a href="{{ site.baseurl }}/about">Contributors </a>
-          </nav>
-        </header>
-      </div>
-    </div>
+      {% if page.warning == true %}
+      <div class="warning">{{ site.warning }}</div>
+      {% endif %}
 
-    <div id="main" role="main" class="container">
       {{ content }}
+      :bike: :bike: :bike: <!-- indicates end of page -->
+    </section>
     </div>
+    {%- include footer.html -%}
+ 
+  </main>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
-      </div>
-    </div>
+  <div id="popup">
+    <textarea id="popup-text"  placeholder="Add your notes here, don't forget to hit save!" cols="20" rows="10"></textarea>
+    <br />
+    <button id="popup-close">Save</button>
+  </div>
 
-    {% include analytics.html %}
-  </body>
+  {% if site.smallNavbar == true %}
+  <div id="smallnav"  class="skin">
+    {%- include nav.html -%}
+  </div>
+  {% endif %}
+
+  {% if site.timeSpent == true %}
+  <div id="timeSpent" class="skin">
+    <div></div> <!-- time is shown here -->
+  </div>
+  <script type="text/javascript" src="{{ "/assets/javascript/timeSpent.js" | relative_url}}"></script>
+  {% endif %}
+
+  <script type="text/javascript" src="{{ "/assets/javascript/TextHighlighter.js" | relative_url}}"></script>
+  <script type="text/javascript" src="{{ "/assets/javascript/utilsHighlighter.js" | relative_url}}"></script>
+
+  {% for extra in site.extras %}
+    {{ extra.content }}
+  {% endfor %}
+
+  {% if site.exam == true %}
+  <script>
+    let div = document.createElement("div");
+    div.style.width="100vw";
+    div.style.height="100vh";
+    div.style.backgroundColor="crimson";
+    div.style.position="fixed";
+    div.style.top="0";
+    div.style.left="0"
+    div.style.textAlign="center";
+    document.body.appendChild(div);
+    let h1 = document.createElement("h1");
+    h1.innerHTML = "EXAM TIME";
+    h1.style.color = "white";
+    h1.style.fontSize = "10vw";
+    div.appendChild(h1);
+    </script>
+    {% endif %}
+</body>
+
 </html>
