@@ -1,6 +1,11 @@
+# Don't commit system files or dependencies
+*.DS_Store
+node_modules/
+vendor/bundle
+
+# Ensure Hugo builds aren't committed to Git
+public/
+site/public/
+dist/
+.tmp/
 _site/
-.sass-cache/
-.jekyll-metadata
-Gemfile.lock
-*.gem
-.jekyll-cache

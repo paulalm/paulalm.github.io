@@ -1,97 +1,74 @@
 ---
-layout: default
+layout: blocks
+title: Paula Lago
+date: 2017-11-22T23:00:00.000+00:00
+page_sections:
+- template: navigation-header-w-button
+  block: header-2
+  logo: ''
+  navigation:
+  - link: "/CV"
+    link_text: CV
+  - link: "#research"
+    link_text: Research
+  - link: "/activities"
+    link_text: Activities
+  - link: "/openpositions"
+    link_text: Work with me
+  - link: "/projects"
+    link_text: Projects
+  cta:
+    url: ''
+    button_text: Contact me
+- template: hero-banner-w-image
+  block: hero-2
+  slug: features
+  headline: Research in Ambient Intelligence, Activity Recognition, and Technology
+    for Health-care
+  content: I study how pervasive computing can improve people’s quality of life by
+    adapting to their personal routines and current activity.
+  cta:
+    enabled: true
+    url: "#research"
+    button_text: Learn more
+  image:
+    image: "/uploads/2022/01/05/dsc_0020.JPG"
+    alt_text: A picture of Paula
+  background_image: ''
+- template: content-feature
+  block: feature-1
+  media_alignment: Left
+  slug: research
+  headline: "<strong>Sensors and Data Streams</strong>"
+  content: Using sensors embedded in objects of smart environments or sensors embedded
+    in wearable devices to understand people’s needs or to enable personal awareness
+    and reflection of behavior.
+  media:
+    image: ''
+    alt_text: ''
+- template: content-feature
+  block: feature-1
+  media_alignment: Right
+  slug: customize
+  headline: "<strong>Pattern Mining and Machine Learning</strong>"
+  content: Making sense of sensor data by recognizing activities, learning frequent
+    patterns and understanding routines
+  media:
+    image: ''
+    alt_text: ''
+- template: content-feature
+  block: feature-1
+  media_alignment: Left
+  content: Sensing and analysis brought together for Health monitoring at home and
+    in everyday life, ecological settings<br>
+  headline: "<strong>Healthcare applications</strong>"
+  slug: ''
+  media:
+    image: ''
+    alt_text: ''
+- template: simple-footer
+  block: footer-1
+  content: Paula Lago - 2022<br>Assistant Professor - ECE Department<br>Concordia
+    University, Montreal, Canada
+
 ---
-
-<!-- Section -->
-<section>
-	<header class="major">
-		<h2>Erat lacinia</h2>
-	</header>
-	<div class="features">
-		<article>
-			<span class="icon fa-diamond"></span>
-			<div class="content">
-				<h3>Portitor ullamcorper</h3>
-				<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			</div>
-		</article>
-		<article>
-			<span class="icon fa-paper-plane"></span>
-			<div class="content">
-				<h3>Sapien veroeros</h3>
-				<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			</div>
-		</article>
-		<article>
-			<span class="icon fa-rocket"></span>
-			<div class="content">
-				<h3>Quam lorem ipsum</h3>
-				<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			</div>
-		</article>
-		<article>
-			<span class="icon fa-signal"></span>
-			<div class="content">
-				<h3>Sed magna finibus</h3>
-				<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			</div>
-		</article>
-	</div>
-</section>
-
-<!-- Section -->
-<section>
-	<header class="major">
-		<h2>Ipsum sed dolor</h2>
-	</header>
-	<div class="posts">
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic01.jpg" alt="" /></a>
-			<h3>Interdum aenean</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic02.jpg" alt="" /></a>
-			<h3>Nulla amet dolore</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic03.jpg" alt="" /></a>
-			<h3>Tempus ullamcorper</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic04.jpg" alt="" /></a>
-			<h3>Sed etiam facilis</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic05.jpg" alt="" /></a>
-			<h3>Feugiat lorem aenean</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="assets/images/pic06.jpg" alt="" /></a>
-			<h3>Amet varius aliquam</h3>
-			<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">More</a></li>
-			</ul>
-		</article>
-	</div>
-</section>
