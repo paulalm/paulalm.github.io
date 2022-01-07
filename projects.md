@@ -8,7 +8,7 @@ title: Projects
 
   <h2 id="generalization">Improving lab-to-field generalization of activity recognition models</h2>
   <p>(Postdoc) Activity recognition models show high performance when trained and tested with data collected in controlled environments like experiments. However, when used in real-life, the performance of these models tends to drop significantly. We study two causes for this: new user scenario and usage of different devices. We propose solutions based on feature learning. </p>
-  <div class="row"
+  <div class="row">
     <h3>Featured Publications:</h3>
     <ul>
       <li>Paula Lago, Moe Matsuki, Kohei Adachi, and Sozo Inoue. 2021. <a href="https://dl.acm.org/doi/10.1145/3460421.3480421"> Using additional training sensors to improve single-sensor complex activity recognition. </a>2021 International Symposium on Wearable Computers. Association for Computing Machinery, New York, NY, USA, 18–22.</li>
@@ -26,6 +26,7 @@ title: Projects
     <ul>
       <li>Paula Lago, Claudia Roncancio, Claudia Jiménez-Guarín. <a href="https://www.sciencedirect.com/science/article/pii/S0167739X18307180">Learning and managing context enriched behavior patterns in smart homes</a>. Future Generation Computer Systems, Volume 91,2019, Pages 191-205.</li>
     </ul>
+
     <h3>Featured Dataset</h3>
     <ul>
       <li><a href="https://www.researchgate.net/publication/316710301_The_ContextActA4H_Real-Life_Dataset_of_Daily-Living_Activities">The ContextAct@A4H Real-Life Dataset of Daily-Living Activities </a></li>
@@ -36,7 +37,7 @@ title: Projects
 
   <h2>Automatic Nurse Care Record Recreation with Activity Recognition </h2>
   <p>(Postdoc at Kyutech) By using activity recognition based on sensor data and historical data of nurses activities, we aim at reducing documentation workload by partially filling the nurse&#8217;s record for the day.</p>
-  <div class=#row">
+  <div class="row">
     <h3>Featured publications</h3>
     <ul>
       <li>Inoue, S., Lago, P., Hossain, T., Mairittha, T., &amp; Mairittha, N. (2019). <a href="https://dl.acm.org/doi/abs/10.1145/3351244">Integrating Activity Recognition and Nursing Care Records: The System, Deployment, and a Verification Study</a>. <em>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</em>, <em>3</em>(3), 1-24.</li>
