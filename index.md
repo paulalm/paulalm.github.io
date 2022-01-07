@@ -26,10 +26,11 @@ layout: default
 				<span class="icon solid fa-rocket"></span>
 				<div class="content">
 					<h3>Healthcare applications</h3>
-					<p>Sensing and analysis brought together for:
+					<p>Sensing and analysis brought together for:</p>
 						<ul>
 							<li>Health monitoring at home</li>
-							<li>Automatic nursing record creation></li></ul></p>
+							<li>Automatic nursing record creation></li>
+						</ul>
 				</div>
 			</article>
 		</div>
