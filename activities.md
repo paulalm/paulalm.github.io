@@ -20,10 +20,7 @@ published: true
         <p>In Spanish: Invited talk for the class of Research Seminar of the Master in Mathematics of the Sergio Arboleda University</p>
       </div>
       <!-- Break -->
-      <div class="col-6 col-12-small">
-        <h3>Interdum sapien gravida</h3>
-        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit.</p>
-      </div>
+
     </div>
 
   <hr class="major" />
@@ -34,8 +31,8 @@ published: true
     <div class="row">
       <div class="col-6 col-12-small">
         <h3>ContextAct @ A4H Dataset</h3>
-        <p>A dataset of Activities of Daily Living containing 1 month of real-life data collected in a smart apartment with over 200 sensors.</p>
-        <p>	<a href="https://data.mendeley.com/datasets/fcj2hmz5kb/3" class="button primary small">Download</a></p>
+        <p>A dataset of Activities of Daily Living containing 1 month of real-life data collected in a smart apartment with over 200 sensors.
+        <a href="https://data.mendeley.com/datasets/fcj2hmz5kb/3" class="button primary small">Download</a></p>
       </div>
       <div class="col-6 col-12-small">
         <h3>Nurse Care Activity Recognition</h3>
@@ -46,9 +43,8 @@ published: true
       <!-- Break -->
       <div class="col-6 col-12-small">
         <h3>Cooking activity Recognition</h3>
-        <p>Contains data from 4 accelerometers (smartphones and smartwatches) and motion capture collected in a laboratory setting during cooking sessions of 3 recipes.</p>
-        <p>	<a href="https://ieee-dataport.org/open-access/cooking-activity-dataset-macro-and-micro-activities" class="button primary small">Download</a></p>
-        <p>	<a href="https://abc-research.github.io/cook2020/tutorial/" class="button primary small">Check tutorials</a></p>
+        <p>Contains data from 4 accelerometers (smartphones and smartwatches) and motion capture collected in a laboratory setting during cooking sessions of 3 recipes. <a href="https://ieee-dataport.org/open-access/cooking-activity-dataset-macro-and-micro-activities" class="button primary small">Download</a></p>
+        <p>	I created some tutorials to help you get started <a href="https://abc-research.github.io/cook2020/tutorial/" class="button primary small">Check them</a></p>
       </div>
     </div>
 
