@@ -22,7 +22,7 @@ title: Projects
   <h2>Context-enriched patterns of behavior at home for Ambient Assisted Living</h2>
   <p>(PhD project) In Ambient Assisted Living routine deviations are usually used as a sign that assistance is needed. However, to reduce false alarms, context must be considered to assess when a routine deviation is truly an anomaly or when it is a result of a change in context, i.e. it is raining and the person can&#8217;t go out.  In this project, I proposed context-enriched behavior patterns to describe routines with the context they occur on and a stream learning algorithm to discover them. </p>
   <div class="row">
-    <h3>Featured Publications and Dataset</h3>
+    <h3>Featured Publications and Datasets</h3>
     <ul>
       <li>Paula Lago, Claudia Roncancio, Claudia Jiménez-Guarín. <a href="https://www.sciencedirect.com/science/article/pii/S0167739X18307180">Learning and managing context enriched behavior patterns in smart homes</a>. Future Generation Computer Systems, Volume 91,2019, Pages 191-205.</li>
 
