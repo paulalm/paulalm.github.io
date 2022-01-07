@@ -13,7 +13,7 @@ published: true
       <div class="col-6 col-12-small">
         <h3>Aprendizaje automático de rutinas en casa mediante uso de sensores para identificar cambios de comportamiento</h3>
         <p>Talk In Spanish. Invited talk to the forum "Innovation and Opportunities in healthcare from Information Engineering"  June, 2019
-          <a ref=https://sistemas.uniandes.edu.co/foro/mine/2019/> Watch </a></p>
+          <a href=https://sistemas.uniandes.edu.co/foro/mine/2019/> Watch </a></p>
       </div>
       <div class="col-6 col-12-small">
         <h3>Reconocimiento de actividades usando smartphones</h3>
