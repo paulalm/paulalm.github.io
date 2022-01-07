@@ -22,13 +22,10 @@ title: Projects
   <h2>Context-enriched patterns of behavior at home for Ambient Assisted Living</h2>
   <p>(PhD project) In Ambient Assisted Living routine deviations are usually used as a sign that assistance is needed. However, to reduce false alarms, context must be considered to assess when a routine deviation is truly an anomaly or when it is a result of a change in context, i.e. it is raining and the person can&#8217;t go out.  In this project, I proposed context-enriched behavior patterns to describe routines with the context they occur on and a stream learning algorithm to discover them. </p>
   <div class="row">
-    <h3>Featured Publications</h3>
+    <h3>Featured Publications and Dataset</h3>
     <ul>
       <li>Paula Lago, Claudia Roncancio, Claudia Jiménez-Guarín. <a href="https://www.sciencedirect.com/science/article/pii/S0167739X18307180">Learning and managing context enriched behavior patterns in smart homes</a>. Future Generation Computer Systems, Volume 91,2019, Pages 191-205.</li>
-    </ul>
 
-    <h3>Featured Dataset</h3>
-    <ul>
       <li><a href="https://www.researchgate.net/publication/316710301_The_ContextActA4H_Real-Life_Dataset_of_Daily-Living_Activities">The ContextAct@A4H Real-Life Dataset of Daily-Living Activities </a></li>
     </ul>
   </div>
@@ -38,12 +35,10 @@ title: Projects
   <h2>Automatic Nurse Care Record Recreation with Activity Recognition </h2>
   <p>(Postdoc at Kyutech) By using activity recognition based on sensor data and historical data of nurses activities, we aim at reducing documentation workload by partially filling the nurse&#8217;s record for the day.</p>
   <div class="row">
-    <h3>Featured publications</h3>
+    <h3>Featured Publications and Datasets</h3>
     <ul>
       <li>Inoue, S., Lago, P., Hossain, T., Mairittha, T., &amp; Mairittha, N. (2019). <a href="https://dl.acm.org/doi/abs/10.1145/3351244">Integrating Activity Recognition and Nursing Care Records: The System, Deployment, and a Verification Study</a>. <em>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</em>, <em>3</em>(3), 1-24.</li>
-    </ul>
-    <h3>Featured dataset:</h3>
-    <ul>
+
       <li> <a href="https://ieee-dataport.org/open-access/nurse-care-activities-datasets-laboratory-and-real-field">Nursing activities dataset</a></li>
     </ul>
   </div>
