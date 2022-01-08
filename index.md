@@ -11,7 +11,7 @@ image: assets/images/profilepic.jpg
 				<span class="icon fa-gem"></span>
 				<div class="content">
 					<h3>Sensors and Data Streams</h3>
-					<p>Using sensors embedded in objects of smart environments or sensors embedded in wearable devices to understand people’s needs or to enable personal awareness and reflection of behavior.</p>
+					<p>Using sensors embedded in objects of smart environments or sensors embedded in wearable devices to understand people's needs or to enable personal awareness and reflection of behavior.</p>
 				</div>
 				<span class="icon solid fa-paper-plane"></span>
 				<div class="content">
