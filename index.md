@@ -25,7 +25,7 @@ layout: default
 						<p>Sensing and analysis brought together for:</p>
 							<ul>
 								<li>Health monitoring at home</li>
-								<li>Automatic nursing record creation></li>
+								<li>Automatic nursing record creation</li>
 							</ul>
 					</div>
 				</article>
