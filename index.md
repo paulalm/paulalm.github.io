@@ -4,9 +4,7 @@ layout: default
 
 <!-- Section -->
 	<section>
-		<header class="major">
 			<h2>My Research</h2>
-		</header>
 		<div class="features">
 			<article>
 				<span class="icon fa-gem"></span>
