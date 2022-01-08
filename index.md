@@ -1,12 +1,9 @@
 ---
 layout: page
 title: Paula Lago
-image: assets/images/profilepic.jpg
 ---
-
-<!-- Section -->
-	<section>
-			<h2>My Research</h2>
+<section>
+		<h2>My Research</h2>
 		<div class="features">
 				<span class="icon fa-gem"></span>
 				<div class="content">
@@ -28,4 +25,4 @@ image: assets/images/profilepic.jpg
 						</ul>
 				</div>
 		</div>
-	</section>
+</section>
