@@ -1,5 +1,7 @@
 ---
 layout: page
+title: Paula Lago
+image: assets/images/profilepic.jpg
 ---
 
 <!-- Section -->
