@@ -53,11 +53,13 @@ published: true
       <h2 id="service">Service</h2>
       <div class="row">
       <ul>
-        <li>I am currently a volunteer in the <a href="https://sigchi.org/">SIGCHI</a> Communications Team</li>
+        <li> I am Data Chair at CHI2022</li>
+        <li>I was a volunteer in the <a href="https://sigchi.org/">SIGCHI</a> Communications Team from 2018-2021</li>
+        <li> I was part of ISWC2021 (International Symposium of Wearable Computing) Program Committee</li>
+        <li>I have participated in the organizing committee of HASCA Workshop since 2018 (co-located with Ubicomp)</li>
         <li>I have reviewed for IMWUT, Sensors, Applied Science and IEICE Journals.</li>
         <li>I served as AC for CHI Late Breaking Works in 2020.</li>
         <li>I have reviewed for several conferences including CCC (11, 12, 13), IEEE Colombian Conference on Communications and Computing COLCOM (COLCOM 2014, 2015, 2016, 2017), International Conference on Applied Informatics ICAI (2018, 2019), International Conference on Mobile Computing, Applications and Services (MobiCASE 2018), and ABC (2019, 2020).</li>
-        <li>I have participated in the organizing committee of HASCA Workshop since 2018 (co-located with Ubicomp)</li>
         <li>I have served as Publicity Chair and Publications Chair for the Activity and Behavior Computing Conference.</li>
         <li>I served as the social media manager for INFORSID and RCIS Conferences in 2016, creating their first twitter account. You can see them here <a href="https://twitter.com/RCIS_Conference" rel="nofollow">https://twitter.com/RCIS_Conference</a> and <a href="https://twitter.com/InforsidCongres" rel="nofollow">https://twitter.com/InforsidCongres</a></li>
       </ul>
