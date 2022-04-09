@@ -26,6 +26,8 @@ slack_url:
 twitter_url: https://twitter.com/paulalm87
 researchgate_url: https://www.researchgate.net/profile/Paula-Lago-2
 orcid_url: https://orcid.org/0000-0001-5290-6486
+scopus_url: https://www.scopus.com/authid/detail.uri?authorId=44061282400
+acm_url: https://dl.acm.org/profile/99659319783
 
 # Build settings
 markdown: kramdown

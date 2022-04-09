@@ -2,6 +2,12 @@
   <header id="header">
     <a href="{{ 'index.html' | absolute_url }}" class="logo"><strong>{{ site.title }}</strong> {{ site.subtitle }}</a>
     <ul class="icons">
+      {% if site.scopus_url %}
+      <li><a href="{{ site.scopus_url }}" class="icon fa-graduation-cap" target="_blank"><span class="label">Scopus Profile</span></a></li>
+      {% endif %}
+      {% if site.acm_url %}
+      <li><a href="{{ site.acm_url }}" class="icon fa-star" target="_blank"><span class="label">ACM Profile</span></a></li>
+      {% endif %}
       {% if site.twitter_url %}
       <li><a href="{{ site.twitter_url }}" class="icon fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
       {% endif %}
