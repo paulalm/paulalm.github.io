@@ -84,12 +84,12 @@ function handleGameGrid(){
 }
 // projectiles
 class Projectile{
-  constructor(x,y){
+  constructor(x,y, power){
     this.x = x;
     this.y = y;
     this.width = 10;
     this.height = 10;
-    this.power = 20;
+    this.power = power;
     this.speed = 5;
   }
   update(){
@@ -144,9 +144,9 @@ class Wonderball{
     this.height = cellSize - cellGap *2;
     this.shooting = false;
     this.health = 100;
+    this.defense = cards[choosenDefender].defense;
     this.projectiles = [];
-    this.timer = 0;
-    this.wonderballType = wonderballTypes[choosenDefender];
+    this.wonderballType = cards[choosenDefender].img;
     this.frameX = 0;
     this.frameY = 0;
     this.minFrame = 0;
@@ -154,6 +154,7 @@ class Wonderball{
     this.spriteWidth = 340;
     this.spriteHeight = 367;
     this.shootNow = false;
+    this.power = cards[choosenDefender].power;
   }
 
   draw(){
@@ -181,8 +182,14 @@ class Wonderball{
     }
 
     if (this.shooting && this.shootNow){
-      projectiles.push(new Projectile(this.x + 70, this.y + 30));
-      this.shootNow = false;
+      if(this.power > 0){
+        projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power));
+        this.shootNow = false;
+      }else{
+        if(frame%500 == 0){
+          resources.push(new Resource(this.x+15, this.y+15, 25));
+        }
+      }
     }
   }
 }
@@ -201,6 +208,7 @@ function handleWonderballs(){
     for (let j=0; j< enemies.length; j++){
       if(wonderballs[i] && collision(wonderballs[i], enemies[j])){
         wonderballs[i].health -= enemies[j].attack;
+        enemies[j].health -= wonderballs[i].defense;
         enemies[j].movement = 0;
       }
       if(wonderballs[i] && wonderballs[i].health <= 0){
@@ -219,6 +227,9 @@ const card1 = {
   width: 70,
   height: 85,
   img: wonderballTypes[0],
+  cost: 200,
+  defense: 0.08,
+  power: 35
 }
 cards.push(card1);
 
@@ -227,7 +238,10 @@ const card2 = {
   y:10,
   width: 70,
   height: 85,
-  img: wonderballTypes[1]
+  img: wonderballTypes[1],
+  cost: 50,
+  defense: 0,
+  power: 0
 }
 cards.push(card2);
 
@@ -236,7 +250,10 @@ const card3 = {
   y:10,
   width: 70,
   height: 85,
-  img: wonderballTypes[2]
+  img: wonderballTypes[2],
+  cost: 100,
+  defense: 0.05,
+  power: 20
 }
 cards.push(card3);
 
@@ -341,7 +358,7 @@ function handleEnemies(){
     let verticalPosition = Math.floor(Math.random()*5 +1) * cellSize + cellGap;
     enemies.push(new Enemy(verticalPosition));
     enemyPositions.push(verticalPosition);
-    if ( enemiesInterval > 120 ){
+    if ( enemiesInterval > 150 ){
       enemiesInterval -=50
     }
   }
@@ -350,27 +367,38 @@ function handleEnemies(){
 const amounts = [20, 30, 40];
 
 class Resource{
-  constructor(){
-    this.x = Math.random() * (canvas.width - cellSize);
-    this.y = (Math.floor(Math.random()*5)+1)*cellSize + 25;
+
+  constructor(x,y,amount){
+    this.x = x;
+    this.y = y;
     this.width = cellSize * 0.6;
     this.height = cellSize * 0.6;
-    this.amount = amounts[Math.floor(Math.random()* amounts.length)];
+    this.amount = amount;
   }
   draw(){
     ctx.fillStyle = 'yellow';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.beginPath();
+    ctx.arc(this.x+50, this.y+50, this.width/2, 0, Math.PI * 2);
+    ctx.fill();
     ctx.fillStyle = 'black';
     ctx.font = '20px Orbitron';
     ctx.fillText(this.amount, this.x + 15, this.y + 25);
+  }
+  update(){
+    this.y +=0.1;
   }
 }
 
 function handleResources(){
   if(frame%500 === 0 && score < winningScore){
-    resources.push(new Resource());
+    x = (Math.floor(Math.random()*5)+1)*cellSize;
+    y = (Math.floor(Math.random()*5)+1)*cellSize;
+    amount = amounts[Math.floor(Math.random()* amounts.length)];
+
+    resources.push(new Resource(x,y,amount));
   }
   for(let i = 0; i < resources.length; i++){
+    resources[i].update();
     resources[i].draw();
     if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)){
       numberOfResources+=resources[i].amount;
@@ -411,12 +439,12 @@ canvas.addEventListener('click', function(){
       return;
     }
   }
-  let defenderCost = 100;
+  let defenderCost = cards[choosenDefender].cost;
   if (numberOfResources >= defenderCost){
     wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
     numberOfResources -= defenderCost;
   }else{
-    floatingMessages.push(new floatingMessage("No resources available", mouse.x, mouse.y, 20, 'blue'));
+    floatingMessages.push(new FloatingMessage("No resources available", mouse.x, mouse.y, 20, 'blue'));
   }
 });
 
