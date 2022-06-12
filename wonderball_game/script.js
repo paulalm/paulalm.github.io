@@ -18,6 +18,7 @@ let numberOfResources = 1000;
 let frame = 0;
 let gameOver = false;
 let score = 0;
+let choosenDefender = 0;
 
 
 //mouse
@@ -26,6 +27,7 @@ const mouse ={
   y: undefined,
   width: 0.1,
   height: 0.1,
+  clicked: false,
 };
 let canvasPosition = canvas.getBoundingClientRect();
 
@@ -39,6 +41,14 @@ canvas.addEventListener('mousemove', function(e){
 canvas.addEventListener('mouseleave', function(e){
   mouse.x = undefined;
   mouse.y = undefined;
+});
+
+canvas.addEventListener('mousedown', function(e){
+  mouse.clicked = true;
+});
+
+canvas.addEventListener('mouseup', function(e){
+  mouse.clicked = false;
 });
 // game board
 const controlsBar = {
@@ -115,8 +125,16 @@ function handleProjectiles(){
 // Wonderballs
 const wonderballTypes = [];
 const wonderball1 = new Image();
-wonderball1.src = 'wonderball1.png';
+wonderball1.src = 'wonderballs/wonderball1.png';
 wonderballTypes.push(wonderball1);
+
+const wonderball2 = new Image();
+wonderball2.src = 'wonderballs/girasol.png';
+wonderballTypes.push(wonderball2);
+
+const wonderball3 = new Image();
+wonderball3.src = 'wonderballs/lanzaguisantes.png';
+wonderballTypes.push(wonderball3);
 
 class Wonderball{
   constructor(x,y){
@@ -124,18 +142,18 @@ class Wonderball{
     this.y = y;
     this.width = cellSize - cellGap *2;
     this.height = cellSize - cellGap *2;
-    console.log("created W " + this.y)
     this.shooting = false;
     this.health = 100;
     this.projectiles = [];
     this.timer = 0;
-    this.wonderballType = wonderballTypes[0];
+    this.wonderballType = wonderballTypes[choosenDefender];
     this.frameX = 0;
     this.frameY = 0;
     this.minFrame = 0;
     this.maxFrame = 3;
     this.spriteWidth = 340;
     this.spriteHeight = 367;
+    this.shootNow = false;
   }
 
   draw(){
@@ -151,15 +169,20 @@ class Wonderball{
     if(frame % 10 === 0 ){
       if(this.frameX < this.maxFrame ) this.frameX++;
       else this.frameX = this.minFrame;
+      if (this.frameX == 2) this.shootNow = true;
     }
 
-    if (this.shooting){
-      this.timer++;
-      if (this.timer % 100 === 0){
-        projectiles.push(new Projectile(this.x + 70, this.y + 30));
-      }
+    if(this.shooting){
+      this.minFrame = 1;
+      this.maxFrame = 2;
     }else{
-      this.timer=0;
+      this.minFrame = 0;
+      this.minFrame = 1;
+    }
+
+    if (this.shooting && this.shootNow){
+      projectiles.push(new Projectile(this.x + 70, this.y + 30));
+      this.shootNow = false;
     }
   }
 }
@@ -188,9 +211,51 @@ function handleWonderballs(){
     }
   }
 }
+
+cards = [];
+const card1 = {
+  x:10,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[0],
+}
+cards.push(card1);
+
+const card2 = {
+  x:90,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[1]
+}
+cards.push(card2);
+
+const card3 = {
+  x:170,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[2]
+}
+cards.push(card3);
+
+function chooseDefender(){
+  ctx.lineWidth = 1;
+  for(let i = 0; i< cards.length; i++){
+    if (collision(mouse, cards[i]) && mouse.clicked){
+      choosenDefender = i;
+    }
+    ctx.strokeStyle = 'black';
+    if(i == choosenDefender) ctx.strokeStyle = 'gold';
+    ctx.strokeRect(cards[i].x, cards[i].y, cards[i].width, cards[i].height);
+    ctx.drawImage(cards[i].img, 0, 0, 340, 367, cards[i].x, cards[i].y, cards[i].width, cards[i].height);
+  }
+}
+
 //Floating messages
 const floatingMessages = [];
-class floatingMessage{
+class FloatingMessage{
   constructor(value, x, y, size, color){
     this.value = value;
     this.x = x;
@@ -217,7 +282,7 @@ class floatingMessage{
 }
 
 function handleFloatingMessages(){
-  for (let i=0; i < floatingMessages; i++){
+  for (let i=0; i < floatingMessages.length; i++){
     floatingMessages[i].update();
     floatingMessages[i].draw();
     if(floatingMessages[i] && floatingMessages[i].lifeSpan >= 50){
@@ -231,7 +296,6 @@ class Enemy{
   constructor(verticalPosition){
     this.x = canvas.width;
     this.y = verticalPosition;
-    console.log("created enemy " + this.y)
     this.width = cellSize - cellGap*2;
     this.height = cellSize - cellGap*2;
     this.speed = Math.random() * 0.2 + 0.4;
@@ -262,8 +326,8 @@ function handleEnemies(){
 
     if(enemies[i].health <= 0){
       let gainedResources = enemies[i].maxHealth/10;
-      floatingMessages.push(new floatingMessage("+"+gainedResources, enemies[i].x, enemies[i].y, 30, 'black'));
-      floatingMessages.push(new floatingMessage("+"+gainedResources, 250, 50, 30, 'gold'));
+      floatingMessages.push(new FloatingMessage("+"+gainedResources, enemies[i].x, enemies[i].y, 30, 'black'));
+      floatingMessages.push(new FloatingMessage("+"+gainedResources, 250, 50, 30, 'gold'));
       numberOfResources += gainedResources;
       score += gainedResources;
       const findThisIndex = enemyPositions.indexOf(enemies[i].y);
@@ -311,8 +375,8 @@ function handleResources(){
     if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)){
       numberOfResources+=resources[i].amount;
 
-      floatingMessages.push(new floatingMessage("+"+resources[i].amount, resources[i].x, resources[i].y, 30, 'black'));
-      floatingMessages.push(new floatingMessage("+"+resources[i].amount, 250,50,30,'gold' ));
+      floatingMessages.push(new FloatingMessage("+"+resources[i].amount, resources[i].x, resources[i].y, 30, 'black'));
+      floatingMessages.push(new FloatingMessage("+"+resources[i].amount, 250,50,30,'gold' ));
       resources.splice(i, 1);
       i--;
     }
@@ -322,8 +386,8 @@ function handleResources(){
 function handleGameStatus(){
   ctx.fillStyle = 'gold';
   ctx.font = '30px Arial';
-  ctx.fillText('Score: ' + score, 20, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 20, 80);
+  ctx.fillText('Score: ' + score, 320, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 320, 80);
   if (gameOver){
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
@@ -362,6 +426,7 @@ function animate(){
   ctx.fillRect(0,0, controlsBar.width, controlsBar.height);
 
 
+  chooseDefender()
   handleGameGrid();
   handleWonderballs();
   handleProjectiles();
