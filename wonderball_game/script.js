@@ -38,9 +38,24 @@ canvas.addEventListener('mousemove', function(e){
   mouse.y = e.y - canvasPosition.top;
 });
 
+canvas.addEventListener('touchmove', function(e){
+  mouse.x = e.x - canvasPosition.left;
+  mouse.y = e.y - canvasPosition.top;
+});
+
 canvas.addEventListener('mouseleave', function(e){
   mouse.x = undefined;
   mouse.y = undefined;
+});
+
+canvas.addEventListener('touchend', function(e){
+  mouse.x = undefined;
+  mouse.y = undefined;
+  mouse.clicked = false;
+});
+
+canvas.addEventListener('touchstart', function(e){
+  mouse.clicked = true;
 });
 
 canvas.addEventListener('mousedown', function(e){
