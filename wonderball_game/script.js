@@ -6,7 +6,7 @@ canvas.height = 600;
 // global variables
 const cellSize = 100;
 const cellGap = 3;
-const winningScore = 20;
+
 const gameGrid = [];
 const wonderballs = [];
 const enemies = [];
@@ -19,7 +19,19 @@ let frame = 0;
 let gameOver = false;
 let score = 0;
 let choosenDefender = 0;
+let boss = false;
 
+let level_zombies = 10;
+let boss_points = 50;
+let go_next_levl = false;
+let winningScore = level_zombies*10+boss_points;
+let curr_level = 1;
+
+//types
+const producer = 0;
+const distanceshoot = 1;
+const defenser = 2;
+const contactshoot = 3;
 
 //mouse
 const mouse ={
@@ -151,6 +163,10 @@ const wonderball3 = new Image();
 wonderball3.src = 'wonderballs/lanzaguisantes.png';
 wonderballTypes.push(wonderball3);
 
+const wonderball4 = new Image();
+wonderball3.src = 'wonderballs/lanzaguisantes.png';
+wonderballTypes.push(wonderball4);
+
 class Wonderball{
   constructor(x,y){
     this.x = x;
@@ -158,7 +174,7 @@ class Wonderball{
     this.width = cellSize - cellGap *2;
     this.height = cellSize - cellGap *2;
     this.shooting = false;
-    this.health = 100;
+    this.health = cards[choosenDefender].health;
     this.defense = cards[choosenDefender].defense;
     this.projectiles = [];
     this.wonderballType = cards[choosenDefender].img;
@@ -170,6 +186,8 @@ class Wonderball{
     this.spriteHeight = 367;
     this.shootNow = false;
     this.power = cards[choosenDefender].power;
+    this.type = cards[choosenDefender].type;
+    this.life = 0;
   }
 
   draw(){
@@ -193,19 +211,21 @@ class Wonderball{
       this.maxFrame = 2;
     }else{
       this.minFrame = 0;
-      this.minFrame = 1;
+      this.maxFrame = 1;
     }
 
     if (this.shooting && this.shootNow){
-      if(this.power > 0){
-        projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power));
+      if(this.type==distanceshoot){
+        let prob = Math.random();
+        if(prob > 0.7) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power));
         this.shootNow = false;
-      }else{
-        if(frame%500 == 0){
-          resources.push(new Resource(this.x+15, this.y+15, 25));
-        }
       }
     }
+    if(this.type == producer && this.life%500 == 0){
+      resources.push(new Resource(this.x+15, this.y+15, this.power));
+    }
+
+    this.life++;
   }
 }
 
@@ -235,6 +255,8 @@ function handleWonderballs(){
   }
 }
 
+
+
 cards = [];
 const card1 = {
   x:10,
@@ -244,7 +266,9 @@ const card1 = {
   img: wonderballTypes[0],
   cost: 200,
   defense: 0.08,
-  power: 35
+  power: 35,
+  health: 100,
+  type: distanceshoot
 }
 cards.push(card1);
 
@@ -255,8 +279,10 @@ const card2 = {
   height: 85,
   img: wonderballTypes[1],
   cost: 50,
-  defense: 0,
-  power: 0
+  defense: 0.02,
+  power: 25,
+  health: 100,
+  type: producer
 }
 cards.push(card2);
 
@@ -268,9 +294,25 @@ const card3 = {
   img: wonderballTypes[2],
   cost: 100,
   defense: 0.05,
-  power: 20
+  power: 20,
+  health: 100,
+  type: distanceshoot
 }
 cards.push(card3);
+
+const card4 = {
+  x:250,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[3],
+  cost: 80,
+  defense: 1,
+  power: 0,
+  health: 300,
+  type: defenser
+}
+cards.push(card4);
 
 function chooseDefender(){
   ctx.lineWidth = 1;
@@ -325,16 +367,16 @@ function handleFloatingMessages(){
 }
 // Enemies
 class Enemy{
-  constructor(verticalPosition){
+  constructor(verticalPosition, health){
     this.x = canvas.width;
     this.y = verticalPosition;
     this.width = cellSize - cellGap*2;
     this.height = cellSize - cellGap*2;
     this.speed = Math.random() * 0.2 + 0.4;
     this.movement = this.speed;
-    this.health = 100;
+    this.health = health;
     this.maxHealth = this.health;
-    this.attack = 0.2;
+    this.attack = health / 500;
   }
   update(){
     this.x -= this.movement;
@@ -369,12 +411,18 @@ function handleEnemies(){
     }
   }
 
-  if (frame % enemiesInterval == 0){
+  if (frame % enemiesInterval == 0 && !boss){
     let verticalPosition = Math.floor(Math.random()*5 +1) * cellSize + cellGap;
-    enemies.push(new Enemy(verticalPosition));
+    let health = 100;
+    if (score > level_zombies*5) health = 200;
+    if (score > level_zombies*9) {
+      health = boss_points*20;
+      boss = true;
+    }
+    enemies.push(new Enemy(verticalPosition, health));
     enemyPositions.push(verticalPosition);
-    if ( enemiesInterval > 150 ){
-      enemiesInterval -=50
+    if ( enemiesInterval > 150){
+      enemiesInterval -= 25
     }
   }
 }
@@ -429,8 +477,9 @@ function handleResources(){
 function handleGameStatus(){
   ctx.fillStyle = 'gold';
   ctx.font = '30px Arial';
-  ctx.fillText('Score: ' + score, 320, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 320, 80);
+  ctx.fillText('Score: ' + score, 420, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 420, 80);
+  ctx.fillText('Level: ' + curr_level, 700, 80);
   if (gameOver){
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
@@ -442,6 +491,8 @@ function handleGameStatus(){
     ctx.fillText("LEVEL COMPLETE", 130, 300);
     ctx.font = '30px Orbitron';
     ctx.fillText("Score " + score, 134, 340);
+    ctx.fillText("Click for next level ", 134, 380);
+    go_next_levl = true;
   }
 }
 
@@ -484,6 +535,22 @@ function animate(){
   frame++;
 }
 
+
+canvas.addEventListener('dblclick', function(){
+  if(go_next_levl){
+    score = 0;
+    go_next_levl = false;
+    winningScore = level_zombies*10+boss_points;
+    numberOfResources = 200;
+    boss = false;
+    curr_level +=1;
+    resources.length = 0;
+    projectiles.length = 0;
+    wonderballs.length = 0;
+    level_zombies *= 2;
+    animate();
+  }
+})
 
 
 animate();
