@@ -16,6 +16,7 @@ This study involves doing a predefined set of activities in the PERFORM Center c
 <li>Having good mobility, no difficulties walking. </li>
 <li>Aged 18 – 75</li>
 <li>Being able to prepare any kind of salad safely (beginner to expert) </li>
+<li>Living in Montreal, Canada </li>
 </ul>
 </div>
 <p>There are no monetary incentives to participate</p>
@@ -27,16 +28,20 @@ This study involves doing a predefined set of activities in the PERFORM Center c
 <h3>About the researcher</h3>
 <p>I am an assistant professor at the Electrical and Computer Engineering Department of Concordia University and member of PERFORM Center. I am interested in developing algorithms that help us understand health from wearable, mobile and smart home sensors. </p>
 
+<hr class="major" />
+<h3> I want to participate!</h3>
+Please fill in this form if you want to participate in this study or if you have questions about the study.
+
 <form
   action="https://formspree.io/f/mpzbezqz" method="POST" >
 
-  Fill this form if you want to participate in this study or receive more information about it
+
   <label>
     Your email:
     <input type="email" name="email">
   </label>
   <label>
-    DO you want to participate or more information? Please write your answer and questions below
+    Do you want to participate or more information? Please write your answer and questions below
     <textarea name="message"></textarea>
   </label>
   <!-- your other form fields go here -->
