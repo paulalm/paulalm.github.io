@@ -3,7 +3,6 @@ layout: page
 title: Call for Participation - Continuous monitoring of behavior and health using pervasive computing
 ---
 
-<h1> Call for Participation - Continuous monitoring of behavior and health using pervasive computing </h1>
 <section>
 
 <p>We aim to investigate how different the measurements collected by wearable sensors are from vendor to vendor and how these differences affect the algorithms created to understand behaviors from the signals they collect (for example, walking and running recognition to count your daily steps).
