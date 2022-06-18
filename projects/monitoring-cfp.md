@@ -5,8 +5,9 @@ title: Call for Participation - Continuous monitoring of behavior and health usi
 
 <section>
 
-<p>We aim to investigate how different the measurements collected by wearable sensors are from vendor to vendor and how these differences affect the algorithms created to understand behaviors from the signals they collect (for example, walking and running recognition to count your daily steps).
-This study involves doing a predefined set of activities in the PERFORM Center carrying 12 different sensors. It will take around 1 hour. </p>
+<p>Wearable devices have the potential to monitor our physical, mental and internal health. However, their validity and the usefulness of the data collected by them depends on the methods used to translate it into actionable insights. These algorithms are sensitive to small variabilities in devices, people's behaviors and other contextual changes </p>
+<p> We aim to investigate how different the measurements collected by wearable sensors are from vendor to vendor and how these differences affect the algorithms created to understand behaviors from the signals they collect (for example, walking and running recognition to count your daily steps). We want you to participate in this study to help us collect data from multiple sensors to understand these differences. </p>
+<p>This study involves doing a predefined set of activities in the PERFORM Center carrying 12 different sensors. It will take around 1 hour. </p>
 
 <hr class="major" />
 
