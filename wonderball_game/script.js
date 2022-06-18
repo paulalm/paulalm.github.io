@@ -164,8 +164,12 @@ wonderball3.src = 'wonderballs/lanzaguisantes.png';
 wonderballTypes.push(wonderball3);
 
 const wonderball4 = new Image();
-wonderball3.src = 'wonderballs/lanzaguisantes.png';
+wonderball4.src = 'wonderballs/nuez.png';
 wonderballTypes.push(wonderball4);
+
+const wonderball5 = new Image();
+wonderball5.src = 'wonderballs/doudis.png';
+wonderballTypes.push(wonderball5);
 
 class Wonderball{
   constructor(x,y){
@@ -181,7 +185,7 @@ class Wonderball{
     this.frameX = 0;
     this.frameY = 0;
     this.minFrame = 0;
-    this.maxFrame = 3;
+    this.maxFrame = 2;
     this.spriteWidth = 340;
     this.spriteHeight = 367;
     this.shootNow = false;
@@ -206,12 +210,14 @@ class Wonderball{
       if (this.frameX == 2) this.shootNow = true;
     }
 
-    if(this.shooting){
-      this.minFrame = 1;
-      this.maxFrame = 2;
-    }else{
-      this.minFrame = 0;
-      this.maxFrame = 1;
+    if(this.type == distanceshoot){
+      if(this.shooting){
+        this.minFrame = 1;
+        this.maxFrame = 2;
+      }else{
+        this.minFrame = 0;
+        this.maxFrame = 1;
+      }
     }
 
     if (this.shooting && this.shootNow){
@@ -307,12 +313,26 @@ const card4 = {
   height: 85,
   img: wonderballTypes[3],
   cost: 80,
-  defense: 1,
+  defense: 0,
   power: 0,
   health: 300,
   type: defenser
 }
 cards.push(card4);
+
+const card5 = {
+  x:330,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[4],
+  cost: 0,
+  defense: 0.025,
+  power: 0,
+  health: 50,
+  type: contactshoot
+}
+cards.push(card5);
 
 function chooseDefender(){
   ctx.lineWidth = 1;
@@ -500,7 +520,7 @@ canvas.addEventListener('click', function(){
   const gridPositionX = mouse.x - (mouse.x % cellSize) + cellGap;
   const gridPositionY = mouse.y - (mouse.y % cellSize) + cellGap;
   if (gridPositionY < cellSize) return;
-  for (let i=0; i < wonderballs[i]; i++){
+  for (let i=0; i < wonderballs.length; i++){
     if(wonderballs[i].x === gridPositionX && wonderballs[i].y === gridPositionY){
       return;
     }
