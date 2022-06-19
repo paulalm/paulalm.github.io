@@ -188,6 +188,10 @@ const wonderball6 = new Image();
 wonderball6.src = 'wonderballs/melonpulta.png';
 wonderballTypes.push(wonderball6);
 
+const wonderball7 = new Image();
+wonderball7.src = 'wonderballs/cloudino.png';
+wonderballTypes.push(wonderball7);
+
 class Wonderball{
   constructor(x,y){
     this.x = x;
@@ -376,6 +380,22 @@ const card6 = {
   projectile_img: melon
 }
 cards.push(card6);
+
+//cloudino
+const card7 = {
+  x:490,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[6],
+  cost: 125,
+  defense: 0.13,
+  power: 35,
+  health: 125,
+  type: distanceshoot,
+  projectile_img: null
+}
+cards.push(card7);
 
 function chooseDefender(){
   ctx.lineWidth = 1;
