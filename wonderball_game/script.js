@@ -111,22 +111,34 @@ function handleGameGrid(){
 }
 // projectiles
 class Projectile{
-  constructor(x,y, power){
+  constructor(x,y, power, img){
     this.x = x;
     this.y = y;
+    this.originaly = y;
     this.width = 10;
     this.height = 10;
     this.power = power;
     this.speed = 5;
+    this.speedy = -1;
+    this.img = img;
   }
   update(){
     this.x += this.speed;
+    this.y += this.speedy;
+    if (this.originaly-this.y > 50) this.speedy *= -1;
+    if (this.y == this.originaly) this.speedy = 0;
   }
   draw(){
-    ctx.fillStyle = 'black';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
-    ctx.fill();
+    if(this.img.length == 0){
+      ctx.fillStyle = 'black';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+      ctx.fill();
+    }else{
+      console.log("drawing image")
+      console.log(this.img[0].src)
+      ctx.drawImage(this.img[0], 0, 0, 100, 100, this.x, this.y-30, this.width*5, this.height*5 );
+    }
   }
 }
 
@@ -171,6 +183,10 @@ const wonderball5 = new Image();
 wonderball5.src = 'wonderballs/doudis.png';
 wonderballTypes.push(wonderball5);
 
+const wonderball6 = new Image();
+wonderball6.src = 'wonderballs/melonpulta.png';
+wonderballTypes.push(wonderball6);
+
 class Wonderball{
   constructor(x,y){
     this.x = x;
@@ -181,6 +197,9 @@ class Wonderball{
     this.health = cards[choosenDefender].health;
     this.defense = cards[choosenDefender].defense;
     this.projectiles = [];
+    if(cards[choosenDefender].projectile_img != null){
+      this.projectiles.push(cards[choosenDefender].projectile_img);
+    }
     this.wonderballType = cards[choosenDefender].img;
     this.frameX = 0;
     this.frameY = 0;
@@ -212,7 +231,7 @@ class Wonderball{
 
     if(this.type == distanceshoot){
       if(this.shooting){
-        this.minFrame = 1;
+        this.minFrame = 0;
         this.maxFrame = 2;
       }else{
         this.minFrame = 0;
@@ -223,7 +242,7 @@ class Wonderball{
     if (this.shooting && this.shootNow){
       if(this.type==distanceshoot){
         let prob = Math.random();
-        if(prob > 0.7) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power));
+        if(prob > 0.7) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power, this.projectiles));
         this.shootNow = false;
       }
     }
@@ -274,7 +293,8 @@ const card1 = {
   defense: 0.08,
   power: 35,
   health: 100,
-  type: distanceshoot
+  type: distanceshoot,
+  projectile_img :  null
 }
 cards.push(card1);
 
@@ -288,7 +308,8 @@ const card2 = {
   defense: 0.02,
   power: 25,
   health: 100,
-  type: producer
+  type: producer,
+  projectile_img :  null
 }
 cards.push(card2);
 
@@ -302,7 +323,8 @@ const card3 = {
   defense: 0.05,
   power: 20,
   health: 100,
-  type: distanceshoot
+  type: distanceshoot,
+  projectile_img :  null
 }
 cards.push(card3);
 
@@ -316,7 +338,8 @@ const card4 = {
   defense: 0,
   power: 0,
   health: 300,
-  type: defenser
+  type: defenser,
+  projectile_img :  null
 }
 cards.push(card4);
 
@@ -327,12 +350,31 @@ const card5 = {
   height: 85,
   img: wonderballTypes[4],
   cost: 0,
-  defense: 0.025,
+  defense: 0.05,
   power: 0,
   health: 50,
-  type: contactshoot
+  type: contactshoot,
+  projectile_img:  null
 }
 cards.push(card5);
+
+const melon = new Image();
+melon.src = 'wonderballs/melon.png';
+
+const card6 = {
+  x:410,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[5],
+  cost: 225,
+  defense: 0.1,
+  power: 40,
+  health: 100,
+  type: distanceshoot,
+  projectile_img: melon
+}
+cards.push(card6);
 
 function chooseDefender(){
   ctx.lineWidth = 1;
@@ -497,9 +539,9 @@ function handleResources(){
 function handleGameStatus(){
   ctx.fillStyle = 'gold';
   ctx.font = '30px Arial';
-  ctx.fillText('Score: ' + score, 420, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 420, 80);
-  ctx.fillText('Level: ' + curr_level, 700, 80);
+  ctx.fillText('Score: ' + score, 500, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 500, 80);
+  ctx.fillText('Level: ' + curr_level, 720, 80);
   if (gameOver){
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
