@@ -615,8 +615,14 @@ canvas.addEventListener('dblclick', function(){
   }
 })
 
+document.getElementById('myVideo').addEventListener('ended',myHandler,false);
+    function myHandler(e) {
+        document.getElementById('myVideo').remove();
+        canvasPosition = canvas.getBoundingClientRect();
+        animate();
+    }
 
-animate();
+
 
 function collision(first, second){
   if( !(first.x > second.x + second.width ||
