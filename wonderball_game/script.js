@@ -635,6 +635,9 @@ canvas.addEventListener('dblclick', function(){
   }
 })
 
+
+animate();
+
 document.getElementById('myVideo').addEventListener('ended',myHandler,false);
     function myHandler(e) {
         document.getElementById('myVideo').remove();
