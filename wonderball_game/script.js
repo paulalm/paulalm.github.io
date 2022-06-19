@@ -119,8 +119,9 @@ class Projectile{
     this.height = 10;
     this.power = power;
     this.speed = 5;
-    this.speedy = -1;
+    this.speedy = 0;
     this.img = img;
+    if(this.img.length > 0) this.speedy = -1;
   }
   update(){
     this.x += this.speed;
