@@ -16,6 +16,7 @@ const resources = [];
 let enemiesInterval = 400;
 let numberOfResources = 1000;
 let frame = 0;
+let playGame = false;
 let gameOver = false;
 let score = 0;
 let choosenDefender = 0;
@@ -82,6 +83,7 @@ const controlsBar = {
   width : canvas.width,
   height : cellSize,
 };
+
 class Cell {
   constructor(x,y){
     this.x = x;
@@ -192,6 +194,10 @@ const wonderball7 = new Image();
 wonderball7.src = 'wonderballs/cloudino.png';
 wonderballTypes.push(wonderball7);
 
+const wonderball8 = new Image();
+wonderball8.src = 'wonderballs/doudiscarta.png';
+wonderballTypes.push(wonderball8);
+
 class Wonderball{
   constructor(x,y){
     this.x = x;
@@ -216,6 +222,7 @@ class Wonderball{
     this.power = cards[choosenDefender].power;
     this.type = cards[choosenDefender].type;
     this.life = 0;
+    this.underAttack=false;
   }
 
   draw(){
@@ -247,7 +254,8 @@ class Wonderball{
     if (this.shooting && this.shootNow){
       if(this.type==distanceshoot){
         let prob = Math.random();
-        if(prob > 0.7) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power, this.projectiles));
+        let th = 10/this.power;
+        if(prob < th) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power, this.projectiles));
         this.shootNow = false;
       }
     }
@@ -273,6 +281,7 @@ function handleWonderballs(){
     for (let j=0; j< enemies.length; j++){
       if(wonderballs[i] && collision(wonderballs[i], enemies[j])){
         wonderballs[i].health -= enemies[j].attack;
+        wonderballs[i].underAttack= true;
         enemies[j].health -= wonderballs[i].defense;
         enemies[j].movement = 0;
       }
@@ -285,9 +294,33 @@ function handleWonderballs(){
   }
 }
 
+class CardType{
+  constructor(x,y,h,w){
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+  }
+}
+class WonderballType{
+  constructor(x, y, img, type, cost, defense, power, health, proj_img ){
+    this.x = x;
+    this.y = y;
+    this.width = 70;
+    this.height = 85;
+    this.img = img;
+    this.type = type;
+    this.cost= cost;
+    this.defense= defense;
+    this.power= power;
+    this.health= health;
+    this.projectile_img =  proj_img;
+  }
+}
 
 
 cards = [];
+allcards = [];
 const card1 = {
   x:10,
   y:10,
@@ -301,7 +334,7 @@ const card1 = {
   type: distanceshoot,
   projectile_img :  null
 }
-cards.push(card1);
+allcards.push(card1);
 
 const card2 = {
   x:90,
@@ -316,7 +349,7 @@ const card2 = {
   type: producer,
   projectile_img :  null
 }
-cards.push(card2);
+allcards.push(card2);
 
 const card3 = {
   x:170,
@@ -331,7 +364,7 @@ const card3 = {
   type: distanceshoot,
   projectile_img :  null
 }
-cards.push(card3);
+allcards.push(card3);
 
 const card4 = {
   x:250,
@@ -346,7 +379,7 @@ const card4 = {
   type: defenser,
   projectile_img :  null
 }
-cards.push(card4);
+allcards.push(card4);
 
 const card5 = {
   x:330,
@@ -361,7 +394,8 @@ const card5 = {
   type: contactshoot,
   projectile_img:  null
 }
-cards.push(card5);
+allcards.push(card5);
+cards = allcards;
 
 const melon = new Image();
 melon.src = 'wonderballs/melon.png';
@@ -379,7 +413,7 @@ const card6 = {
   type: distanceshoot,
   projectile_img: melon
 }
-cards.push(card6);
+allcards.push(card6);
 
 //cloudino
 const card7 = {
@@ -395,7 +429,29 @@ const card7 = {
   type: distanceshoot,
   projectile_img: null
 }
-cards.push(card7);
+allcards.push(card7);
+
+//doudiscarta
+const lanza = new Image();
+lanza.src = 'wonderballs/flecha.png';
+
+const card8 = {
+  x:570,
+  y:10,
+  width: 70,
+  height: 85,
+  img: wonderballTypes[7],
+  cost: 125,
+  defense: 0.15,
+  power: 50,
+  health: 300,
+  type: distanceshoot,
+  projectile_img: lanza
+}
+allcards.push(card8);
+
+let cardAvailable = new Array(6).fill(50);
+cardAvailable[1]=0;
 
 function chooseDefender(){
   ctx.lineWidth = 1;
@@ -404,9 +460,11 @@ function chooseDefender(){
       choosenDefender = i;
     }
     ctx.strokeStyle = 'black';
+    ctx.globalAlpha = 1 - (cardAvailable[i]%100/100);
     if(i == choosenDefender) ctx.strokeStyle = 'gold';
     ctx.strokeRect(cards[i].x, cards[i].y, cards[i].width, cards[i].height);
     ctx.drawImage(cards[i].img, 0, 0, 340, 367, cards[i].x, cards[i].y, cards[i].width, cards[i].height);
+    ctx.globalAlpha = 1;
   }
 }
 
@@ -559,10 +617,10 @@ function handleResources(){
 // Utilities
 function handleGameStatus(){
   ctx.fillStyle = 'gold';
-  ctx.font = '30px Arial';
-  ctx.fillText('Score: ' + score, 500, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 500, 80);
-  ctx.fillText('Level: ' + curr_level, 720, 80);
+  ctx.font = '20px Arial';
+  ctx.fillText('Score: ' + score, 650, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 650, 80);
+  ctx.fillText('Level: ' + curr_level, 780, 40);
   if (gameOver){
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
@@ -590,12 +648,58 @@ canvas.addEventListener('click', function(){
   }
   let defenderCost = cards[choosenDefender].cost;
   if (numberOfResources >= defenderCost){
-    wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
-    numberOfResources -= defenderCost;
+    if(cardAvailable[choosenDefender]<=0){
+      wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
+      numberOfResources -= defenderCost;
+      cardAvailable[choosenDefender] = cards[choosenDefender].health;
+    }
+    else{
+      floatingMessages.push(new FloatingMessage("Wait for recharge", mouse.x, mouse.y, 20, 'blue'));
+    }
   }else{
     floatingMessages.push(new FloatingMessage("No resources available", mouse.x, mouse.y, 20, 'blue'));
   }
 });
+
+function handleCards(){
+  for(let i = 0; i< cardAvailable.length; i++){
+    if(cardAvailable[i] > 0){
+      cardAvailable[i]--;
+    }
+  }
+}
+
+let choosenOnes = [];
+function handleTypeSelection(){
+  ctx.clearRect(0,0, canvas.width, canvas.height);
+  height = 200;
+  width = 150;
+  ctx.fillStyle='black';
+  ctx.font = '30px Orbitron';
+  ctx.fillText('Choose your wonderballs for this battle', 15, 30);
+  for(let i = 0; i< allcards.length; i++){
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'black';
+    if(choosenOnes.includes(i)) ctx.strokeStyle = 'gold';
+    x = (i%4)*width + (i%4)*5+50;
+    y = Math.floor(i / 4)*height + (Math.floor(i / 4)*5) + 100;
+    ctx.strokeRect(x, y, width, height);
+    ctx.drawImage(allcards[i].img, 0, 0, 340, 367, x, y, width, height);
+    ctx.fillStyle='gold';
+    ctx.font = '30px Orbitron';
+    ctx.fillText(Math.floor(allcards[i].cost), x+15, y+30);
+  }
+
+  ctx.fillStyle='gold';
+  ctx.fillRect(300, 550, 150, 150);
+  ctx.fillStyle='black';
+  ctx.font = '30px Orbitron';
+  ctx.fillText('Go', 350, 590);
+  requestAnimationFrame(handleTypeSelection);
+  if(playGame){
+    animate();
+  }
+}
 
 function animate(){
   ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -610,6 +714,7 @@ function animate(){
   handleEnemies();
   handleResources();
   handleGameStatus();
+  handleCards();
   handleFloatingMessages();
   if(gameOver || score > winningScore && enemies.length == 0){
     return;
@@ -631,11 +736,12 @@ canvas.addEventListener('dblclick', function(){
     projectiles.length = 0;
     wonderballs.length = 0;
     level_zombies *= 2;
-    animate();
+    playGame = false;
+    handleTypeSelection();
   }
 })
 
-
+//handleTypeSelection();
 animate();
 
 
