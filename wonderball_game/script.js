@@ -450,7 +450,7 @@ const card8 = {
 }
 allcards.push(card8);
 
-let cardAvailable = new Array(6).fill(50);
+let cardAvailable = new Array(cards.length).fill(50);
 cardAvailable[1]=0;
 
 function chooseDefender(){
