@@ -33,6 +33,7 @@ const producer = 0;
 const distanceshoot = 1;
 const defenser = 2;
 const contactshoot = 3;
+const timedshoot = 4;
 
 //mouse
 const mouse ={
@@ -196,6 +197,10 @@ const wonderball8 = new Image();
 wonderball8.src = 'wonderballs/doudiscarta.png';
 wonderballTypes.push(wonderball8);
 
+const wonderball9 = new Image();
+wonderball9.src = 'wonderballs/arcoiris.png';
+wonderballTypes.push(wonderball9);
+
 class Wonderball{
   constructor(x,y){
     this.x = x;
@@ -213,14 +218,17 @@ class Wonderball{
     this.frameX = 0;
     this.frameY = 0;
     this.minFrame = 0;
-    this.maxFrame = 2;
+    this.maxFrame = this.shootingFrames+this.restingFrames;
     this.spriteWidth = 340;
     this.spriteHeight = 367;
     this.shootNow = false;
     this.power = cards[choosenDefender].power;
     this.type = cards[choosenDefender].type;
     this.life = 0;
+    this.shootTimer = 0;
     this.underAttack=false;
+    this.shootingFrames = cards[choosenDefender].shootingFrames;
+    this.restingFrames = cards[choosenDefender].restingFrames;
   }
 
   draw(){
@@ -236,16 +244,35 @@ class Wonderball{
     if(frame % 10 === 0 ){
       if(this.frameX < this.maxFrame ) this.frameX++;
       else this.frameX = this.minFrame;
-      if (this.frameX == 2) this.shootNow = true;
+      if (this.frameX == this.maxFrame) this.shootNow = true;
     }
 
     if(this.type == distanceshoot){
       if(this.shooting){
-        this.minFrame = 0;
-        this.maxFrame = 2;
+        this.minFrame = 1;
+        this.maxFrame = this.restingFrames + this.shootingFrames;
       }else{
         this.minFrame = 0;
+        this.maxFrame = this.restingFrames;
+      }
+    }
+
+    if(this.type == timedshoot){
+      if(this.shooting && !this.shootNow){
+        this.minFrame = 1;
         this.maxFrame = 1;
+        this.shootNow = true;
+      }
+      else if(this.shootNow){
+        this.minFrame = 2;
+        this.maxFrame = this.shootingFrames;
+        this.shootTimer ++;
+      }
+      if(this.shootNow && this.shootTimer == 10){
+        this.shootNow = false;
+        this.shootTimer = 0;
+        this.minFrame = 0;
+        this.maxFrame = this.restingFrames;
       }
     }
 
@@ -305,6 +332,8 @@ class WonderballType{
     this.power= card.power;
     this.health= card.health;
     this.projectile_img =  card.projectile_img;
+    this.restingFrames = card.restingFrames;
+    this.shootingFrames = card.shootingFrames;
   }
 }
 
@@ -319,7 +348,9 @@ const card1 = {
   power: 35,
   health: 100,
   type: distanceshoot,
-  projectile_img :  null
+  projectile_img :  null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card1);
 
@@ -330,7 +361,9 @@ const card2 = {
   power: 25,
   health: 100,
   type: producer,
-  projectile_img :  null
+  projectile_img :  null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card2);
 
@@ -341,7 +374,9 @@ const card3 = {
   power: 20,
   health: 100,
   type: distanceshoot,
-  projectile_img :  null
+  projectile_img :  null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card3);
 
@@ -352,7 +387,9 @@ const card4 = {
   power: 0,
   health: 300,
   type: defenser,
-  projectile_img :  null
+  projectile_img :  null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card4);
 
@@ -363,7 +400,9 @@ const card5 = {
   power: 0,
   health: 50,
   type: contactshoot,
-  projectile_img:  null
+  projectile_img:  null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card5);
 
@@ -377,7 +416,9 @@ const card6 = {
   power: 40,
   health: 100,
   type: distanceshoot,
-  projectile_img: melon
+  projectile_img: melon,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card6);
 
@@ -389,7 +430,9 @@ const card7 = {
   power: 35,
   health: 125,
   type: distanceshoot,
-  projectile_img: null
+  projectile_img: null,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card7);
 
@@ -404,9 +447,24 @@ const card8 = {
   power: 50,
   health: 300,
   type: distanceshoot,
-  projectile_img: lanza
+  projectile_img: lanza,
+  shootingFrames : 1,
+  restingFrames : 1
 }
 allTypes.push(card8);
+
+const card9 = {
+  img: wonderballTypes[8],
+  cost: 200,
+  defense: 0.3,
+  power: 50,
+  health: 150,
+  type: timedshoot,
+  projectile_img: null,
+  shootingFrames : 3,
+  restingFrames : 0
+}
+allTypes.push(card9);
 
 let cardAvailable = [];
 
@@ -664,12 +722,14 @@ function handleSelection(){
   }
 }
 
+const cols = 5;
+
 function initAllCards(){
   const width = 150;
   const height = 200;
   for(let i = 0; i < allTypes.length; i++){
-    x = (i%4)*width + (i%4)*5+50;
-    y = Math.floor(i / 4)*height + (Math.floor(i / 4)*5) + 100;
+    x = (i%cols)*width + (i%cols)*5+50;
+    y = Math.floor(i / cols)*height + (Math.floor(i / cols)*5) + 100;
     allcards.push(new WonderballType(x, y, width, height, allTypes[i]));
   }
 }
@@ -734,9 +794,7 @@ function animate(){
 canvas.addEventListener('dblclick', function(){
   if(go_next_levl || gameOver){
     score = 0;
-    go_next_levl = false;
-    playGame = false;
-    gameOver = false;
+
     numberOfResources = 200;
     boss = false;
     enemies.length = 0;
@@ -749,6 +807,9 @@ canvas.addEventListener('dblclick', function(){
       level_zombies *= 2;
       winningScore = level_zombies*10+boss_points;
     }
+    go_next_levl = false;
+    playGame = false;
+    gameOver = false;
     console.log(gameOver);
     cards = [];
     cardsAvailable = [];
