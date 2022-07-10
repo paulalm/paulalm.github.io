@@ -767,4 +767,3 @@ function collision(first, second){
 window.addEventListener('resize', function(){
   canvasPosition = canvas.getBoundingClientRect();
 })
->>>>>>> Stashed changes
