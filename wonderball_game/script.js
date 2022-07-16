@@ -571,8 +571,8 @@ function handleGameStatus(){
   ctx.fillStyle = 'gold';
   ctx.font = '20px Arial';
   //ctx.fillText('Score: ' + score, 650, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 780, 80);
-  ctx.fillText('Level: ' + curr_level, 780, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 740, 80);
+  ctx.fillText('Level: ' + curr_level, 740, 40);
   if (gameOver){
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
