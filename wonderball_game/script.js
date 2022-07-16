@@ -80,6 +80,19 @@ const controlsBar = {
   height : cellSize,
 };
 
+//pausa
+const pauseImg = new Image();
+pauseImg.src = 'resources/pause.png';
+
+const pauseBtn ={
+  x: 7*90,
+  y: 10,
+  width: 85,
+  height: 70,
+  active: false,
+  img: pauseImg
+};
+
 powerUps = [];
 //pala
 const shovelImg = new Image();
@@ -370,6 +383,11 @@ function choosePowerUps(){
     ctx.strokeRect(powerUps[i].x, powerUps[i].y, powerUps[i].width, powerUps[i].height);
     ctx.drawImage(powerUps[i].img, 0, 0, 100, 100, powerUps[i].x, powerUps[i].y, powerUps[i].width, powerUps[i].height);
   }
+
+  //pauseImg
+  ctx.strokeStyle = 'black';
+  ctx.strokeRect(pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
+  ctx.drawImage(pauseBtn.img, 0, 0, 100, 100, pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
 }
 
 //Floating messages
@@ -546,8 +564,8 @@ function handleResources(){
 function handleGameStatus(){
   ctx.fillStyle = 'gold';
   ctx.font = '20px Arial';
-  ctx.fillText('Score: ' + score, 650, 40);
-  ctx.fillText('Resources: ' + numberOfResources, 650, 80);
+  //ctx.fillText('Score: ' + score, 650, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 780, 80);
   ctx.fillText('Level: ' + curr_level, 780, 40);
   if (gameOver){
     ctx.fillStyle = 'black';
