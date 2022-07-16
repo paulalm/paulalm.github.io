@@ -90,6 +90,7 @@ const pauseBtn ={
   width: 85,
   height: 70,
   active: false,
+  paused: false,
   img: pauseImg
 };
 
@@ -384,8 +385,15 @@ function choosePowerUps(){
     ctx.drawImage(powerUps[i].img, 0, 0, 100, 100, powerUps[i].x, powerUps[i].y, powerUps[i].width, powerUps[i].height);
   }
 
+}
+
+function handlePauseBtn(){
   //pauseImg
+  if(collision(mouse, pauseBtn)&& mouse.clicked){
+    pauseBtn.active = !pauseBtn.active;
+  }
   ctx.strokeStyle = 'black';
+  if(pauseBtn.active) ctx.strokeStyle = 'gold';
   ctx.strokeRect(pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
   ctx.drawImage(pauseBtn.img, 0, 0, 100, 100, pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
 }
@@ -467,8 +475,6 @@ class Enemy{
     }
   }
   draw(){
-    ctx.fillStyle = 'white';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle='gold';
     ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x+15, this.y+30);
@@ -719,16 +725,19 @@ function animate(){
   ctx.fillStyle = 'blue';
   ctx.fillRect(0,0, controlsBar.width, controlsBar.height);
 
-  chooseDefender();
-  choosePowerUps();
+  handlePauseBtn();
   handleGameGrid();
-  handleWonderballs();
-  handleProjectiles();
-  handleEnemies();
-  handleResources();
+  if(!pauseBtn.active){
+    chooseDefender();
+    choosePowerUps();
+    handleWonderballs();
+    handleProjectiles();
+    handleEnemies();
+    handleResources();
+    handleFloatingMessages();
+  }
   handleGameStatus();
   handleCards();
-  handleFloatingMessages();
   if(gameOver || score > winningScore && enemies.length == 0){
     frame=0;
     return;
