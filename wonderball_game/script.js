@@ -95,19 +95,37 @@ const pauseBtn ={
 };
 
 powerUps = [];
+powerUpsTime = [];
 //pala
 const shovelImg = new Image();
 shovelImg.src = 'resources/palacolor.png';
 
 const shovel ={
   x: 6*90,
-  y: 10,
-  width: 85,
-  height: 70,
+  y: 5,
+  width: 40,
+  height: 40,
   active: false,
   img: shovelImg
 };
-powerUps.push(shovel)
+powerUps.push(shovel);
+powerUpsTime.push(0);
+
+//Gema de agua
+const watergemImg = new Image();
+watergemImg.src = 'resources/gemaAgua.png';
+
+const watergem ={
+  x: 6*90,
+  y: 50,
+  width: 40,
+  height: 40,
+  active: false,
+  img: watergemImg
+};
+
+powerUps.push(watergem);
+powerUpsTime.push(1000);
 
 class Cell {
   constructor(x,y){
@@ -197,6 +215,7 @@ class Wonderball{
     this.height = cellSize - cellGap *2;
     this.shooting = false;
     this.health = cards[choosenDefender].card.health;
+    this.maxDefense = cards[choosenDefender].card.defense;
     this.defense = cards[choosenDefender].card.defense;
     this.shooting = false;
 
@@ -212,6 +231,7 @@ class Wonderball{
     this.minFrame = 0;
     this.maxFrame = this.shootingFrames+this.restingFrames;
 
+    this.maxPower = cards[choosenDefender].card.power;
     this.power = cards[choosenDefender].card.power;
   }
 
@@ -238,6 +258,7 @@ class ProducerWonderball extends Wonderball{
   constructor(x,y){
     super(x,y);
     this.timer = 500;
+    this.maxProduce = cards[choosenDefender].card.power;
     this.produce = cards[choosenDefender].card.power;
     this.life = 0;
   }
@@ -247,6 +268,12 @@ class ProducerWonderball extends Wonderball{
 
   update(){
     super.update();
+
+    if(powerUps[1].active){
+      this.produce = this.maxProduce + 20;
+    }else{
+      this.produce = this.maxProduce;
+    }
 
     if(this.life% this.timer == 0){
       resources.push(new Resource(this.x+15, this.y+15, this.produce));
@@ -273,6 +300,14 @@ class AttackerWonderball extends Wonderball{
 
   update(){
     super.update();
+    if(powerUps[1].active){
+      this.defense = this.maxDefense +this.maxDefense*2;
+      this.power = this.maxPower + this.maxPower * 0.2;
+    }else{
+      this.defense = this.maxDefense;
+      this.power = this.maxPower;
+    }
+
     if(frame%10 == 0 && this.frameX == this.shootFrame) this.shootNow = true;
 
     if(this.type == distanceshoot){
@@ -375,14 +410,34 @@ function chooseDefender(){
 function choosePowerUps(){
   ctx.lineWidth = 1;
   for ( let i = 0; i < powerUps.length; i++){
-    if (collision(mouse, powerUps[i]) && mouse.clicked){
-      powerUps[i].active = !powerUps[i].active;
+    if(i== 0){
+      if (collision(mouse, powerUps[i]) && mouse.clicked && powerUpsTime[i] == 0){
+        powerUps[i].active = !powerUps[i].active;
+      }
+    }
+    else{
+      if(powerUpsTime[i] > 0){
+        powerUpsTime[i]--;
+        if(powerUpsTime[i] == 0){
+          if ( powerUps[i].active){
+            powerUps[i].active = false;
+            powerUpsTime[i] = 700;
+          }
+        }
+      }
+      if (collision(mouse, powerUps[i]) && mouse.clicked && !powerUps[i].active){
+        powerUps[i].active = true;
+        powerUpsTime[i] = 1000;
+      }
     }
 
+
     ctx.strokeStyle = 'black';
+    ctx.globalAlpha = 1 - (powerUps[i]%1000/1000);
     if(powerUps[i].active) ctx.strokeStyle = 'gold';
     ctx.strokeRect(powerUps[i].x, powerUps[i].y, powerUps[i].width, powerUps[i].height);
     ctx.drawImage(powerUps[i].img, 0, 0, 100, 100, powerUps[i].x, powerUps[i].y, powerUps[i].width, powerUps[i].height);
+    ctx.globalAlpha = 1;
   }
 
 }
@@ -397,6 +452,7 @@ function handlePauseBtn(){
   ctx.strokeRect(pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
   ctx.drawImage(pauseBtn.img, 0, 0, 100, 100, pauseBtn.x, pauseBtn.y, pauseBtn.width, pauseBtn.height);
 }
+
 
 //Floating messages
 const floatingMessages = [];
@@ -580,7 +636,7 @@ function handleGameStatus(){
     ctx.font = '60px Orbitron';
     ctx.fillText("Pau Pau, Try again.", 135, 370);
   }
-  if(score >= winningScore && enemies.length === 0){
+  if(enemies.length === 0){
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
     ctx.fillText("LEVEL COMPLETE", 130, 300);
@@ -605,6 +661,7 @@ canvas.addEventListener('click', function(){
             floatingMessages.push(new FloatingMessage("+25", mouse.x, mouse.y, 20, 'blue'));
             wonderballs.splice(i, 1);
             i--;
+            powerUps[0].active=false; //make shovel not active
             return;
           }
           //check other powerUps
