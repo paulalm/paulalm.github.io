@@ -176,6 +176,28 @@ const card9 = {
 }
 allTypes.push(card9);
 
+const wonderball11 = new Image();
+wonderball11.src = 'wonderballs/frailejon.png';
+wonderballTypes.push(wonderball11);
+
+const fraiproy = new Image();
+fraiproy.src = 'wonderballs/fraiproy.png';
+
+const card11 = {
+  img: wonderball11,
+  cost: 200,
+  defense: 0.2,
+  power: 18,
+  health: 250,
+  type: distanceshoot,
+  projectile_img: fraiproy,
+  shootingFrames : 2,
+  restingFrames : 1,
+  shootFrame: 2
+}
+allTypes.push(card11);
+
+
 const wonderball10 = new Image();
 wonderball10.src = 'wonderballs/dilan.png';
 wonderballTypes.push(wonderball10);
@@ -184,7 +206,7 @@ const dilanproy = new Image();
 dilanproy.src = 'wonderballs/dilanproy.png';
 
 const card10 = {
-  img: wonderballTypes[9],
+  img: wonderball10,
   cost: 150,
   defense: 0.2,
   power: 25,
