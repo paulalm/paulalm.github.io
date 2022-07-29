@@ -362,6 +362,7 @@ function handleWonderballs(){
     }
 
     for (let j=0; j< enemies.length; j++){
+      enemies[j].movement = enemies[j].speed;
       if(wonderballs[i] && collision(wonderballs[i], enemies[j])){
         wonderballs[i].health -= enemies[j].attack;
         enemies[j].health -= wonderballs[i].defense;
@@ -370,7 +371,6 @@ function handleWonderballs(){
       if(wonderballs[i] && wonderballs[i].health <= 0){
         wonderballs.splice(i, 1);
         i--;
-        enemies[j].movement = enemies[j].speed;
       }
     }
   }
@@ -388,7 +388,7 @@ class WonderballType{
 
 
 cards = [];
-allcards = [];
+let allcards = [];
 
 let cardAvailable = [];
 
@@ -676,7 +676,8 @@ canvas.addEventListener('click', function(){
               ||    cards[choosenDefender].card.type == contactshoot) wonderballs.push(new AttackerWonderball(gridPositionX, gridPositionY));
           else wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
           numberOfResources -= defenderCost;
-          cardAvailable[choosenDefender] = cards[choosenDefender].card.health;
+          cardAvailable[choosenDefender] = cards[choosenDefender].card.cost;
+          if(cardAvailable[choosenDefender]==0)cardAvailable[choosenDefender]=150;
         }
         else{
           floatingMessages.push(new FloatingMessage("Wait for recharge", mouse.x, mouse.y, 20, 'blue'));
@@ -699,15 +700,33 @@ const goButton={
   x: 250,
   y: 550,
   width: 250,
-  height: 150
-}
+  height: 150,
+  text: 'Go!'
+};
+
+const backButton={
+  x: 80,
+  y: 550,
+  width: 150,
+  height: 150,
+  text: '<--'
+};
+
+const nextButton={
+  x: 550,
+  y: 550,
+  width: 150,
+  height: 150,
+  text: '-->'
+};
 
 let choosenOnes = [];
+let curr_page = 0;
 
 function handleSelection(){
-  for(let i = 0; i < allcards.length; i++){
-    if (collision(mouse, allcards[i]) && mouse.clicked && !choosenOnes.includes(i)){
-      choosenCard = i;
+  for(let i = 0; i < 10; i++){
+    if (collision(mouse, allcards[i]) && mouse.clicked && !choosenOnes.includes(i+curr_page)){
+      choosenCard = i+curr_page;
       choosenOnes.push(choosenCard);
       mouse.clicked=false;
       if(choosenOnes.length > 6){
@@ -716,13 +735,28 @@ function handleSelection(){
     }
   }
 
-  if (collision(mouse, goButton) && mouse.clicked){
+  if (collision(mouse, nextButton) && mouse.clicked){
+    if(curr_page < 1){
+      curr_page +=1;
+      mouse.clicked=false;
+      initAllCards();
+    }
+  }
+  else if (collision(mouse, backButton) && mouse.clicked){
+    if(curr_page > 0){
+      curr_page -=1;
+      mouse.clicked=false;
+      initAllCards();
+    }
+  }
+  else if (collision(mouse, goButton) && mouse.clicked){
     if(choosenOnes.length == 6){
-      cardAvailable = new Array(choosenOnes.length).fill(50);
+      cardAvailable = new Array(choosenOnes.length).fill(75);
       for(let j = 0; j < choosenOnes.length; j++){
-        cards.push(new WonderballType(j*90, 10, 70, 85, allcards[choosenOnes[j]].card));
-        if(allcards[choosenOnes[j]].card.type == 'producer') cardAvailable[j]==0;
+        cards.push(new WonderballType(j*90, 10, 70, 85, allTypes[choosenOnes[j]]));
+        if(allTypes[choosenOnes[j]].type == 'producer') cardAvailable[j]==0;
       }
+      mouse.clicked = false;
       playGame = true;
     }else{
       floatingMessages.push(new FloatingMessage("Choose 6 defenders", mouse.x, mouse.y, 20, 'blue'));
@@ -735,10 +769,14 @@ const cols = 5;
 function initAllCards(){
   const width = 150;
   const height = 200;
-  for(let i = 0; i < allTypes.length; i++){
-    x = (i%cols)*width + (i%cols)*5+50;
-    y = Math.floor(i / cols)*height + (Math.floor(i / cols)*5) + 100;
-    allcards.push(new WonderballType(x, y, width, height, allTypes[i]));
+  allcards=[];
+  for(let j = curr_page; j < curr_page+10; j++){
+    if(j< allTypes.length){
+      i = j - curr_page;
+      x = (i%cols)*width + (i%cols)*5+50;
+      y = Math.floor(i / cols)*height + (Math.floor(i / cols)*5) + 100;
+      allcards.push(new WonderballType(x, y, width, height, allTypes[j]));
+    }
   }
 }
 
@@ -749,10 +787,12 @@ function handleTypeSelection(){
   ctx.font = '30px Orbitron';
   ctx.fillText('Pau Pau! Welcome to the world!', 15, 30);
   ctx.fillText('Choose your wonderballs for this battle', 15, 60);
+  //initAllCards();
+
   for(let i = 0; i< allcards.length; i++){
     ctx.lineWidth = 1;
     ctx.strokeStyle = 'black';
-    if(choosenOnes.includes(i)) ctx.strokeStyle = 'gold';
+    if(choosenOnes.includes(i+curr_page)) ctx.strokeStyle = 'gold';
     ctx.strokeRect(allcards[i].x, allcards[i].y, allcards[i].width, allcards[i].height);
     ctx.drawImage(allcards[i].card.img, 0, 0, 340, 367, allcards[i].x, allcards[i].y, allcards[i].width, allcards[i].height);
     ctx.fillStyle='gold';
@@ -765,7 +805,21 @@ function handleTypeSelection(){
   ctx.fillRect(goButton.x, goButton.y, goButton.width, goButton.height);
   ctx.fillStyle='black';
   ctx.font = '30px Orbitron';
-  ctx.fillText('Go', 350, 590);
+  ctx.fillText(goButton.text, goButton.x+20, 590);
+
+  //NExt Button
+  ctx.fillStyle='gold';
+  ctx.fillRect(nextButton.x, nextButton.y, nextButton.width, nextButton.height);
+  ctx.fillStyle='black';
+  ctx.font = '30px Orbitron';
+  ctx.fillText(nextButton.text, nextButton.x+20, 590);
+
+  //NExt Button
+  ctx.fillStyle='gold';
+  ctx.fillRect(backButton.x, backButton.y, backButton.width, backButton.height);
+  ctx.fillStyle='black';
+  ctx.font = '30px Orbitron';
+  ctx.fillText(backButton.text, backButton.x+20, 590);
 
   //events
   handleFloatingMessages();
