@@ -564,9 +564,6 @@ function handleEnemies(){
     let verticalPosition = Math.floor(Math.random()*5 +1) * cellSize + cellGap;
     let type = 0;
     type = Math.floor(Math.random()*(enemyTypes.length-2));
-    if(Math.random() > 1/(curr_level)){
-      type = enemyTypes.length-1;
-    }
     if (score > level_zombies*9) {
       type = 2;
       boss = true;
