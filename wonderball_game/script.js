@@ -563,7 +563,10 @@ function handleEnemies(){
   if (frame % enemiesInterval == 0 && !boss){
     let verticalPosition = Math.floor(Math.random()*5 +1) * cellSize + cellGap;
     let type = 0;
-    if (score > level_zombies*5) type = 1;
+    type = Math.floor(Math.random()*(enemyTypes.length-2));
+    if(Math.random() > 1/(curr_level)){
+      type = enemyTypes.length-1;
+    }
     if (score > level_zombies*9) {
       type = 2;
       boss = true;
@@ -571,7 +574,7 @@ function handleEnemies(){
     enemies.push(new Enemy(verticalPosition, enemyTypes[type]));
     enemyPositions.push(verticalPosition);
     if ( enemiesInterval > 150){
-      enemiesInterval -= 25
+      enemiesInterval -= 25;
     }
   }
 }
@@ -636,7 +639,7 @@ function handleGameStatus(){
     ctx.font = '60px Orbitron';
     ctx.fillText("Pau Pau, Try again.", 135, 370);
   }
-  if(enemies.length === 0){
+  if(enemies.length == 0){
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
     ctx.fillText("LEVEL COMPLETE", 130, 300);
@@ -849,7 +852,7 @@ function animate(){
   }
   handleGameStatus();
   handleCards();
-  if(gameOver || score > winningScore && enemies.length == 0){
+  if(gameOver || enemies.length == 0){
     frame=0;
     return;
   }
@@ -863,7 +866,7 @@ canvas.addEventListener('dblclick', function(){
   if(go_next_levl || gameOver){
     score = 0;
 
-    numberOfResources = 200;
+    numberOfResources = (5-curr_level)*100;
     boss = false;
     enemies.length = 0;
     resources.length = 0;
@@ -872,13 +875,12 @@ canvas.addEventListener('dblclick', function(){
 
     if(go_next_levl){
       curr_level +=1;
-      level_zombies *= 2;
+      level_zombies =curr_level*10+Math.pow(curr_level,2);
       winningScore = level_zombies*10+boss_points;
     }
     go_next_levl = false;
     playGame = false;
     gameOver = false;
-    console.log(gameOver);
     cards = [];
     cardsAvailable = [];
     handleTypeSelection();
