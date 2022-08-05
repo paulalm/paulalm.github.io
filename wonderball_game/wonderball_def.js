@@ -7,6 +7,7 @@ const distanceshoot = 1;
 const defenser = 2;
 const contactshoot = 3;
 const timedshoot = 4;
+const general = 5;
 
 const wonderball1 = new Image();
 wonderball1.src = 'wonderballs/wonderball1.png';
@@ -229,7 +230,7 @@ const card12 = {
   defense: 0.2,
   power: 30,
   health: 200,
-  type: contactshoot,
+  type: general,
   shootingFrames : 4,
   restingFrames : 1,
   shootFrame: 3

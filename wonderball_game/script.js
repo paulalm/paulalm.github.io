@@ -206,217 +206,7 @@ function handleProjectiles(){
     }
   }
 }
-// Wonderballs
-class Wonderball{
-  constructor(x,y){
-    this.x = x;
-    this.y = y;
-    this.width = cellSize - cellGap *2;
-    this.height = cellSize - cellGap *2;
-    this.shooting = false;
-    this.health = cards[choosenDefender].card.health;
-    this.maxDefense = cards[choosenDefender].card.defense;
-    this.defense = cards[choosenDefender].card.defense;
-    this.shooting = false;
 
-    this.spriteWidth = 340;
-    this.spriteHeight = 367;
-
-    this.wonderballType = cards[choosenDefender].card.img;
-    this.frameX = 0;
-
-    this.shootingFrames = cards[choosenDefender].card.shootingFrames;
-    this.restingFrames = cards[choosenDefender].card.restingFrames;
-
-    this.minFrame = 0;
-    this.maxFrame = this.shootingFrames+this.restingFrames;
-
-    this.maxPower = cards[choosenDefender].card.power;
-    this.power = cards[choosenDefender].card.power;
-  }
-
-  draw(){
-    ctx.fillStyle = 'white';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle='gold';
-    ctx.font = '20px Orbitron';
-    ctx.fillText(Math.floor(this.health), this.x+15, this.y+30);
-    ctx.drawImage(this.wonderballType, this.frameX*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
-  }
-
-  enemyOnRow(onRow){
-
-  }
-
-  enemyAttacking(attack){
-
-  }
-
-  update(){
-    if(frame % 10 == 0 ){
-      if(this.frameX < this.maxFrame ) this.frameX++;
-      else this.frameX = this.minFrame;
-    }
-
-
-  }
-}
-
-class ProducerWonderball extends Wonderball{
-  constructor(x,y){
-    super(x,y);
-    this.timer = 500;
-    this.maxProduce = cards[choosenDefender].card.power;
-    this.produce = cards[choosenDefender].card.power;
-    this.life = 0;
-  }
-  draw(){
-    super.draw();
-  }
-
-  update(){
-    super.update();
-
-    if(powerUps[1].active){
-      this.produce = this.maxProduce + 20;
-    }else{
-      this.produce = this.maxProduce;
-    }
-
-    if(this.life% this.timer == 0){
-      resources.push(new Resource(this.x+15, this.y+15, this.produce));
-    }
-    this.life++;
-  }
-}
-
-class AttackerWonderball extends Wonderball{
-  constructor(x,y){
-    super(x,y);
-    this.shooting = false;
-    this.shootNow = false;
-    this.shootFrame = cards[choosenDefender].card.shootFrame;
-    this.projectiles = [];
-    if(cards[choosenDefender].card.projectile_img != null){
-      this.projectiles.push(cards[choosenDefender].card.projectile_img);
-    }
-    this.type = cards[choosenDefender].card.type;
-  }
-  draw(){
-    super.draw();
-  }
-
-  enemyOnRow(onRow){
-
-  }
-
-  enemyAttacking(attack){
-    this.health -= attack;
-  }
-
-  update(){
-    super.update();
-    if(this.shooting){
-      this.minFrame = 1;
-      this.maxFrame = this.restingFrames + this.shootingFrames;
-    }else{
-      this.minFrame = 0;
-      this.maxFrame = this.restingFrames;
-    }
-
-    if(powerUps[1].active){
-      this.defense = this.maxDefense +this.maxDefense*2;
-      this.power = this.maxPower + this.maxPower * 0.2;
-    }else{
-      this.defense = this.maxDefense;
-      this.power = this.maxPower;
-    }
-
-    if(frame%10 == 0 && this.frameX == this.shootFrame) this.shootNow = true;
-
-  }
-}
-
-class DistanceWonderball extends AttackerWonderball{
-  constructor(x,y){
-    super(x,y);
-  }
-
-  enemyOnRow(onRow){
-    this.shooting = true;
-  }
-
-  enemyAttacking(attack){
-    super.enemyAttacking(attack);
-    this.shooting = true;
-  }
-
-  update(){
-    super.update();
-
-
-
-    if (this.shooting && this.shootNow){
-        let prob = Math.random();
-        let th = 10/this.power;
-        if(prob < th) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power, this.projectiles));
-        this.shootNow = false;
-    }
-  }
-}
-
-class ContactWonderball extends AttackerWonderball{
-  constructor(x,y){
-    super(x,y);
-  }
-
-  enemyOnRow(onRow){
-
-  }
-
-  enemyAttacking(attack){
-    super.enemyAttacking(attack);
-    this.shooting = true;
-  }
-
-  update(){
-    super.update();
-    if(this.shooting){
-      this.shooting = false;
-    }
-  }
-}
-
-class TimedShootWonderball extends AttackerWonderball{
-  constructor(x,y){
-    super(x,y);
-  }
-
-  enemyOnRow(onRow){
-    this.shooting = onRow;
-  }
-
-  update(){
-    super.update();
-
-    if(this.shooting && !this.shootNow){
-      this.minFrame = 1;
-      this.maxFrame = 1;
-      this.shootNow = true;
-    }
-    else if(this.shootNow){
-      this.minFrame = 2;
-      this.maxFrame = this.shootingFrames;
-      this.shootTimer ++;
-    }
-    if(this.shootNow && this.shootTimer == 10){
-      this.shootNow = false;
-      this.shootTimer = 0;
-      this.minFrame = 0;
-      this.maxFrame = this.restingFrames;
-    }
-  }
-}
 
 function handleWonderballs(){
   for (let i=0; i< wonderballs.length; i++){
@@ -430,10 +220,9 @@ function handleWonderballs(){
     }
 
     for (let j=0; j< enemies.length; j++){
-      enemies[j].movement = enemies[j].speed;
       if(wonderballs[i] && collision(wonderballs[i], enemies[j])){
-        wonderballs[i].enemyAttacking(enemies[j].attack);
-        enemies[j].wonderballAttacking(wonderballs[i].defense);
+        wonderballs[i].enemyAttacking(enemies[j].attack, enemies[j].health);
+        enemies[j].wonderballAttacking(wonderballs[i].defense, wonderballs[i].health);
       }
       if(wonderballs[i] && wonderballs[i].health <= 0){
         wonderballs.splice(i, 1);
@@ -604,9 +393,13 @@ class Enemy{
     ctx.drawImage(this.img, this.frameX*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
   }
 
-  wonderballAttacking(defense){
+  wonderballAttacking(defense, health){
     this.health -= defense;
-    this.movement = 0;
+    if(health - this.attack > 0){
+      this.movement = 0;
+    }else{
+      this.movement = this.speed;
+    }
   }
 }
 
@@ -651,7 +444,6 @@ function handleEnemies(){
 const amounts = [20, 30, 40];
 
 class Resource{
-
   constructor(x,y,amount){
     this.x = x;
     this.y = y;
@@ -746,6 +538,7 @@ canvas.addEventListener('click', function(){
           else if ( cards[choosenDefender].card.type==timedshoot) wonderballs.push(new TimedShootWonderball(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == distanceshoot) wonderballs.push(new DistanceWonderball(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == contactshoot) wonderballs.push(new ContactWonderball(gridPositionX, gridPositionY));
+          else if ( cards[choosenDefender].card.type == general) wonderballs.push(new DoudisGeneral(gridPositionX, gridPositionY));
           else wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
           numberOfResources -= defenderCost;
           cardAvailable[choosenDefender] = cards[choosenDefender].card.cost;
