@@ -183,6 +183,8 @@ class DoudisGeneral extends ContactWonderball{
   constructor(x,y){
     super(x,y);
     this.defeatedEnemies = 0;
+    this.origX = x;
+    this.origY = y;
   }
 
   enemyAttacking(attack, health){
@@ -191,7 +193,20 @@ class DoudisGeneral extends ContactWonderball{
       this.defeatedEnemies += 1;
       this.defense *= 1.05;
       this.health += 15;
+      this.height += cellSize/2;
+      this.width += cellSize/2;
+      this.x -= cellSize/4;
+      this.y -= cellSize/4;
     }
+  }
+
+  draw(){
+    ctx.fillStyle = 'white';
+    ctx.fillRect(this.origX, this.origY, cellSize - cellGap *2, cellSize - cellGap *2);
+    ctx.fillStyle='gold';
+    ctx.font = '20px Orbitron';
+    ctx.fillText(Math.floor(this.health), this.origX+15, this.origY+30);
+    ctx.drawImage(this.wonderballType, this.frameX*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.origX, this.origY, cellSize - cellGap *2, cellSize - cellGap *2);
   }
 }
 
