@@ -218,3 +218,20 @@ const card10 = {
   shootFrame: 3
 }
 allTypes.push(card10);
+
+const wonderball12 = new Image();
+wonderball12.src = 'wonderballs/doudis_gral.png';
+wonderballTypes.push(wonderball12);
+
+const card12 = {
+  img: wonderball12,
+  cost: 300,
+  defense: 0.2,
+  power: 30,
+  health: 200,
+  type: contactshoot,
+  shootingFrames : 4,
+  restingFrames : 1,
+  shootFrame: 3
+}
+allTypes.push(card12);
