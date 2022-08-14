@@ -236,3 +236,26 @@ const card12 = {
   shootFrame: 3
 }
 allTypes.push(card12);
+
+
+const wonderball13 = new Image();
+wonderball13.src = 'wonderballs/ninja.png';
+wonderballTypes.push(wonderball13);
+
+const wonderball13pry = new Image();
+wonderball13pry.src = 'wonderballs/ninja_proy.png';
+
+
+const card13 = {
+  img: wonderball13,
+  cost: 125,
+  defense: 0.2,
+  power: 30,
+  health: 200,
+  type: distanceshoot,
+  projectile_img: wonderball13pry,
+  shootingFrames : 2,
+  restingFrames : 1,
+  shootFrame: 2
+}
+allTypes.push(card13);

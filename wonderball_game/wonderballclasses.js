@@ -1,3 +1,46 @@
+class WonderballType{
+  constructor(x, y, width, height, card ){
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.card = card;
+  }
+}
+
+// projectiles
+class Projectile{
+  constructor(x,y, power, img){
+    this.x = x;
+    this.y = y;
+    this.originaly = y;
+    this.width = 10;
+    this.height = 10;
+    this.power = power;
+    this.speed = 5;
+    this.speedy = 0;
+    this.img = img;
+    if(this.img.length > 0) this.speedy = -1;
+  }
+  update(){
+    this.x += this.speed;
+    this.y += this.speedy;
+    if (this.originaly-this.y > 50) this.speedy *= -1;
+    if (this.y == this.originaly) this.speedy = 0;
+  }
+  draw(){
+    if(this.img.length == 0){
+      ctx.fillStyle = 'black';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+      ctx.fill();
+    }else{
+      ctx.drawImage(this.img[0], 0, 0, 100, 100, this.x, this.y-30, this.width*5, this.height*5 );
+    }
+  }
+}
+
+
 // Wonderballs
 class Wonderball{
   constructor(x,y){

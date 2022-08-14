@@ -22,11 +22,12 @@ let score = 0;
 let choosenDefender = 0;
 let boss = false;
 
-let level_zombies = 10;
+let curr_level = 1;
+let level_zombies = curr_level*10+Math.pow(curr_level,2);
 let boss_points = 50;
 let go_next_levl = false;
 let winningScore = level_zombies*10+boss_points;
-let curr_level = 1;
+
 
 //mouse
 const mouse ={
@@ -155,37 +156,6 @@ function handleGameGrid(){
   }
 }
 
-// projectiles
-class Projectile{
-  constructor(x,y, power, img){
-    this.x = x;
-    this.y = y;
-    this.originaly = y;
-    this.width = 10;
-    this.height = 10;
-    this.power = power;
-    this.speed = 5;
-    this.speedy = 0;
-    this.img = img;
-    if(this.img.length > 0) this.speedy = -1;
-  }
-  update(){
-    this.x += this.speed;
-    this.y += this.speedy;
-    if (this.originaly-this.y > 50) this.speedy *= -1;
-    if (this.y == this.originaly) this.speedy = 0;
-  }
-  draw(){
-    if(this.img.length == 0){
-      ctx.fillStyle = 'black';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
-      ctx.fill();
-    }else{
-      ctx.drawImage(this.img[0], 0, 0, 100, 100, this.x, this.y-30, this.width*5, this.height*5 );
-    }
-  }
-}
 
 function handleProjectiles(){
   for (let i=0; i< projectiles.length; i++){
@@ -232,15 +202,7 @@ function handleWonderballs(){
   }
 }
 
-class WonderballType{
-  constructor(x, y, width, height, card ){
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.card = card;
-  }
-}
+
 
 
 cards = [];
@@ -601,7 +563,7 @@ function handleSelection(){
   }
 
   if (collision(mouse, nextButton) && mouse.clicked){
-    if(curr_page < 2){
+    if(curr_page < 3){
       curr_page +=1;
       mouse.clicked=false;
       initAllCards();
