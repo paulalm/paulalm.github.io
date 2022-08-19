@@ -1,7 +1,7 @@
-const canvas = document.getElementById('canvas1');
-const ctx = canvas.getContext('2d')
-canvas.width= 900;
-canvas.height = 600;
+//const canvas = document.getElementById('canvas1');
+//const ctx = canvas.getContext('2d')
+//canvas.width= 900;
+//canvas.height = 600;
 
 // global variables
 const cellSize = 100;
@@ -29,51 +29,10 @@ let go_next_levl = false;
 let winningScore = level_zombies*10+boss_points;
 
 
-//mouse
-const mouse ={
-  x: undefined,
-  y: undefined,
-  width: 0.1,
-  height: 0.1,
-  clicked: false,
-};
-let canvasPosition = canvas.getBoundingClientRect();
+
+//let canvasPosition = canvas.getBoundingClientRect();
 
 console.log(canvasPosition);
-
-canvas.addEventListener('mousemove', function(e){
-  mouse.x = e.x - canvasPosition.left;
-  mouse.y = e.y - canvasPosition.top;
-});
-
-canvas.addEventListener('touchmove', function(e){
-  mouse.x = e.x - canvasPosition.left;
-  mouse.y = e.y - canvasPosition.top;
-});
-
-canvas.addEventListener('mouseleave', function(e){
-  mouse.x = undefined;
-  mouse.y = undefined;
-});
-
-canvas.addEventListener('touchend', function(e){
-  mouse.x = undefined;
-  mouse.y = undefined;
-  mouse.clicked = false;
-});
-
-canvas.addEventListener('touchstart', function(e){
-  mouse.clicked = true;
-});
-
-canvas.addEventListener('mousedown', function(e){
-  mouse.clicked = true;
-});
-
-canvas.addEventListener('mouseup', function(e){
-  mouse.clicked = false;
-});
-
 
 // game board
 const controlsBar = {
@@ -460,14 +419,14 @@ function handleGameStatus(){
     ctx.font = '90px Orbitron';
     ctx.fillText("Game Over", 135, 330);
     ctx.font = '60px Orbitron';
-    ctx.fillText("Pau Pau, Try again.", 135, 370);
+    ctx.fillText("Pau & Feli, Try again.", 135, 370);
   }
   if(enemies.length == 0){
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
     ctx.fillText("LEVEL COMPLETE", 130, 300);
     ctx.font = '40px Orbitron';
-    ctx.fillText("Well done, Pau Pau!", 130, 340);
+    ctx.fillText("Well done, Pau & Feli!", 130, 340);
     ctx.font = '30px Orbitron';
     ctx.fillText("Score " + score, 134, 380);
     ctx.fillText("Click for next level ", 134, 420);
@@ -612,7 +571,7 @@ function handleTypeSelection(){
   ctx.clearRect(0,0, canvas.width, canvas.height);
   ctx.fillStyle='black';
   ctx.font = '30px Orbitron';
-  ctx.fillText('Pau Pau! Welcome to the world!', 15, 30);
+  ctx.fillText('Pau & Feli! Welcome to the world!', 15, 30);
   ctx.fillText('Choose your wonderballs for this battle', 15, 60);
   //initAllCards();
 
@@ -652,6 +611,8 @@ function handleTypeSelection(){
   handleFloatingMessages();
   handleSelection();
   if(playGame){
+    audioEl = document.getElementById("audio");
+    audioEl.src = "assets/worldsong.mp3";
     animate();
     return;
   }
@@ -715,19 +676,3 @@ canvas.addEventListener('dblclick', function(){
 initAllCards();
 handleTypeSelection();
 //animate();
-
-
-
-function collision(first, second){
-  if( !(first.x > second.x + second.width ||
-        first.x + first.width < second.x ||
-        first.y > second.y + second.height ||
-        first.y + first.height < second.y)
-  ){
-    return true;
-  };
-}
-
-window.addEventListener('resize', function(){
-  canvasPosition = canvas.getBoundingClientRect();
-})
