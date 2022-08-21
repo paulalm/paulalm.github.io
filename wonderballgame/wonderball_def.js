@@ -31,6 +31,9 @@ const wonderball2 = new Image();
 wonderball2.src = 'wonderballs/girasol.png';
 wonderballTypes.push(wonderball2);
 
+const sol = new Image();
+sol.src = 'wonderballs/sol.png';
+
 const card2 = {
   img: wonderballTypes[1],
   cost: 50,
@@ -38,7 +41,7 @@ const card2 = {
   power: 25,
   health: 100,
   type: producer,
-  projectile_img :  null,
+  product_img :  sol,
   shootingFrames : 1,
   restingFrames : 1
 }
@@ -259,3 +262,24 @@ const card13 = {
   shootFrame: 2
 }
 allTypes.push(card13);
+
+const wonderball14 = new Image();
+wonderball14.src = 'wonderballs/birasol.png';
+wonderballTypes.push(wonderball14);
+
+const wonderball14pry = new Image();
+wonderball14pry.src = 'wonderballs/soldoble.png';
+
+
+const card14 = {
+  img: wonderball14,
+  cost: 125,
+  defense: 0.2,
+  power: 100,
+  health: 100,
+  type: producer,
+  product_img: wonderball14pry,
+  shootingFrames : 1,
+  restingFrames : 2
+}
+allTypes.push(card14);

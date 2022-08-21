@@ -365,21 +365,27 @@ function handleEnemies(){
 const amounts = [20, 30, 40];
 
 class Resource{
-  constructor(x,y,amount){
+  constructor(x,y,amount, img){
     this.x = x;
     this.y = y;
     this.width = cellSize * 0.6;
     this.height = cellSize * 0.6;
     this.amount = amount;
+    this.image = img;
   }
   draw(){
-    ctx.fillStyle = 'yellow';
-    ctx.beginPath();
-    ctx.arc(this.x+50, this.y+50, this.width/2, 0, Math.PI * 2);
-    ctx.fill();
+    if(this.image == null){
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      ctx.arc(this.x+50, this.y+50, this.width/2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    else{
+      ctx.drawImage(this.image, 0, 0, 100, 100, this.x, this.y, this.width, this.height);
+    }
     ctx.fillStyle = 'black';
     ctx.font = '20px Orbitron';
-    ctx.fillText(this.amount, this.x + 15, this.y + 25);
+    //ctx.fillText(this.amount, this.x + 15, this.y + 25);
   }
   update(){
     this.y +=0.1;
@@ -392,7 +398,7 @@ function handleResources(){
     y = (Math.floor(Math.random()*5)+1)*cellSize;
     amount = amounts[Math.floor(Math.random()* amounts.length)];
 
-    resources.push(new Resource(x,y,amount));
+    resources.push(new Resource(x,y,amount, sol));
   }
   for(let i = 0; i < resources.length; i++){
     resources[i].update();
@@ -522,7 +528,7 @@ function handleSelection(){
   }
 
   if (collision(mouse, nextButton) && mouse.clicked){
-    if(curr_page < 3){
+    if(curr_page < Math.max(curr_level,4)){
       curr_page +=1;
       mouse.clicked=false;
       initAllCards();

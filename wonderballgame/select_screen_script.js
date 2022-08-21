@@ -25,6 +25,10 @@ function animate(){
   ctx.strokeRect(catalogBtn.x, catalogBtn.y, catalogBtn.width, catalogBtn.height);
   ctx.drawImage(catalogBtn.img, 0, 0, 200, 200, catalogBtn.x, catalogBtn.y, catalogBtn.width, catalogBtn.height);
 
+  ctx.fillStyle='black';
+  ctx.font = '30px Orbitron';
+  ctx.fillText('Feli! This is your game, click the soup to start', 0, 245);
+
   handleCatalogBtn();
   requestAnimationFrame(animate);
 }

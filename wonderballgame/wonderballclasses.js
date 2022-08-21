@@ -104,6 +104,7 @@ class ProducerWonderball extends Wonderball{
     this.maxProduce = cards[choosenDefender].card.power;
     this.produce = cards[choosenDefender].card.power;
     this.life = 0;
+    this.product_img = cards[choosenDefender].card.product_img;
   }
   draw(){
     super.draw();
@@ -119,7 +120,7 @@ class ProducerWonderball extends Wonderball{
     }
 
     if(this.life% this.timer == 0){
-      resources.push(new Resource(this.x+15, this.y+15, this.produce));
+      resources.push(new Resource(this.x+15, this.y+15, this.produce, this.product_img));
     }
     this.life++;
   }
