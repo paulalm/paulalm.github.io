@@ -36,8 +36,8 @@ console.log(canvasPosition);
 
 // game board
 const controlsBar = {
-  width : canvas.width,
-  height : cellSize,
+  width : cellSize,
+  height : canvas.width,
 };
 
 //pausa
@@ -61,8 +61,8 @@ const shovelImg = new Image();
 shovelImg.src = 'resources/palacolor.png';
 
 const shovel ={
-  x: 6*90,
-  y: 5,
+  x: 30,
+  y: canvas.height-50,
   width: 40,
   height: 40,
   active: false,
@@ -76,8 +76,8 @@ const watergemImg = new Image();
 watergemImg.src = 'resources/gemaAgua.png';
 
 const watergem ={
-  x: 6*90,
-  y: 50,
+  x: 80,
+  y: canvas.height-50,
   width: 40,
   height: 40,
   active: false,
@@ -102,8 +102,8 @@ class Cell {
   }
 }
 function createGrid(){
-  for (let y = cellSize; y < canvas.height; y+= cellSize ){
-    for (let x = 0; x < canvas.width; x+= cellSize){
+  for (let y = 0; y < canvas.height-cellSize; y+= cellSize ){
+    for (let x = cellSize; x < canvas.width; x+= cellSize){
       gameGrid.push(new Cell(x,y));
     }
   }
@@ -347,7 +347,7 @@ function handleEnemies(){
   }
 
   if (frame % enemiesInterval == 0 && !boss){
-    let verticalPosition = Math.floor(Math.random()*5 +1) * cellSize + cellGap;
+    let verticalPosition = Math.floor(Math.random()*5) * cellSize + cellGap;
     let type = 0;
     type = Math.floor(Math.random()*(enemyTypes.length-2));
     if (score > level_zombies*9) {
@@ -444,7 +444,8 @@ canvas.addEventListener('click', function(){
     if(playGame){
       const gridPositionX = mouse.x - (mouse.x % cellSize) + cellGap;
       const gridPositionY = mouse.y - (mouse.y % cellSize) + cellGap;
-      if (gridPositionY < cellSize) return;
+      if (gridPositionX < cellSize) return;
+      if (gridPositionY > canvas.height - cellSize) return;
       for (let i=0; i < wonderballs.length; i++){
         if(wonderballs[i]&&wonderballs[i].x === gridPositionX && wonderballs[i].y === gridPositionY){
           if(powerUps[0].active){ //shovel is active
@@ -545,7 +546,7 @@ function handleSelection(){
     if(choosenOnes.length == 6){
       cardAvailable = new Array(choosenOnes.length).fill(75);
       for(let j = 0; j < choosenOnes.length; j++){
-        cards.push(new WonderballType(j*90, 10, 70, 85, allTypes[choosenOnes[j]]));
+        cards.push(new WonderballType(10, j*90, 70, 85, allTypes[choosenOnes[j]]));
         if(allTypes[choosenOnes[j]].type == 'producer') cardAvailable[j]==0;
       }
       mouse.clicked = false;
@@ -627,7 +628,7 @@ function handleTypeSelection(){
 
 function animate(){
   ctx.clearRect(0,0, canvas.width, canvas.height);
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = 'white';
   ctx.fillRect(0,0, controlsBar.width, controlsBar.height);
 
   //handlePauseBtn();
