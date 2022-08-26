@@ -25,7 +25,7 @@ class Projectile{
   update(){
     this.x += this.speed;
     this.y += this.speedy;
-    if (this.originaly-this.y > 50) this.speedy *= -1;
+    if (this.originaly-this.y > 30) this.speedy *= -1;
     if (this.y == this.originaly) this.speedy = 0;
   }
   draw(){

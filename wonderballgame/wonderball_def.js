@@ -283,3 +283,47 @@ const card14 = {
   restingFrames : 2
 }
 allTypes.push(card14);
+
+const wonderball15 = new Image();
+wonderball15.src = 'wonderballs/doudisbateador.png';
+wonderballTypes.push(wonderball15);
+
+const wonderball15pry = new Image();
+wonderball15pry.src = 'wonderballs/batproy.png';
+
+
+const card15 = {
+  img: wonderball15,
+  cost: 225,
+  defense: 0.35,
+  power: 60,
+  health: 200,
+  type: distanceshoot,
+  projectile_img: wonderball15pry,
+  shootingFrames : 3,
+  restingFrames : 2,
+  shootFrame:4
+}
+allTypes.push(card15);
+
+const wonderball16 = new Image();
+wonderball16.src = 'wonderballs/lanzadora.png';
+wonderballTypes.push(wonderball16);
+
+const wonderball16pry = new Image();
+wonderball16pry.src = 'wonderballs/lanzadoraproy.png';
+
+
+const card16 = {
+  img: wonderball16,
+  cost: 320,
+  defense: 0.25,
+  power: 100,
+  health: 180,
+  type: distanceshoot,
+  projectile_img: wonderball16pry,
+  shootingFrames : 2,
+  restingFrames : 1,
+  shootFrame:1
+}
+allTypes.push(card16);

@@ -27,6 +27,7 @@ let level_zombies = curr_level*10+Math.pow(curr_level,2);
 let boss_points = 50;
 let go_next_levl = false;
 let winningScore = level_zombies*10+boss_points;
+let givenZombies = 0;
 
 
 
@@ -350,11 +351,12 @@ function handleEnemies(){
     let verticalPosition = Math.floor(Math.random()*5) * cellSize + cellGap;
     let type = 0;
     type = Math.floor(Math.random()*(enemyTypes.length-2));
-    if (score > level_zombies*9) {
+    if (givenZombies >= level_zombies) {
       type = 2;
       boss = true;
     }
     enemies.push(new Enemy(verticalPosition, enemyTypes[type]));
+    givenZombies += 1;
     enemyPositions.push(verticalPosition);
     if ( enemiesInterval > 150){
       enemiesInterval -= 25;
@@ -427,7 +429,7 @@ function handleGameStatus(){
     ctx.font = '60px Orbitron';
     ctx.fillText("Pau & Feli, Try again.", 135, 370);
   }
-  if(enemies.length == 0){
+  if(enemies.length == 0 && givenZombies >= level_zombies){
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
     ctx.fillText("LEVEL COMPLETE", 130, 300);
@@ -529,7 +531,7 @@ function handleSelection(){
   }
 
   if (collision(mouse, nextButton) && mouse.clicked){
-    if(curr_page < Math.max(curr_level,4)){
+    if(curr_page < Math.max(curr_level,allTypes.length-10)){
       curr_page +=1;
       mouse.clicked=false;
       initAllCards();
