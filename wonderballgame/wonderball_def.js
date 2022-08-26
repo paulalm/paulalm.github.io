@@ -316,9 +316,9 @@ wonderball16pry.src = 'wonderballs/lanzadoraproy.png';
 
 const card16 = {
   img: wonderball16,
-  cost: 320,
+  cost: 200,
   defense: 0.25,
-  power: 100,
+  power: 40,
   health: 180,
   type: distanceshoot,
   projectile_img: wonderball16pry,
