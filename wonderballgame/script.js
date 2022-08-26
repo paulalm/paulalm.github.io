@@ -622,6 +622,9 @@ function handleTypeSelection(){
   if(playGame){
     audioEl = document.getElementById("audio");
     audioEl.src = "assets/worldsong.mp3";
+    if(curr_level>6){
+      audioEl.src = "assets/camp.mp3";
+    }
     animate();
     return;
   }
@@ -677,6 +680,8 @@ canvas.addEventListener('dblclick', function(){
     gameOver = false;
     cards = [];
     cardsAvailable = [];
+    audioEl = document.getElementById("audio");
+    audioEl.src = "assets/menusong.mp3";
     handleTypeSelection();
   }
 
