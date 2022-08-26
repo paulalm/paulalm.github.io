@@ -519,7 +519,7 @@ let choosenOnes = [];
 let curr_page = 0;
 
 function handleSelection(){
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 12; i++){
     if (collision(mouse, allcards[i]) && mouse.clicked && !choosenOnes.includes(i+curr_page)){
       choosenCard = i+curr_page;
       choosenOnes.push(choosenCard);
@@ -531,7 +531,7 @@ function handleSelection(){
   }
 
   if (collision(mouse, nextButton) && mouse.clicked){
-    if(curr_page < Math.max(curr_level,allTypes.length-10)){
+    if(curr_page < Math.max(curr_level,allTypes.length-12)){
       curr_page +=1;
       mouse.clicked=false;
       initAllCards();
@@ -559,13 +559,13 @@ function handleSelection(){
   }
 }
 
-const cols = 5;
+const cols = 4;
 
 function initAllCards(){
-  const width = 150;
-  const height = 200;
+  const width = 200;
+  const height = 150;
   allcards=[];
-  for(let j = curr_page; j < curr_page+10; j++){
+  for(let j = curr_page; j < curr_page+12; j++){
     if(j< allTypes.length){
       i = j - curr_page;
       x = (i%cols)*width + (i%cols)*5+50;
@@ -587,12 +587,13 @@ function handleTypeSelection(){
   for(let i = 0; i< allcards.length; i++){
     ctx.lineWidth = 1;
     ctx.strokeStyle = 'black';
-    if(choosenOnes.includes(i+curr_page)) ctx.strokeStyle = 'gold';
-    ctx.strokeRect(allcards[i].x, allcards[i].y, allcards[i].width, allcards[i].height);
+    bgnImg = selectionImg;
+    if(choosenOnes.includes(i+curr_page)) bgnImg = selectionChosenImg;
+    //ctx.strokeRect(allcards[i].x, allcards[i].y, allcards[i].width, allcards[i].height);
+    ctx.drawImage(bgnImg, 0, 0, 250, 180, allcards[i].x, allcards[i].y-25, allcards[i].width+20, allcards[i].height+50);
     ctx.drawImage(allcards[i].card.img, 0, 0, 340, 367, allcards[i].x, allcards[i].y, allcards[i].width, allcards[i].height);
-    ctx.fillStyle='gold';
-    ctx.font = '30px Orbitron';
-    ctx.fillText(Math.floor(allcards[i].card.cost), allcards[i].x+15, allcards[i].y+30);
+    ctx.font = '20px Orbitron';
+    ctx.fillText(Math.floor(allcards[i].card.cost), allcards[i].x+allcards[i].width-50, allcards[i].y+allcards[i].height-10);
   }
 
   //Go Button

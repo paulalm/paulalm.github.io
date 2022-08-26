@@ -9,6 +9,12 @@ const contactshoot = 3;
 const timedshoot = 4;
 const general = 5;
 
+const selectionImg = new Image();
+selectionImg.src = 'wonderballs/seleccion.png';
+
+const selectionChosenImg = new Image();
+selectionChosenImg.src = 'wonderballs/seleccion_choosen.png';
+
 const wonderball1 = new Image();
 wonderball1.src = 'wonderballs/wonderball1.png';
 wonderballTypes.push(wonderball1);
