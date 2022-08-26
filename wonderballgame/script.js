@@ -688,5 +688,7 @@ canvas.addEventListener('dblclick', function(){
 })
 
 initAllCards();
+audioEl = document.getElementById("audio");
+audioEl.src = "assets/menusong.mp3";
 handleTypeSelection();
 //animate();
