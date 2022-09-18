@@ -29,9 +29,10 @@ title: Current Job Openings
     <input type="email" name="email">
   </label>
   <label>
+    Brief expression of interest (include link to your webpage):
     <textarea name="message"></textarea>
   </label>
   <!-- your other form fields go here -->
   <button type="submit">Send</button>
-  Brief expression of interest (include link to your webpage):
+
 </form>
