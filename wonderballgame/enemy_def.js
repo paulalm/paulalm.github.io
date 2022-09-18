@@ -40,7 +40,7 @@ const enemyType2 = {
   frameAttack: 1,
   frameBadHealth: 1,
   framesStart: 1,
-  framesBadHealth: 1,
-  framesAttack: 1
+  framesBadHealth: 0,
+  framesAttack: 0
 }
 enemyTypes.push(enemyType2);
