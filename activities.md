@@ -52,12 +52,24 @@ published: true
     <!-- Elements -->
       <h2 id="service">Service</h2>
       <div class="row">
+      <h3> 2022 </h3>
       <ul>
-        <li> I am Data Chair at CHI2022</li>
-        <li>I was a volunteer in the <a href="https://sigchi.org/">SIGCHI</a> Communications Team from 2018-2021</li>
-        <li> I was part of ISWC2021 (International Symposium of Wearable Computing) Program Committee</li>
+        <li> Best Paper Award Committee Member for ISWC 2022</li>
+        <li> Technical Program Committee member for ISWC 2022</li>
+        <li> Data Chair at CHI2022</li>
+        <li> Co-organizer of HASCA Workshop </li>
+        <li> Reviewer for Expert Systems and Applications (Elsevier)</li>
+        <li> Reviewer for the journal in Interactive, Mobile, Wearable and Ubiquitous Computing - IMWUT - (ACM)</li>
+      </ul>
+     <h3> 2021 </h3>
+       <ul>
+        <li> Communications Team Member for ACM SIGCHI from 2018-2021</li>
+        <li> Program Committee Member of ISWC2021 (International Symposium of Wearable Computing) </li>
+      </ul>
+    <h3> Previous </h3>
+      <ul>
         <li>I have participated in the organizing committee of HASCA Workshop since 2018 (co-located with Ubicomp)</li>
-        <li>I have reviewed for IMWUT, Sensors, Applied Science and IEICE Journals.</li>
+        <li>I have reviewed for ACM IMWUT, Sensors, Applied Science and IEICE Journals.</li>
         <li>I served as AC for CHI Late Breaking Works in 2020.</li>
         <li>I have reviewed for several conferences including CCC (11, 12, 13), IEEE Colombian Conference on Communications and Computing COLCOM (COLCOM 2014, 2015, 2016, 2017), International Conference on Applied Informatics ICAI (2018, 2019), International Conference on Mobile Computing, Applications and Services (MobiCASE 2018), and ABC (2019, 2020).</li>
         <li>I have served as Publicity Chair and Publications Chair for the Activity and Behavior Computing Conference.</li>
