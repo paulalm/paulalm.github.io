@@ -28,6 +28,9 @@ class Projectile{
     if (this.originaly-this.y > 30) this.speedy *= -1;
     if (this.y == this.originaly) this.speedy = 0;
   }
+  destroy(){
+
+  }
   draw(){
     if(this.img.length == 0){
       ctx.fillStyle = 'black';
@@ -36,6 +39,36 @@ class Projectile{
       ctx.fill();
     }else{
       ctx.drawImage(this.img[0], 0, 0, 100, 100, this.x, this.y-30, this.width*5, this.height*5 );
+    }
+  }
+}
+
+class ManualShootObjective{
+  constructor(power, img, owner){
+    this.x = mouse.x;
+    this.y = mouse.y;
+    this.height=20;
+    this.width=20;
+    this.power = power;
+    this.img = img;
+    this.owner = owner;
+  }
+  update(){
+    this.x = mouse.x;
+    this.y = mouse.y;
+  }
+
+  destroy(){
+    this.owner.projectileDestroyed();
+  }
+  draw(){
+    if(this.img.length == 0){
+      ctx.fillStyle = 'black';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+      ctx.fill();
+    }else{
+      ctx.drawImage(this.img[0], 0, 0, 340, 367, this.x, this.y-30, this.width*5, this.height*5 );
     }
   }
 }
@@ -172,6 +205,57 @@ class AttackerWonderball extends Wonderball{
 
   }
 }
+
+class ManualAttackWonderball extends AttackerWonderball{
+  constructor(x,y){
+    super(x,y);
+    this.chargingTime = 0;
+    this.charging = false;
+    this.resting = true;
+    this.shooting = false;
+  }
+
+  enemyAttacking(attack, health){
+    super.enemyAttacking(attack);
+    this.shooting = true;
+  }
+
+  projectileDestroyed(){
+    this.shooting = false;
+    this.charging = true;
+  }
+
+  update(){
+    super.update();
+
+    if(collision(mouse, this) && this.resting && mouse.clicked){
+      projectiles.push(new ManualShootObjective(this.power, this.projectiles, this));
+      this.shooting = true;
+      this.resting = false;
+      this.minFrame = 2;
+      this.maxFrame = 3;
+    }
+
+    if(this.charging){
+      this.minFrame = 1;
+      this.maxFrame = 2;
+      this.chargingTime++;
+      if(this.chargingTime==100){
+        this.resting = true;
+        this.charging = false;
+        this.chargingTime = 0;
+      }
+    }
+
+    if(this.resting){
+      this.minFrame=0;
+      this.maxFrame=1;
+    }
+  }
+
+}
+
+
 
 class DistanceWonderball extends AttackerWonderball{
   constructor(x,y){

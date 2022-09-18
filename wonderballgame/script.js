@@ -125,7 +125,9 @@ function handleProjectiles(){
     for (let j = 0; j < enemies.length; j++){
       if(enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])){
         enemies[j].health -= projectiles[i].power;
+        p = projectiles[i];
         projectiles.splice(i, 1);
+        p.destroy();
         i--;
       }
     }
@@ -469,6 +471,7 @@ canvas.addEventListener('click', function(){
           else if ( cards[choosenDefender].card.type == distanceshoot) wonderballs.push(new DistanceWonderball(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == contactshoot) wonderballs.push(new ContactWonderball(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == general) wonderballs.push(new DoudisGeneral(gridPositionX, gridPositionY));
+          else if ( cards[choosenDefender].card.type == manualshoot) wonderballs.push(new ManualAttackWonderball(gridPositionX, gridPositionY));
           else wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
           numberOfResources -= defenderCost;
           cardAvailable[choosenDefender] = cards[choosenDefender].card.cost;

@@ -8,6 +8,7 @@ const defenser = 2;
 const contactshoot = 3;
 const timedshoot = 4;
 const general = 5;
+const manualshoot = 6;
 
 const selectionImg = new Image();
 selectionImg.src = 'wonderballs/seleccion.png';
@@ -333,3 +334,26 @@ const card16 = {
   shootFrame:1
 }
 allTypes.push(card16);
+
+const wonderball17 = new Image();
+wonderball17.src = 'wonderballs/flormeteorito.png';
+wonderballTypes.push(wonderball17);
+
+const wonderball17pry = new Image();
+wonderball17pry.src = 'wonderballs/florobjetivo.png';
+
+
+const card17 = {
+  img: wonderball17,
+  cost: 525,
+  defense: 0.30,
+  power: 250,
+  health: 400,
+  type: manualshoot,
+  projectile_img: wonderball17pry,
+  shootingFrames : 1,
+  restingFrames : 0,
+  rechargeFrames: 1,
+  shootFrame:1
+}
+allTypes.push(card17);
