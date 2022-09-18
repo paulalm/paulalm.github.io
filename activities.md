@@ -7,8 +7,9 @@ published: true
 ---
 Here you will find a list of
 <a href="{{ 'activities.html' | absolute_url }}#talks">talks</a>,
-<a href="{{ 'activities.html' | absolute_url }}#datasets">datasets</a> and
-<a href="{{ 'activities.html' | absolute_url }}#service"> service</a> activities I have participated in. 
+<a href="{{ 'activities.html' | absolute_url }}#datasets">datasets</a>,
+<a href="{{ 'activities.html' | absolute_url }}#service"> service</a>
+and <a href="{{ 'activities.html' | absolute_url }}#other"> other</a> activities I have participated in.
 
 
 <section>
@@ -85,7 +86,6 @@ Here you will find a list of
         <li>I have served as Publicity Chair and Publications Chair for the Activity and Behavior Computing Conference.</li>
         <li>I served as the social media manager for INFORSID and RCIS Conferences in 2016, creating their first twitter account. You can see them here <a href="https://twitter.com/RCIS_Conference" rel="nofollow">https://twitter.com/RCIS_Conference</a> and <a href="https://twitter.com/InforsidCongres" rel="nofollow">https://twitter.com/InforsidCongres</a></li>
       </ul>
-      </div>
       </div>
 
   <hr class="major" />
