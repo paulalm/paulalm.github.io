@@ -5,15 +5,21 @@ date:
 published: true
 
 ---
+Here you will find a list of
+<a href="{{ 'activities.html' | absolute_url }}#talks">talks</a>,
+<a href="{{ 'activities.html' | absolute_url }}#datasets">datasets</a> and
+<a href="{{ 'activities.html' | absolute_url }}#service"> service</a> activities I have participated in. 
+
+
 <section>
   <!-- Content -->
-    <h2 id="content">Talks</h2>
+    <h2 id="talks">Talks</h2>
     <p>These are some talks I have given before</p>
     <div class="row">
       <div class="col-6 col-12-small">
         <h3>Aprendizaje automático de rutinas en casa mediante uso de sensores para identificar cambios de comportamiento</h3>
         <p>Talk In Spanish. Invited talk to the forum "Innovation and Opportunities in healthcare from Information Engineering"  June, 2019
-          <a href=https://sistemas.uniandes.edu.co/foro/mine/2019/> Watch </a></p>
+          <a href="https://sistemas.uniandes.edu.co/foro/mine/2019/" class="button primary small"> Watch </a></p>
       </div>
       <div class="col-6 col-12-small">
         <h3>Reconocimiento de actividades usando smartphones</h3>
@@ -61,11 +67,15 @@ published: true
         <li> Reviewer for Expert Systems and Applications (Elsevier)</li>
         <li> Reviewer for the journal in Interactive, Mobile, Wearable and Ubiquitous Computing - IMWUT - (ACM)</li>
       </ul>
+      </div>
+      <div class="row">
      <h3> 2021 </h3>
        <ul>
         <li> Communications Team Member for ACM SIGCHI from 2018-2021</li>
         <li> Program Committee Member of ISWC2021 (International Symposium of Wearable Computing) </li>
       </ul>
+      </div>
+      <div class="row">
     <h3> Previous </h3>
       <ul>
         <li>I have participated in the organizing committee of HASCA Workshop since 2018 (co-located with Ubicomp)</li>
@@ -75,6 +85,7 @@ published: true
         <li>I have served as Publicity Chair and Publications Chair for the Activity and Behavior Computing Conference.</li>
         <li>I served as the social media manager for INFORSID and RCIS Conferences in 2016, creating their first twitter account. You can see them here <a href="https://twitter.com/RCIS_Conference" rel="nofollow">https://twitter.com/RCIS_Conference</a> and <a href="https://twitter.com/InforsidCongres" rel="nofollow">https://twitter.com/InforsidCongres</a></li>
       </ul>
+      </div>
       </div>
 
   <hr class="major" />
