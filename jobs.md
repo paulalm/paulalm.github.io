@@ -2,7 +2,7 @@
 layout: page
 title: Current Job Openings
 ---
-<p>Come work with me at my laboratory in Concordia University, Montreal to work on Pervasive Computing for Health and Healthy Aging research. Areas of interest include but are not limited to human activity recognition, pervasive computing, machine learning for sensor data and mobile applications. </p>
+<p>Come work with me at my laboratory in Concordia University, Montreal on Pervasive Computing for Health and Healthy Aging research. Areas of interest include but are not limited to human activity recognition, pervasive computing, machine learning for sensor data and mobile applications. </p>
 
 <p>We will design and develop mobile and smart home technologies with the goal of monitoring and analyzing behavior patterns and health status and their changes in a long-term and contextualized manner to enable better and personalized health management.  </p>
 
