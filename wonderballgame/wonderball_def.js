@@ -357,3 +357,22 @@ const card17 = {
   shootFrame:1
 }
 allTypes.push(card17);
+
+const wonderball18 = new Image();
+wonderball18.src = 'wonderballs/crabball.png';
+wonderballTypes.push(wonderball18);
+
+const card18 = {
+  img: wonderball18,
+  cost: 275,
+  defense: 0.7,
+  power: 200,
+  health: 340,
+  type: contactshoot,
+  projectile_img: null,
+  shootingFrames : 9,
+  restingFrames : 3,
+  rechargeFrames: 1,
+  shootFrame:12
+}
+allTypes.push(card18);
