@@ -671,7 +671,7 @@ canvas.addEventListener('dblclick', function(){
   if(go_next_levl || gameOver){
     score = 0;
 
-    numberOfResources = (5-curr_level)*100;
+    numberOfResources = Math.max((5-curr_level)*100, 100);
     boss = false;
     enemies.length = 0;
     resources.length = 0;

@@ -10,6 +10,12 @@ const timedshoot = 4;
 const general = 5;
 const manualshoot = 6;
 
+//projectile allTypes
+const noType = 0;
+const straightpath=1;
+const randompath = 2;
+const arcpath=3;
+
 const selectionImg = new Image();
 selectionImg.src = 'wonderballs/seleccion.png';
 
@@ -28,6 +34,7 @@ const card1 = {
   health: 100,
   type: distanceshoot,
   projectile_img :  null,
+  projectile_type: straightpath,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame : 2
@@ -66,6 +73,7 @@ const card3 = {
   health: 100,
   type: distanceshoot,
   projectile_img :  null,
+  projectile_type: straightpath,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame : 2
@@ -84,6 +92,7 @@ const card4 = {
   health: 300,
   type: defenser,
   projectile_img :  null,
+  projectile_type: noType,
   shootingFrames : 1,
   restingFrames : 1
 }
@@ -96,11 +105,12 @@ wonderballTypes.push(wonderball5);
 const card5 = {
   img: wonderballTypes[4],
   cost: 0,
-  defense: 0.05,
-  power: 0,
-  health: 50,
+  defense: 0.50,
+  power: 22,
+  health: 100,
   type: contactshoot,
   projectile_img:  null,
+  projectile_type: noType,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame : 2
@@ -122,6 +132,7 @@ const card6 = {
   health: 100,
   type: distanceshoot,
   projectile_img: melon,
+  projectile_type: arcpath,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame : 2
@@ -136,11 +147,12 @@ wonderballTypes.push(wonderball7);
 const card7 = {
   img: wonderballTypes[6],
   cost: 125,
-  defense: 0.13,
+  defense: 1,
   power: 35,
   health: 125,
   type: distanceshoot,
   projectile_img: null,
+  projectile_type: arcpath,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame: 2
@@ -163,6 +175,7 @@ const card8 = {
   health: 300,
   type: distanceshoot,
   projectile_img: lanza,
+  projectile_type: arcpath,
   shootingFrames : 1,
   restingFrames : 1,
   shootFrame: 2
@@ -181,6 +194,7 @@ const card9 = {
   health: 150,
   type: timedshoot,
   projectile_img: null,
+  projectile_type: noType,
   shootingFrames : 3,
   restingFrames : 0,
   shootFrame: 2
@@ -202,6 +216,7 @@ const card11 = {
   health: 250,
   type: distanceshoot,
   projectile_img: fraiproy,
+  projectile_type: arcpath,
   shootingFrames : 2,
   restingFrames : 1,
   shootFrame: 2
@@ -219,11 +234,12 @@ dilanproy.src = 'wonderballs/dilanproy.png';
 const card10 = {
   img: wonderball10,
   cost: 150,
-  defense: 0.2,
-  power: 25,
+  defense: 0.34,
+  power: 75,
   health: 150,
   type: distanceshoot,
   projectile_img: dilanproy,
+  projectile_type: arcpath,
   shootingFrames : 3,
   restingFrames : 1,
   shootFrame: 3
@@ -237,9 +253,9 @@ wonderballTypes.push(wonderball12);
 const card12 = {
   img: wonderball12,
   cost: 300,
-  defense: 0.2,
-  power: 30,
-  health: 200,
+  defense: 0.32,
+  power: 300,
+  health: 567,
   type: general,
   shootingFrames : 4,
   restingFrames : 1,
@@ -264,6 +280,7 @@ const card13 = {
   health: 200,
   type: distanceshoot,
   projectile_img: wonderball13pry,
+  projectile_type: arcpath,
   shootingFrames : 2,
   restingFrames : 1,
   shootFrame: 2
@@ -286,6 +303,7 @@ const card14 = {
   health: 100,
   type: producer,
   product_img: wonderball14pry,
+  projectile_type: noType,
   shootingFrames : 1,
   restingFrames : 2
 }
@@ -307,6 +325,7 @@ const card15 = {
   health: 200,
   type: distanceshoot,
   projectile_img: wonderball15pry,
+  projectile_type: arcpath,
   shootingFrames : 3,
   restingFrames : 2,
   shootFrame:4
@@ -325,10 +344,11 @@ const card16 = {
   img: wonderball16,
   cost: 200,
   defense: 0.25,
-  power: 40,
+  power: 125,
   health: 180,
   type: distanceshoot,
   projectile_img: wonderball16pry,
+  projectile_type: straightpath,
   shootingFrames : 2,
   restingFrames : 1,
   shootFrame:1
@@ -351,6 +371,7 @@ const card17 = {
   health: 400,
   type: manualshoot,
   projectile_img: wonderball17pry,
+  projectile_type: noType,
   shootingFrames : 1,
   restingFrames : 0,
   rechargeFrames: 1,
@@ -370,9 +391,33 @@ const card18 = {
   health: 340,
   type: contactshoot,
   projectile_img: null,
+  projectile_type: noType,
   shootingFrames : 9,
   restingFrames : 3,
   rechargeFrames: 1,
   shootFrame:12
 }
 allTypes.push(card18);
+
+const wonderball19 = new Image();
+wonderball19.src = 'wonderballs/pinball.png';
+wonderballTypes.push(wonderball19);
+
+const wonderball19proy = new Image();
+wonderball19proy.src = 'wonderballs/pinproy.png';
+
+const card19 = {
+  img: wonderball19,
+  cost: 125,
+  defense: 0.12,
+  power: 234,
+  health: 300,
+  type: distanceshoot,
+  projectile_img: wonderball19proy,
+  projectile_type:randompath,
+  shootingFrames : 3,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card19);

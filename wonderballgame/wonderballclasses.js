@@ -9,6 +9,21 @@ class WonderballType{
 }
 
 // projectiles
+function createProjectile(x,y,power,img, type){
+  if(type==straightpath){
+    return new StraightPathProjectile(x,y,power,img);
+  }
+  else if(type==arcpath){
+    return new ArcPathProjectile(x,y,power,img);
+  }
+  else if(type == randompath){
+    return new RandomPathProjectile(x,y,power,img);
+  }
+  else {
+    return new Projectile(x,y,power,img);
+  }
+}
+
 class Projectile{
   constructor(x,y, power, img){
     this.x = x;
@@ -22,15 +37,15 @@ class Projectile{
     this.img = img;
     if(this.img.length > 0) this.speedy = -1;
   }
+
   update(){
-    this.x += this.speed;
-    this.y += this.speedy;
-    if (this.originaly-this.y > 30) this.speedy *= -1;
-    if (this.y == this.originaly) this.speedy = 0;
+
   }
+
   destroy(){
 
   }
+
   draw(){
     if(this.img.length == 0){
       ctx.fillStyle = 'black';
@@ -40,6 +55,56 @@ class Projectile{
     }else{
       ctx.drawImage(this.img[0], 0, 0, 100, 100, this.x, this.y-30, this.width*5, this.height*5 );
     }
+  }
+
+}
+
+class ArcPathProjectile extends Projectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+  }
+
+  update(){
+    this.x += this.speed;
+    this.y += this.speedy;
+    if (this.originaly-this.y > 30) this.speedy *= -1;
+    if (this.y == this.originaly) this.speedy = 0;
+  }
+  destroy(){
+
+  }
+
+  draw(){
+    super.draw();
+  }
+}
+
+class StraightPathProjectile extends Projectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+  }
+
+  update(){
+    this.x += this.speed;
+  }
+  destroy(){
+    super.destroy();
+  }
+
+  draw(){
+    super.draw();
+  }
+}
+
+class RandomPathProjectile extends Projectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+  }
+  update(){
+    let xRandom = Math.random() * (1 - (-1)) - 1;
+    this.x += xRandom*this.speed;
+    let yRandom = Math.random() * (1 - (-1)) - 1;
+    this.y += yRandom * this.speedy;
   }
 }
 
@@ -260,6 +325,7 @@ class ManualAttackWonderball extends AttackerWonderball{
 class DistanceWonderball extends AttackerWonderball{
   constructor(x,y){
     super(x,y);
+    this.projectileType = cards[choosenDefender].card.projectile_type;
   }
 
   enemyOnRow(onRow){
@@ -279,7 +345,7 @@ class DistanceWonderball extends AttackerWonderball{
     if (this.shooting && this.shootNow){
         let prob = Math.random();
         let th = 10/this.power;
-        if(prob < th) projectiles.push(new Projectile(this.x + 70, this.y + 30, this.power, this.projectiles));
+        if(prob < th) projectiles.push(createProjectile(this.x + 70, this.y + 30, this.power, this.projectiles,this.projectileType));
         this.shootNow = false;
     }
   }
