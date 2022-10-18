@@ -9,18 +9,24 @@ class WonderballType{
 }
 
 // projectiles
-function createProjectile(x,y,power,img, type){
+function createProjectile(x,y,power,img, type, store){
   if(type==straightpath){
-    return new StraightPathProjectile(x,y,power,img);
+    store.push(new StraightPathProjectile(x,y,power,img));
   }
   else if(type==arcpath){
-    return new ArcPathProjectile(x,y,power,img);
+    store.push(new ArcPathProjectile(x,y,power,img));
   }
   else if(type == randompath){
-    return new RandomPathProjectile(x,y,power,img);
+    store.push(new RandomPathProjectile(x,y,power,img));
+  }
+  else if(type == penetratingproj){
+    store.push(new PenetratingProjectile(x,y,power,img));
+  }
+  else if(type == nutrientproj){
+    store.push(new NutrientProjectile(x,y,power,img));
   }
   else {
-    return new Projectile(x,y,power,img);
+    store.push(new Projectile(x,y,power,img));
   }
 }
 
@@ -39,11 +45,16 @@ class Projectile{
   }
 
   update(){
-
+    this.x += this.speed;
+    this.y += this.speedy;
   }
 
   destroy(){
 
+  }
+
+  getType(){
+    return noType;
   }
 
   draw(){
@@ -65,13 +76,15 @@ class ArcPathProjectile extends Projectile{
   }
 
   update(){
-    this.x += this.speed;
-    this.y += this.speedy;
     if (this.originaly-this.y > 30) this.speedy *= -1;
     if (this.y == this.originaly) this.speedy = 0;
   }
   destroy(){
 
+  }
+
+  getType(){
+    return arcpath;
   }
 
   draw(){
@@ -85,10 +98,13 @@ class StraightPathProjectile extends Projectile{
   }
 
   update(){
-    this.x += this.speed;
+    super.update();
   }
   destroy(){
     super.destroy();
+  }
+  getType(){
+    return straightpath;
   }
 
   draw(){
@@ -106,7 +122,46 @@ class RandomPathProjectile extends Projectile{
     let yRandom = Math.random() * (1 - (-1)) - 1;
     this.y += yRandom * this.speedy;
   }
+  getType(){
+    return randompath;
+  }
 }
+
+class PenetratingProjectile extends StraightPathProjectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+    this.speed = 10;
+    this.speedy = 0;
+  }
+  update(){
+    super.update();
+  }
+  destroy(){
+    super.destroy();
+    this.x = this.x + 100;
+  }
+  getType(){
+    return penetratingproj;
+  }
+}
+
+class NutrientProjectile extends Projectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+    this.speed = 3;
+    this.speedy = -0.25;
+  }
+  update(){
+    super.update();
+  }
+  destroy(){
+    super.destroy();
+  }
+  getType(){
+    return nutrientproj;
+  }
+}
+
 
 class ManualShootObjective{
   constructor(power, img, owner){
@@ -170,7 +225,6 @@ class Wonderball{
 
   draw(){
     ctx.fillStyle = 'white';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle='gold';
     ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x+15, this.y+30);
@@ -345,9 +399,24 @@ class DistanceWonderball extends AttackerWonderball{
     if (this.shooting && this.shootNow){
         let prob = Math.random();
         let th = 10/this.power;
-        if(prob < th) projectiles.push(createProjectile(this.x + 70, this.y + 30, this.power, this.projectiles,this.projectileType));
+        if(prob < th) {
+          if(this.projectileType==nutrientproj){
+            createProjectile(this.x + cellSize+10, this.y + 30, this.power, this.projectiles,this.projectileType, nutrients);
+          }else{
+            createProjectile(this.x + 70, this.y + 30, this.power, this.projectiles,this.projectileType, projectiles);
+          }
+        }
         this.shootNow = false;
     }
+  }
+}
+
+class SupportWonderball extends DistanceWonderball{
+  draw(){
+    ctx.fillStyle='gold';
+    ctx.font = '20px Orbitron';
+    ctx.fillText(Math.floor(this.health), this.x+15, this.y+30);
+    ctx.drawImage(this.wonderballType, this.frameX*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -395,8 +464,6 @@ class DoudisGeneral extends ContactWonderball{
   }
 
   draw(){
-    ctx.fillStyle = 'white';
-    ctx.fillRect(this.origX, this.origY, cellSize - cellGap *2, cellSize - cellGap *2);
     ctx.fillStyle='gold';
     ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.origX+15, this.origY+30);
@@ -432,5 +499,34 @@ class TimedShootWonderball extends AttackerWonderball{
       this.minFrame = 0;
       this.maxFrame = this.restingFrames;
     }
+  }
+}
+
+class TeamworkWonderball extends DistanceWonderball{
+  constructor(x,y, shoot){
+    super(x,y);
+    this.type_selected = choosenDefender;
+    this.wonderballShoot = shoot;
+  }
+
+  enemyOnRow(onRow){
+    this.shooting = true;
+  }
+
+  enemyAttacking(attack, health){
+    super.enemyAttacking(attack);
+    this.shooting = true;
+  }
+
+  update(){
+    super.update();
+
+      if(this.wonderballShoot == true){
+        let selected = choosenDefender;
+        choosenDefender = this.type_selected;
+        wonderballs.push(new TeamworkWonderball(this.x+3*cellSize, this.y, false));
+        choosenDefender = selected;
+        this.wonderballShoot = false;
+      }
   }
 }

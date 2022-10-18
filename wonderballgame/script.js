@@ -14,6 +14,7 @@ const enemyPositions = [];
 const projectiles = [];
 const resources = [];
 let enemiesInterval = 400;
+let enemiesPowerBoost = 1;
 let numberOfResources = 1000;
 let frame = 0;
 let playGame = false;
@@ -126,9 +127,11 @@ function handleProjectiles(){
       if(enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])){
         enemies[j].health -= projectiles[i].power;
         p = projectiles[i];
-        projectiles.splice(i, 1);
         p.destroy();
-        i--;
+        if(p.getType() != penetratingproj ){
+          projectiles.splice(i, 1);
+          i--;
+        }
       }
     }
 
@@ -284,7 +287,7 @@ class Enemy{
     this.img = enemyType.img;
     this.speed = Math.random() * enemyType.speedFactor + 0.4;
     this.movement = this.speed;
-    this.health = enemyType.maxHealth;
+    this.health = enemyType.maxHealth*enemiesPowerBoost;
     this.maxHealth = enemyType.maxHealth;
     this.attack = this.health / 500;
 
@@ -459,6 +462,14 @@ canvas.addEventListener('click', function(){
             powerUps[0].active=false; //make shovel not active
             return;
           }
+          let defenderCost = cards[choosenDefender].card.cost;
+          if (numberOfResources >= defenderCost){
+            if(cardAvailable[choosenDefender]<=0){
+              if (cards[choosenDefender].card.type == support) wonderballs.push(new SupportWonderball(gridPositionX, gridPositionY));
+            }
+            numberOfResources -= defenderCost;
+            cardAvailable[choosenDefender]=300;
+          }
           return;
           //check other powerUps
         }
@@ -472,9 +483,11 @@ canvas.addEventListener('click', function(){
           else if ( cards[choosenDefender].card.type == contactshoot) wonderballs.push(new ContactWonderball(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == general) wonderballs.push(new DoudisGeneral(gridPositionX, gridPositionY));
           else if ( cards[choosenDefender].card.type == manualshoot) wonderballs.push(new ManualAttackWonderball(gridPositionX, gridPositionY));
+          else if ( cards[choosenDefender].card.type == support) floatingMessages.push(new FloatingMessage("Use a wonderball first", mouse.x, mouse.y, 20, 'blue'));
+          else if (cards[choosenDefender].card.type == teamwork) wonderballs.push(new TeamworkWonderball(gridPositionX, gridPositionY, true));
           else wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
           numberOfResources -= defenderCost;
-          cardAvailable[choosenDefender] = cards[choosenDefender].card.cost;
+          cardAvailable[choosenDefender] = cards[choosenDefender].card.cost*1.5;
           if(cardAvailable[choosenDefender]==0)cardAvailable[choosenDefender]=150;
         }
         else{
@@ -682,6 +695,7 @@ canvas.addEventListener('dblclick', function(){
       curr_level +=1;
       level_zombies =curr_level*10+Math.pow(curr_level,2);
       winningScore = level_zombies*10+boss_points;
+      enemiesPowerBoost = curr_level/2;
     }
     go_next_levl = false;
     playGame = false;

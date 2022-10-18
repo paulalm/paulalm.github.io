@@ -9,12 +9,18 @@ const contactshoot = 3;
 const timedshoot = 4;
 const general = 5;
 const manualshoot = 6;
+const support= 7;
+const teamwork = 8;
+const instant=9;
+const powerUp=10;
 
 //projectile allTypes
 const noType = 0;
 const straightpath=1;
 const randompath = 2;
 const arcpath=3;
+const penetratingproj = 4;
+const nutrientproj=5;
 
 const selectionImg = new Image();
 selectionImg.src = 'wonderballs/seleccion.png';
@@ -52,7 +58,7 @@ const card2 = {
   img: wonderballTypes[1],
   cost: 50,
   defense: 0.02,
-  power: 25,
+  power: 50,
   health: 100,
   type: producer,
   product_img :  sol,
@@ -189,7 +195,7 @@ wonderballTypes.push(wonderball9);
 const card9 = {
   img: wonderballTypes[8],
   cost: 200,
-  defense: 0.3,
+  defense: 0.67,
   power: 50,
   health: 150,
   type: timedshoot,
@@ -421,3 +427,165 @@ const card19 = {
   shootFrame:3
 }
 allTypes.push(card19);
+
+const wonderball20 = new Image();
+wonderball20.src = 'wonderballs/newgunbird.png';
+wonderballTypes.push(wonderball20);
+
+const wonderball20proy = new Image();
+wonderball20proy.src = 'wonderballs/newgunbirdproy.png';
+
+const card20 = {
+  img: wonderball20,
+  cost: 75,
+  defense: 0.34,
+  power:32,
+  health: 140,
+  type: support,
+  projectile_img: wonderball20proy,
+  projectile_type:penetratingproj,
+  shootingFrames : 2,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:2
+}
+allTypes.push(card20);
+
+const wonderball21 = new Image();
+wonderball21.src = 'wonderballs/axebird.png';
+wonderballTypes.push(wonderball21);
+
+const wonderball21proy = new Image();
+wonderball21proy.src = 'wonderballs/axebirdproy.png';
+
+const card21 = {
+  img: wonderball21,
+  cost: 200,
+  defense: 30,
+  power: 200,
+  health: 348,
+  type: contactshoot,
+  projectile_img: null,
+  projectile_type:null,
+  shootingFrames : 2,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:2
+}
+allTypes.push(card21);
+
+const wonderball22 = new Image();
+wonderball22.src = 'wonderballs/bravebird.png';
+wonderballTypes.push(wonderball22);
+
+const wonderball22proy = new Image();
+wonderball22proy.src = 'wonderballs/bravebirdproy.png';
+
+const card22 = {
+  img: wonderball22,
+  cost: 200,
+  defense: 30,
+  power: 200,
+  health: 409,
+  type: contactshoot,
+  projectile_img: null,
+  projectile_type:null,
+  shootingFrames : 2,
+  restingFrames : 1,
+  rechargeFrames: 0,
+  shootFrame:2
+}
+allTypes.push(card22);
+
+const wonderball23 = new Image();
+wonderball23.src = 'wonderballs/pugbert.png';
+wonderballTypes.push(wonderball23);
+
+const wonderball23proy = new Image();
+wonderball23proy.src = 'wonderballs/pugproy.png';
+
+const card23 = {
+  img: wonderball23,
+  cost: 223,
+  defense: 346,
+  power: 200,
+  health: 506,
+  type: contactshoot,
+  projectile_img: null,
+  projectile_type:null,
+  shootingFrames : 1,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card23);
+
+const wonderball24 = new Image();
+wonderball24.src = 'wonderballs/megagunbird.png';
+wonderballTypes.push(wonderball24);
+
+const wonderball24proy = new Image();
+wonderball24proy.src = 'wonderballs/megagunbirdproy.png';
+
+const card24 = {
+  img: wonderball24,
+  cost: 127,
+  defense: 346,
+  power: 200,
+  health: 506,
+  type: distanceshoot,
+  projectile_img: wonderball24proy,
+  projectile_type:penetratingproj,
+  shootingFrames : 2,
+  restingFrames : 3,
+  rechargeFrames: 0,
+  shootFrame:5
+}
+allTypes.push(card24);
+
+const wonderball25 = new Image();
+wonderball25.src = 'wonderballs/doudistenista.png';
+wonderballTypes.push(wonderball25);
+
+const wonderball25proy = new Image();
+wonderball25proy.src = 'wonderballs/doudistenistaproy.png';
+
+const card25 = {
+  img: wonderball25,
+  cost: 127,
+  defense: 0.45,
+  power: 123,
+  health: 200,
+  type: teamwork,
+  projectile_img: wonderball25proy,
+  projectile_type: straightpath,
+  shootingFrames : 4,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:5
+}
+allTypes.push(card25);
+
+
+const wonderball26 = new Image();
+wonderball26.src = 'wonderballs/appel.png';
+wonderballTypes.push(wonderball26);
+
+const wonderball26proy = new Image();
+wonderball26proy.src = 'wonderballs/nutriente.png';
+
+const card26 = {
+  img: wonderball26,
+  cost: 227,
+  defense: 0.34,
+  power: 20,
+  health: 345,
+  type:distanceshoot,
+  projectile_img: wonderball26proy,
+  projectile_type: nutrientproj,
+  shootingFrames : 7,
+  restingFrames : 6,
+  rechargeFrames: 0,
+  shootFrame:9
+}
+allTypes.push(card26);
