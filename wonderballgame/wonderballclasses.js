@@ -181,6 +181,11 @@ class ManualShootObjective{
   destroy(){
     this.owner.projectileDestroyed();
   }
+
+  getType(){
+    return noType;
+  }
+  
   draw(){
     if(this.img.length == 0){
       ctx.fillStyle = 'black';

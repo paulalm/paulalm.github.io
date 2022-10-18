@@ -21,7 +21,7 @@ const l2Btn ={
 };
 
 const l3Btn ={
-  x: 650,
+  x: 600,
   y: 465,
   width: 45,
   height: 45
@@ -72,6 +72,7 @@ function animate(){
   ctx.strokeStyle='blue';
   ctx.strokeRect(l1Btn.x, l1Btn.y, l1Btn.width, l1Btn.height);
   ctx.strokeRect(l2Btn.x, l2Btn.y, l2Btn.width, l2Btn.height);
+  ctx.strokeRect(l3Btn.x, l3Btn.y, l3Btn.width, l3Btn.height);
   //ctx.drawImage(catalogBtn.img, 0, 0, 200, 200, catalogBtn.x, catalogBtn.y, catalogBtn.width, catalogBtn.height);
 
   ctx.fillStyle='black';
