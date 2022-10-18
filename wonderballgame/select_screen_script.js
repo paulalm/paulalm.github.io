@@ -32,7 +32,7 @@ const startScreenImg = new Image();
 startScreenImg.src = 'assets/map.jpg';
 
 const welcomeDialogImg = new Image();
-welcomeDialogImg.src = 'dialogmarie/Slide3.png';
+welcomeDialogImg.src = 'dialogmarie/Slide3.PNG';
 
 var player = document.getElementById("myVideo");
 player.addEventListener("ended", function() {

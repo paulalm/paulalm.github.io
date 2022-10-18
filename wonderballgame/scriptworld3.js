@@ -9,13 +9,13 @@ worldBgnImg.src = 'assets/forestWorldbackground.jpg';
 
 //dialogs
 const winDialogImg = new Image();
-winDialogImg.src = 'dialogmarie/Slide4.png';
+winDialogImg.src = 'dialogmarie/Slide4.PNG';
 
 const gameOverDialogImg = new Image();
-gameOverDialogImg.src = 'dialogmarie/Slide1.png';
+gameOverDialogImg.src = 'dialogmarie/Slide1.PNG';
 
 const gameOver3DialogImg = new Image();
-gameOver3DialogImg.src = 'dialogmarie/Slide2.png';
+gameOver3DialogImg.src = 'dialogmarie/Slide2.PNG';
 
 
 // global variables
