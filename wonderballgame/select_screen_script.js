@@ -41,7 +41,7 @@ player.addEventListener("ended", function() {
   audioPlayer.src = "assets/mapsong.mp3";
   canvasPosition = canvas.getBoundingClientRect();
   ctx.clearRect(0,0, canvas.width, canvas.height);
-  ctx.drawImage(welcomeDialogImg, 0, 0, 8000, 4500, 10,10,canvas.width, canvas.height);
+  ctx.drawImage(welcomeDialogImg, 0, 0, 2959, 1881, 10,10,canvas.width, canvas.height);
   dialog();
 });
 

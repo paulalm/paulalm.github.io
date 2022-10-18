@@ -477,16 +477,16 @@ function handleGameStatus(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     if (gameOverCount == 3){
       gameOverCount = 0;
-      ctx.drawImage(gameOver3DialogImg, 0, 0, 8000, 4500, 10,10,canvas.width, canvas.height);
+      ctx.drawImage(gameOver3DialogImg, 0, 0, 2713, 1778, 10,10,canvas.width, canvas.height);
     }
     else{
-      ctx.drawImage(gameOverDialogImg, 0, 0, 8000, 4500, 10,10,canvas.width, canvas.height);
+      ctx.drawImage(gameOverDialogImg, 0, 0, 3200, 2100, 10,10,canvas.width, canvas.height);
     }
 
   }
   if(enemies.length == 0 && givenZombies >= level_zombies){
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.drawImage(winDialogImg, 0, 0, 8000, 4500, 10,10,canvas.width, canvas.height);
+    ctx.drawImage(winDialogImg, 0, 0, 2607, 1898, 10,10,canvas.width, canvas.height);
     // ctx.fillStyle = 'black';
     // ctx.font = '60px Orbitron';
     // ctx.fillText("LEVEL COMPLETE", 130, 300);
