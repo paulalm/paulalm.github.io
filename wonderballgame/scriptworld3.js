@@ -694,7 +694,7 @@ function handleTypeSelection(){
   handleSelection();
   if(playGame){
     audioEl = document.getElementById("audio");
-    audioEl.src = "assets/poolworld.mp3";
+    audioEl.src = "assets/camp.mp3";
 
     animate();
     return;
