@@ -5,7 +5,7 @@
 
 //catalogo
 const worldBgnImg = new Image();
-worldBgnImg.src = 'assets/poolWorldBackground.jpg';
+worldBgnImg.src = 'assets/poolWorldBackground.JPG';
 
 //dialogs
 const winDialogImg = new Image();

@@ -578,7 +578,7 @@ const card26 = {
   img: wonderball26,
   cost: 227,
   defense: 0.34,
-  power: 20,
+  power: 204,
   health: 345,
   type:distanceshoot,
   projectile_img: wonderball26proy,
@@ -589,3 +589,49 @@ const card26 = {
   shootFrame:9
 }
 allTypes.push(card26);
+
+const wonderball27 = new Image();
+wonderball27.src = 'wonderballs/terrorbird.png';
+wonderballTypes.push(wonderball27);
+
+const wonderball27proy = new Image();
+wonderball27proy.src = 'wonderballs/nutriente.png';
+
+const card27 = {
+  img: wonderball27,
+  cost: 124,
+  defense: 0.34,
+  power: 34,
+  health: 456,
+  type:contactshoot,
+  projectile_img: wonderball27proy,
+  projectile_type: nutrientproj,
+  shootingFrames : 3,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card27);
+
+const wonderball28 = new Image();
+wonderball28.src = 'wonderballs/horrorbird.png';
+wonderballTypes.push(wonderball28);
+
+const wonderball28proy = new Image();
+wonderball28proy.src = 'wonderballs/nutriente.png';
+
+const card28 = {
+  img: wonderball28,
+  cost: 239,
+  defense: 0.98,
+  power: 89,
+  health: 657,
+  type:contactshoot,
+  projectile_img: wonderball28proy,
+  projectile_type: nutrientproj,
+  shootingFrames : 3,
+  restingFrames : 2,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card28);
