@@ -80,8 +80,8 @@ class TeleDirectedProjectile extends Projectile{
   }
 
   update(){
-    this.speedy = 0.01*( this.target.y - this.y);
-    this.speedx = 0.01*( this.target.x - this.x);
+    this.speedy = 0.05*( this.target.y - this.y);
+    this.speedx = 0.05*( this.target.x - this.x);
     super.update();
   }
   destroy(){
