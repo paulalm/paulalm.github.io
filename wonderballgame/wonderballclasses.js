@@ -25,6 +25,9 @@ function createProjectile(x,y,power,img, type, store){
   else if(type == nutrientproj){
     store.push(new NutrientProjectile(x,y,power,img));
   }
+  else if(type == teledirected){
+    store.push(new TeleDirectedProjectile(x,y,power,img));
+  }
   else {
     store.push(new Projectile(x,y,power,img));
   }
@@ -68,6 +71,30 @@ class Projectile{
     }
   }
 
+}
+
+class TeleDirectedProjectile extends Projectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+    this.target = enemies[enemies.length-1]
+  }
+
+  update(){
+    this.speedy = 0.01*( this.target.y - this.y);
+    this.speedx = 0.01*( this.target.x - this.x);
+    super.update();
+  }
+  destroy(){
+
+  }
+
+  getType(){
+    return teledirected;
+  }
+
+  draw(){
+    super.draw();
+  }
 }
 
 class ArcPathProjectile extends Projectile{
@@ -185,7 +212,7 @@ class ManualShootObjective{
   getType(){
     return noType;
   }
-  
+
   draw(){
     if(this.img.length == 0){
       ctx.fillStyle = 'black';

@@ -21,6 +21,7 @@ const randompath = 2;
 const arcpath=3;
 const penetratingproj = 4;
 const nutrientproj=5;
+const teledirected=6;
 
 const selectionImg = new Image();
 selectionImg.src = 'wonderballs/seleccion.png';
@@ -657,3 +658,26 @@ const card29 = {
   shootFrame:3
 }
 allTypes.push(card29);
+
+const wonderball30 = new Image();
+wonderball30.src = 'wonderballs/rabodegato.png';
+wonderballTypes.push(wonderball30);
+
+const wonderball30proy = new Image();
+wonderball30proy.src = 'wonderballs/rabodegatoproy.png';
+
+const card30 = {
+  img: wonderball30,
+  cost: 250,
+  defense: 0.50,
+  power: 35,
+  health: 200,
+  type:distanceshoot,
+  projectile_img: wonderball30proy,
+  projectile_type: teledirected,
+  shootingFrames : 3,
+  restingFrames : 1,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card30);
