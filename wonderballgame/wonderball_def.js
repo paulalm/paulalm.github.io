@@ -13,6 +13,7 @@ const support= 7;
 const teamwork = 8;
 const instant=9;
 const powerUp=10;
+const trap=11;
 
 //projectile allTypes
 const noType = 0;
@@ -681,3 +682,24 @@ const card30 = {
   shootFrame:3
 }
 allTypes.push(card30);
+
+const wonderball31 = new Image();
+wonderball31.src = 'wonderballs/pozoliva.png';
+wonderballTypes.push(wonderball31);
+
+
+const card31 = {
+  img: wonderball31,
+  cost: 175,
+  defense: 0.50,
+  power: 20000,
+  health: 200,
+  type:trap,
+  projectile_img: null,
+  projectile_type: null,
+  shootingFrames : 0,
+  restingFrames : 8,
+  rechargeFrames: 3,
+  shootFrame:12
+}
+allTypes.push(card31);

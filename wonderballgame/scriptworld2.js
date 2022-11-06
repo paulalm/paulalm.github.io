@@ -200,9 +200,18 @@ function handleWonderballs(){
     }
 
     for (let j=0; j< enemies.length; j++){
-      if(wonderballs[i] && collision(wonderballs[i], enemies[j])){
+      if(wonderballs[i] instanceof TrapWonderball){
+        if(wonderballs[i].enemyAttacking(enemies[j].attack, enemies[j].health)){
+          enemies.splice(j, 1);
+          j--;
+        }
+        else{
+          enemies[j].x -= cellSize*2;
+        }
+      }else{
         wonderballs[i].enemyAttacking(enemies[j].attack, enemies[j].health);
         enemies[j].wonderballAttacking(wonderballs[i].defense, wonderballs[i].health);
+      }
       }
       if(wonderballs[i] && wonderballs[i].health <= 0){
         wonderballs.splice(i, 1);
@@ -529,15 +538,12 @@ canvas.addEventListener('click', function(){
       let defenderCost = cards[choosenDefender].card.cost;
       if (numberOfResources >= defenderCost){
         if(cardAvailable[choosenDefender]<=0){
-          if (cards[choosenDefender].card.type == producer) wonderballs.push(new ProducerWonderball(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type==timedshoot) wonderballs.push(new TimedShootWonderball(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type == distanceshoot) wonderballs.push(new DistanceWonderball(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type == contactshoot) wonderballs.push(new ContactWonderball(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type == general) wonderballs.push(new DoudisGeneral(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type == manualshoot) wonderballs.push(new ManualAttackWonderball(gridPositionX, gridPositionY));
-          else if ( cards[choosenDefender].card.type == support) floatingMessages.push(new FloatingMessage("Use a wonderball first", mouse.x, mouse.y, 20, 'blue'));
-          else if (cards[choosenDefender].card.type == teamwork) wonderballs.push(new TeamworkWonderball(gridPositionX, gridPositionY, true));
-          else wonderballs.push(new Wonderball(gridPositionX, gridPositionY));
+          if(cards[choosenDefender].card.type==support){
+              floatingMessages.push(new FloatingMessage("Use a wonderball first", mouse.x, mouse.y, 20, 'blue'));
+            }
+            else{
+              wonderballs.push(createWonderball(cards[choosenDefender].card.type, gridPositionX, gridPositionY));
+            }
           numberOfResources -= defenderCost;
           cardAvailable[choosenDefender] = cards[choosenDefender].card.cost*1.5;
           if(cardAvailable[choosenDefender]==0)cardAvailable[choosenDefender]=150;

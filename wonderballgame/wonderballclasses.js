@@ -225,6 +225,18 @@ class ManualShootObjective{
   }
 }
 
+function createWonderball(type, gridPositionX, gridPositionY){
+  if (type == producer) return new ProducerWonderball(gridPositionX, gridPositionY);
+  else if ( type==timedshoot) return new TimedShootWonderball(gridPositionX, gridPositionY);
+  else if ( type == distanceshoot) return new DistanceWonderball(gridPositionX, gridPositionY);
+  else if ( type == contactshoot) return new ContactWonderball(gridPositionX, gridPositionY);
+  else if ( type == general) return new DoudisGeneral(gridPositionX, gridPositionY);
+  else if ( type == manualshoot) return new ManualAttackWonderball(gridPositionX, gridPositionY);
+  else if (type == teamwork) return new TeamworkWonderball(gridPositionX, gridPositionY, true);
+  else if (type == trap) return new TrapWonderball(gridPositionX, gridPositionY);
+  else return new Wonderball(gridPositionX, gridPositionY);
+}
+
 
 // Wonderballs
 class Wonderball{
@@ -277,6 +289,45 @@ class Wonderball{
       else this.frameX = this.minFrame;
     }
 
+
+  }
+}
+
+class TrapWonderball extends Wonderball{
+  constructor(x,y){
+    super(x,y);
+    this.timer = 500;
+    this.animation = 0;
+    this.rechargeFrames = cards[choosenDefender].card.rechargeFrames;
+    this.defeatedEnemies = 0;
+  }
+  draw(){
+    super.draw();
+  }
+
+  enemyAttacking(attack, health){
+    this.defeatedEnemies++;
+    if(this.defeatedEnemies % 3 == 0){
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  update(){
+    if(this.animation < this.restingFrames){
+      if(frame % 120 == 0){
+        this.animation+=2;
+      }
+      this.minFrame = this.animation;
+      this.maxFrame = this.animation+1;
+    }else{
+      this.minFrame = this.restingFrames;
+      this.maxFrame = this.restingFrames + this.rechargeFrames;
+    }
+
+
+    super.update();
 
   }
 }
