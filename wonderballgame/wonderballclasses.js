@@ -25,6 +25,9 @@ function createProjectile(x,y,power,img, type, store){
   else if(type == nutrientproj){
     store.push(new NutrientProjectile(x,y,power,img));
   }
+  else if(type == timestopproj){
+    store.push(new TimeStopProjectile(x,y,power,img));
+  }
   else if(type == teledirected){
     store.push(new TeleDirectedProjectile(x,y,power,img));
   }
@@ -52,8 +55,12 @@ class Projectile{
     this.y += this.speedy;
   }
 
-  destroy(){
+  attack(enemy){
+    enemy.health -= this.power;
+  }
 
+  destroy(){
+    return true;
   }
 
   getType(){
@@ -73,6 +80,8 @@ class Projectile{
 
 }
 
+
+
 class TeleDirectedProjectile extends Projectile{
   constructor(x,y, power, img){
     super(x,y,power,img);
@@ -85,7 +94,7 @@ class TeleDirectedProjectile extends Projectile{
     super.update();
   }
   destroy(){
-
+    return true;
   }
 
   getType(){
@@ -107,7 +116,7 @@ class ArcPathProjectile extends Projectile{
     if (this.y == this.originaly) this.speedy = 0;
   }
   destroy(){
-
+    return true;
   }
 
   getType(){
@@ -164,13 +173,56 @@ class PenetratingProjectile extends StraightPathProjectile{
     super.update();
   }
   destroy(){
-    super.destroy();
     this.x = this.x + 100;
+    return false;
   }
   getType(){
     return penetratingproj;
   }
 }
+
+class TimeStopProjectile extends StraightPathProjectile{
+  constructor(x,y, power, img){
+    super(x,y,power,img);
+    this.speedy = 0;
+    this.speed = 1;
+    this.count = 0;
+    this.destroyNow = false;
+  }
+
+  attack(enemy){
+    this.speed = -0.01;
+    if(this.count == 0){
+      enemy.movement = 0.1;
+      super.attack(enemy);
+      if(enemy.health <= 0){
+        this.destroyNow = true;
+      }
+    }else if (this.count >123){
+      enemy.movement = enemy.speed;
+    }
+  }
+
+  update(){
+    super.update();
+  }
+  destroy(){
+    if(this.count++ <= 125 && !this.destroyNow){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  getType(){
+    return timestopproj;
+  }
+
+  draw(){
+    super.draw();
+  }
+}
+
 
 class NutrientProjectile extends Projectile{
   constructor(x,y, power, img){
@@ -207,6 +259,7 @@ class ManualShootObjective{
 
   destroy(){
     this.owner.projectileDestroyed();
+    return true;
   }
 
   getType(){
@@ -482,6 +535,9 @@ class DistanceWonderball extends AttackerWonderball{
     if (this.shooting && this.shootNow){
         let prob = Math.random();
         let th = 10/this.power;
+        if(this.projectileType == timestopproj){
+          th = 0.1;
+        }
         if(prob < th) {
           if(this.projectileType==nutrientproj){
             createProjectile(this.x + cellSize+10, this.y + 30, this.power, this.projectiles,this.projectileType, nutrients);

@@ -23,6 +23,7 @@ const arcpath=3;
 const penetratingproj = 4;
 const nutrientproj=5;
 const teledirected=6;
+const timestopproj=7;
 
 const selectionImg = new Image();
 selectionImg.src = 'wonderballs/seleccion.png';
@@ -703,3 +704,26 @@ const card31 = {
   shootFrame:12
 }
 allTypes.push(card31);
+
+const wonderball32 = new Image();
+wonderball32.src = 'wonderballs/orquideadeagua.png';
+wonderballTypes.push(wonderball32);
+
+const wonderball32proy = new Image();
+wonderball32proy.src = 'wonderballs/orquideadeaguaproy.png';
+
+const card32 = {
+  img: wonderball32,
+  cost: 200,
+  defense: 0.30,
+  power: 20,
+  health: 250,
+  type:distanceshoot,
+  projectile_img: wonderball32proy,
+  projectile_type: timestopproj,
+  shootingFrames : 3,
+  restingFrames : 1,
+  rechargeFrames: 0,
+  shootFrame:3
+}
+allTypes.push(card32);

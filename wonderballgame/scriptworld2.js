@@ -143,10 +143,9 @@ function handleProjectiles(){
 
     for (let j = 0; j < enemies.length; j++){
       if(enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])){
-        enemies[j].health -= projectiles[i].power;
         p = projectiles[i];
-        p.destroy();
-        if(p.getType() != penetratingproj ){
+        p.attack(enemies[j]);
+        if(p.destroy()){
           projectiles.splice(i, 1);
           i--;
         }
