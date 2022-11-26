@@ -47,7 +47,7 @@ class Projectile{
     this.speed = 5;
     this.speedy = 0;
     this.img = img;
-    if(this.img.length > 0) this.speedy = -1;
+    //if(this.img.length > 0) this.speedy = -1;
   }
 
   update(){
@@ -109,9 +109,12 @@ class TeleDirectedProjectile extends Projectile{
 class ArcPathProjectile extends Projectile{
   constructor(x,y, power, img){
     super(x,y,power,img);
+    this.speed = 5;
+    this.speedy = -0.5;
   }
 
   update(){
+    super.update();
     if (this.originaly-this.y > 30) this.speedy *= -1;
     if (this.y == this.originaly) this.speedy = 0;
   }

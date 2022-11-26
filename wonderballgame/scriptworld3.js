@@ -122,8 +122,8 @@ class Cell {
   }
 }
 function createGrid(){
-  for (let y = 0; y < canvas.height-cellSize; y+= cellSize ){
-    for (let x = cellSize; x < canvas.width; x+= cellSize){
+  for (let y = 10; y < canvas.height-cellSize; y+= cellSize ){
+    for (let x = cellSize+5; x < canvas.width; x+= cellSize){
       gameGrid.push(new Cell(x,y));
     }
   }

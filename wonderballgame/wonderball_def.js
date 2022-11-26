@@ -727,3 +727,27 @@ const card32 = {
   shootFrame:3
 }
 allTypes.push(card32);
+
+
+const wonderball33 = new Image();
+wonderball33.src = 'wonderballs/radiobird.png';
+wonderballTypes.push(wonderball33);
+
+const wonderball33proy = new Image();
+wonderball33proy.src = 'wonderballs/radioproy.png';
+
+const card33 = {
+  img: wonderball33,
+  cost: 100,
+  defense: 0.10,
+  power: 25,
+  health: 150,
+  type:distanceshoot,
+  projectile_img: wonderball33proy,
+  projectile_type: straightpath,
+  shootingFrames : 3,
+  restingFrames : 0,
+  rechargeFrames: 0,
+  shootFrame:2
+}
+allTypes.push(card33);
