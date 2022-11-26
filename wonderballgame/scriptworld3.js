@@ -593,7 +593,8 @@ let choosenOnes = [];
 let curr_page = 0;
 
 function handleSelection(){
-  for(let i = 0; i < 12; i++){
+  min = Math.min(12, allTypes.length-curr_page);
+  for(let i = 0; i < min; i++){
     if (collision(mouse, allcards[i]) && mouse.clicked && !choosenOnes.includes(i+curr_page)){
       choosenCard = i+curr_page;
       choosenOnes.push(choosenCard);
@@ -606,14 +607,14 @@ function handleSelection(){
 
   if (collision(mouse, nextButton) && mouse.clicked){
     if(curr_page < Math.max(curr_level,allTypes.length-12)){
-      curr_page +=1;
+      curr_page +=12;
       mouse.clicked=false;
       initAllCards();
     }
   }
   else if (collision(mouse, backButton) && mouse.clicked){
     if(curr_page > 0){
-      curr_page -=1;
+      curr_page -=12;
       mouse.clicked=false;
       initAllCards();
     }
